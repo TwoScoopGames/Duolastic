@@ -23,7 +23,11 @@ module.exports = function createPeerConnection(callback) {
     // console.log("got message:", msg.data);
     if (!peer) {
       peer = new Peer({
-        initiator: msg.data === "initiate"
+        initiator: msg.data === "initiate",
+        channelConfig: {
+          ordered: false,
+          maxRetransmits: 0
+        }
       });
       peer.on("signal", function(data) {
         // console.log("got signalling data", JSON.stringify(data));
