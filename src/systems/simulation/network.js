@@ -1,6 +1,7 @@
-"use strict";
-
 var createPeerConnection = require("../../peer");
+var deserialize = require("../../serialize").deserialize;
+var serialize = require("../../serialize").serialize;
+
 var peer;
 var incomingMessages = [];
 
@@ -32,7 +33,14 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "network");
 };
 
+var player1 = 2;
+var player2 = 3;
+
 function handleServer(game, entity, elapsed) {
+  game.entities.addComponent(player1, "playerController2d");
+
+  importComponents(game);
+
   var network = game.entities.getComponent(entity, "network");
   network.time += elapsed;
 
@@ -46,21 +54,30 @@ function sendWorld(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, 2)
+      serialize(game, player1, ["position", "velocity"])
     ]
   };
   peer.send(JSON.stringify(message));
 }
 
-function serialize(game, entity) {
-  return {
-    id: entity,
-    position: game.entities.getComponent(entity, "position"),
-    velocity: game.entities.getComponent(entity, "velocity")
-  };
+function handleClient(game, entity) {
+  game.entities.addComponent(player2, "playerController2d");
+  var network = game.entities.getComponent(entity, "network");
+  sendClient(game, network.time);
+  importComponents(game);
 }
 
-function handleClient(game) {
+function sendClient(game, time) {
+  var message = {
+    time: time,
+    entities: [
+      serialize(game, player2, ["movement2d"])
+    ]
+  };
+  peer.send(JSON.stringify(message));
+}
+
+function importComponents(game) {
   if (incomingMessages.length === 0) {
     return;
   }
@@ -70,25 +87,5 @@ function handleClient(game) {
   var entities = msg.entities || [];
   for (var i = 0; i < entities.length; i++) {
     deserialize(game, entities[i]);
-  }
-}
-
-function deserialize(game, entity) {
-  var keys = Object.keys(entity);
-
-  for (var i = 0; i < keys.length; i++) {
-    if (keys[i] === "id") {
-      continue;
-    }
-    var component = game.entities.getComponent(entity.id, keys[i]);
-    merge(component, entity[keys[i]]);
-  }
-}
-
-function merge(dest, src) {
-  var keys = Object.keys(src);
-
-  for (var i = 0; i < keys.length; i++) {
-    dest[keys[i]] = src[keys[i]];
   }
 }
