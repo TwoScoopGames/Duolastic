@@ -25,9 +25,9 @@
     "x": 100,
     "y": 100
    },
-   "size": {
-    "width": 100,
-    "height": 100
+   "circle": {
+     "fillStyle": "#0000ff",
+     "radius": 50
    },
    "velocity": {
     "x": 0,
@@ -55,9 +55,9 @@
     "x": 400,
     "y": 100
    },
-   "size": {
-    "width": 100,
-    "height": 100
+   "circle": {
+     "fillStyle": "#ff0000",
+     "radius": 50
    },
    "velocity": {
     "x": 0,
@@ -76,6 +76,22 @@
    "friction": {
     "x": 0.97,
     "y": 0.97
+   }
+  },
+  {
+   "id": 4,
+   "name": "ball",
+   "position": {
+    "x": 250,
+    "y": 200
+   },
+   "circle": {
+     "fillStyle": "#000000",
+     "radius": 25
+   },
+   "velocity": {
+    "x": 0,
+    "y": 0
    }
   }
  ]
