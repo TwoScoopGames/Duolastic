@@ -15,6 +15,11 @@ var waiting;
 wss.on("connection", function(ws) {
   if (!waiting) {
     waiting = ws;
+    waiting.on("close", function() {
+      if (this === waiting) {
+        waiting = undefined;
+      }
+    });
     return;
   }
 
