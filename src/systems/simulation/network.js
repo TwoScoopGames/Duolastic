@@ -12,14 +12,9 @@ createPeerConnection(function(err, p) {
   peer = p;
   console.log("got a peer", peer);
   peer.on("data", function(data) {
-    console.log("got data", JSON.parse(data.toString()));
+    // console.log("got data", JSON.parse(data.toString()));
     incomingMessages.push(JSON.parse(data.toString()));
   });
-  // if (peer.initiator) {
-  //   console.log("player 1");
-  // } else {
-  //   console.log("player 2");
-  // }
 });
 
 var PACKET_RATE = 50;
