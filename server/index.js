@@ -1,5 +1,4 @@
 var server = require("http").createServer();
-var url = require("url");
 var WebSocketServer = require("ws").Server;
 
 var wss = new WebSocketServer({ server: server });
@@ -29,11 +28,23 @@ wss.on("connection", function(ws) {
 
   clientA.on("message", function(message) {
     // console.log("received:", message);
-    clientB.send(message);
+    clientB.send(message, function(err) {
+      if (err) {
+        // console.error("error sending, closing other side", err);
+        clientA.close();
+        return;
+      }
+    });
   });
   clientB.on("message", function(message) {
     // console.log("received:", message);
-    clientA.send(message);
+    clientA.send(message, function(err) {
+      if (err) {
+        // console.error("error sending, closing other side", err);
+        clientB.close();
+        return;
+      }
+    });
   });
 
   clientA.send("initiate");
