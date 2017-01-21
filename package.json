@@ -34,6 +34,6 @@
   },
   "dependencies": {
     "simple-peer": "^6.2.1",
-    "splat-ecs": "^7.3.0"
+    "splat-ecs": "^7.5.1"
   }
 }
