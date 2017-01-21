@@ -33,6 +33,7 @@
     "webpack-dev-server": "^1.15.1"
   },
   "dependencies": {
+    "simple-peer": "^6.2.1",
     "splat-ecs": "^7.3.0"
   }
 }
