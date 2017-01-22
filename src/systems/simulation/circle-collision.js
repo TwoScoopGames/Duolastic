@@ -1,20 +1,18 @@
+var constants = require("../../constants");
 var math2d = require("splat-ecs/lib/math2d");
+var reset = require("../../reset");
 var vec2 = require("../../vec2");
-
-var player1 = 2;
-var player2 = 3;
-var ball = 4;
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
-    collide(game, player1, player2);
-    collide(game, player1, ball);
-    collide(game, player2, ball);
+    collide(game, constants.player1, constants.player2);
+    collide(game, constants.player1, constants.ball);
+    collide(game, constants.player2, constants.ball);
 
-    keepOnScreen(game, player1);
-    keepOnScreen(game, player2);
-    keepInSides(game, ball);
-    checkScore(game, ball);
+    keepOnScreen(game, constants.player1);
+    keepOnScreen(game, constants.player2);
+    keepInSides(game, constants.ball);
+    checkScore(game, constants.ball);
   });
 };
 
@@ -93,10 +91,6 @@ function collide(game, a, b) {
   velocityB.y = v2Prime[1];
 }
 
-
-var screenWidth = 800;
-var screenHeight = 600;
-
 function keepOnScreen(game, entity) {
   var position = game.entities.getComponent(entity, "position");
   var circle = game.entities.getComponent(entity, "circle");
@@ -108,8 +102,8 @@ function keepOnScreen(game, entity) {
       velocity.x *= -1;
     }
   }
-  if (position.x + circle.radius > screenWidth) {
-    position.x = screenWidth - circle.radius;
+  if (position.x + circle.radius > constants.screenWidth) {
+    position.x = constants.screenWidth - circle.radius;
     if (velocity.x > 0) {
       velocity.x *= -1;
     }
@@ -129,8 +123,8 @@ function keepInSides(game, entity) {
       velocity.y *= -1;
     }
   }
-  if (position.y + circle.radius > screenHeight) {
-    position.y = screenHeight - circle.radius;
+  if (position.y + circle.radius > constants.screenHeight) {
+    position.y = constants.screenHeight - circle.radius;
     if (velocity.y > 0) {
       velocity.y *= -1;
     }
@@ -145,24 +139,8 @@ function checkScore(game, entity) {
     console.log("player 2 scored");
     reset(game);
   }
-  if (position.x > screenWidth + circle.radius) {
+  if (position.x > constants.screenWidth + circle.radius) {
     console.log("player 1 scored");
     reset(game);
   }
-}
-
-function reset(game) {
-  resetCenter(game, player1, 0.1);
-  resetCenter(game, player2, 0.9);
-  resetCenter(game, ball, 0.5);
-}
-
-function resetCenter(game, entity, percent) {
-  var position = game.entities.getComponent(entity, "position");
-  position.x = screenWidth * percent;
-  position.y = screenHeight / 2;
-
-  var velocity = game.entities.getComponent(entity, "velocity");
-  velocity.x = 0;
-  velocity.y = 0;
 }
