@@ -3,19 +3,33 @@ var drawShadowCircle = require("../../draw-shadow-circle");
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   game.entities.registerSearch("drawCircleSearch", ["circle", "position"]);
-  ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
-    var position = game.entities.getComponent(entity, "position");
-    var circle = game.entities.getComponent(entity, "circle");
 
-    var ball = game.entities.getComponent(entity, "ball");
-    if (ball) {
-      drawCircle(game.context, position.x, position.y, circle.radius, "rgba(50, 50, 50, 1)");
-    } else {
-      drawStack(game.context, position, circle);
-      // drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
+  function compareHeight(a, b) {
+    var positionA = game.entities.getComponent(a, "position");
+    var positionB = game.entities.getComponent(b, "position");
+    return positionA.y - positionB.y;
+  }
+
+  ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
+    var toDraw = game.entities.find("drawCircleSearch").sort(compareHeight);
+    for (var i = 0; i < toDraw.length; i++) {
+      draw(game, toDraw[i]);
     }
   }, "drawCircleSearch");
 };
+
+function draw(game, entity) {
+  var position = game.entities.getComponent(entity, "position");
+  var circle = game.entities.getComponent(entity, "circle");
+
+  var ball = game.entities.getComponent(entity, "ball");
+  if (ball) {
+    drawCircle(game.context, position.x, position.y, circle.radius, "rgba(50, 50, 50, 1)");
+  } else {
+    drawStack(game.context, position, circle);
+    // drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
+  }
+}
 
 function drawStack(ctx, position, circle) {
   var centerX = position.x;
