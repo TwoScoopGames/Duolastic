@@ -14,7 +14,6 @@ module.exports = function drawShadowCircle(ctx, x, y, r, color, inset, insetColo
 
   if (inset > 0) {
     if (outset === 0) {
-      console.log("stop", stop);
       stop = 1 - 0.01;
       radgrad.addColorStop(stop, parseRGBA(insetColor));
       radgrad.addColorStop(1, colorWithZeroAlpha(insetColor));
