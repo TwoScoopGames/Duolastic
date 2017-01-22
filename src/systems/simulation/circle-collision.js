@@ -2,6 +2,16 @@ var constants = require("../../constants");
 var math2d = require("splat-ecs/lib/math2d");
 var reset = require("../../reset");
 var vec2 = require("../../vec2");
+var random = require("splat-ecs/lib/random");
+
+var drums = [
+  "drum-01.mp3",
+  "drum-02.mp3",
+  "drum-03.mp3",
+  "drum-04.mp3",
+  "drum-05.mp3"
+];
+
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
@@ -116,14 +126,17 @@ function keepInSides(game, entity) {
   var position = game.entities.getComponent(entity, "position");
   var circle = game.entities.getComponent(entity, "circle");
   var velocity = game.entities.getComponent(entity, "velocity");
+  var ball = game.entities.getComponent(entity, "ball");
 
   if (position.y - circle.radius < 0) {
+    if (ball) { game.sounds.play(random.from(drums)); }
     position.y = circle.radius;
     if (velocity.y < 0) {
       velocity.y *= -1;
     }
   }
   if (position.y + circle.radius > constants.screenHeight) {
+    if (ball) { game.sounds.play(random.from(drums)); }
     position.y = constants.screenHeight - circle.radius;
     if (velocity.y > 0) {
       velocity.y *= -1;
