@@ -1,19 +1,20 @@
 var math2d = require("splat-ecs/lib/math2d");
 var vec2 = require("../../vec2");
 
+var player1 = 2;
+var player2 = 3;
+var ball = 4;
+
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
-    var player1 = 2;
-    var player2 = 3;
-    var ball = 4;
-
     collide(game, player1, player2);
     collide(game, player1, ball);
     collide(game, player2, ball);
 
     keepOnScreen(game, player1);
     keepOnScreen(game, player2);
-    keepOnScreen(game, ball);
+    keepInSides(game, ball);
+    checkScore(game, ball);
   });
 };
 
@@ -114,6 +115,14 @@ function keepOnScreen(game, entity) {
     }
   }
 
+  keepInSides(game, entity);
+}
+
+function keepInSides(game, entity) {
+  var position = game.entities.getComponent(entity, "position");
+  var circle = game.entities.getComponent(entity, "circle");
+  var velocity = game.entities.getComponent(entity, "velocity");
+
   if (position.y - circle.radius < 0) {
     position.y = circle.radius;
     if (velocity.y < 0) {
@@ -126,4 +135,34 @@ function keepOnScreen(game, entity) {
       velocity.y *= -1;
     }
   }
+}
+
+function checkScore(game, entity) {
+  var position = game.entities.getComponent(entity, "position");
+  var circle = game.entities.getComponent(entity, "circle");
+
+  if (position.x < -circle.radius) {
+    console.log("player 2 scored");
+    reset(game);
+  }
+  if (position.x > screenWidth + circle.radius) {
+    console.log("player 1 scored");
+    reset(game);
+  }
+}
+
+function reset(game) {
+  resetCenter(game, player1, 0.1);
+  resetCenter(game, player2, 0.9);
+  resetCenter(game, ball, 0.5);
+}
+
+function resetCenter(game, entity, percent) {
+  var position = game.entities.getComponent(entity, "position");
+  position.x = screenWidth * percent;
+  position.y = screenHeight / 2;
+
+  var velocity = game.entities.getComponent(entity, "velocity");
+  velocity.x = 0;
+  velocity.y = 0;
 }
