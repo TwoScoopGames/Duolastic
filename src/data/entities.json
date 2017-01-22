@@ -26,7 +26,7 @@
     "y": 100
    },
    "circle": {
-     "fillStyle": "#0000ff",
+     "colorSet": "standard",
      "mass": 20,
      "radius": 50
    },
@@ -57,7 +57,7 @@
     "y": 100
    },
    "circle": {
-     "fillStyle": "#ff0000",
+     "colorSet": "inverted",
      "mass": 20,
      "radius": 50
    },
@@ -87,8 +87,8 @@
     "x": 250,
     "y": 200
    },
+   "ball": true,
    "circle": {
-     "fillStyle": "#000000",
      "mass": 15,
      "radius": 25
    },
