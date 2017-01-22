@@ -28,15 +28,15 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 var topDepth = 2;
 
 var field = [
-  0, 0,// topDepth,
-  0, constants.screenHeight,// 1,
-  constants.screenWidth, constants.screenHeight,// 1,
-  constants.screenWidth, 0,// topDepth,
-  0, 0,// topDepth,
+  0, 0,
+  0, constants.screenHeight,
+  constants.screenWidth, constants.screenHeight,
+  constants.screenWidth, 0,
+  0, 0,
 ];
 var centerLine = [
-  0, constants.screenHeight / 2,// 1 + ((topDepth - 1) / 2),
-  constants.screenWidth, constants.screenHeight / 2,// 1 + ((topDepth - 1) / 2),
+  0, constants.screenHeight / 2,
+  constants.screenWidth, constants.screenHeight / 2,
 ];
 
 function drawPerspectiveLines(context, points) {
