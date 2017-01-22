@@ -20,6 +20,9 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     drawPerspectiveLines(game.context, centerLine, player);
 
     var toDraw = game.entities.find("drawCircleSearch").sort(compareHeight);
+    if (player === 2) {
+      toDraw.reverse();
+    }
     for (var i = 0; i < toDraw.length; i++) {
       draw(game, toDraw[i], player);
     }
