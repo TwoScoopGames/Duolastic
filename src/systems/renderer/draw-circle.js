@@ -51,9 +51,10 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 
     var ball = game.entities.getComponent(entity, "ball");
     if (ball) {
-      drawCircle(game.context, position.x, position.y, circle.radius, "rgba(50,50,50, 1)");
+      drawCircle(game.context, position.x, position.y, circle.radius, "rgba(50, 50, 50, 1)");
     } else {
       drawStack(game.context, position, circle);
+      drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
     }
   }, "drawCircleSearch");
 };
