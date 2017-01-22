@@ -108,7 +108,9 @@
   },
   {
    "name": "./systems/renderer/draw-circle",
-   "scenes": "all"
+   "scenes": [
+     "main"
+   ]
   },
   {
    "name": "./systems/renderer/draw-scores",

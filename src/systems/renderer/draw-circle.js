@@ -12,14 +12,16 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }
 
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
+    var player = game.entities.getComponent(constants.network, "network").player;
+
     game.context.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
     game.context.strokeStyle = "#ff0000";
-    drawPerspectiveLines(game.context, field);
-    drawPerspectiveLines(game.context, centerLine);
+    drawPerspectiveLines(game.context, field, player);
+    drawPerspectiveLines(game.context, centerLine, player);
 
     var toDraw = game.entities.find("drawCircleSearch").sort(compareHeight);
     for (var i = 0; i < toDraw.length; i++) {
-      draw(game, toDraw[i]);
+      draw(game, toDraw[i], player);
     }
 
   }, "drawCircleSearch");
@@ -39,10 +41,10 @@ var centerLine = [
   constants.screenWidth, constants.screenHeight / 2,
 ];
 
-function drawPerspectiveLines(context, points) {
+function drawPerspectiveLines(context, points, player) {
   for (var i = 0; i < points.length - 3; i += 2) {
-    var p1 = coordinateToScreen(points[i + 0], points[i + 1]);
-    var p2 = coordinateToScreen(points[i + 2], points[i + 3]);
+    var p1 = coordinateToScreen(points[i + 0], points[i + 1], player);
+    var p2 = coordinateToScreen(points[i + 2], points[i + 3], player);
     drawPerspectiveLine(context, p1, p2);
   }
 }
@@ -54,7 +56,10 @@ function drawPerspectiveLine(context, p1, p2) {
   context.stroke();
 }
 
-function coordinateToScreen(x, y) {
+function coordinateToScreen(x, y, player) {
+  if (player === 2) {
+    y = constants.screenHeight - y;
+  }
   var yratio = 1 - (y / constants.screenHeight);
   var z = 1 + (topDepth - 1) * yratio;
 
@@ -65,9 +70,9 @@ function coordinateToScreen(x, y) {
   };
 }
 
-function draw(game, entity) {
+function draw(game, entity, player) {
   var position = game.entities.getComponent(entity, "position");
-  position = coordinateToScreen(position.x, position.y);
+  position = coordinateToScreen(position.x, position.y, player);
   var circle = game.entities.getComponent(entity, "circle");
 
   var ball = game.entities.getComponent(entity, "ball");
