@@ -44,20 +44,29 @@ var centerLine = [
   constants.screenWidth, constants.screenHeight / 2,
 ];
 
+
 function drawPerspectiveLines(context, points, player) {
-  for (var i = 0; i < points.length - 3; i += 2) {
-    var p1 = coordinateToScreen(points[i + 0], points[i + 1], player);
-    var p2 = coordinateToScreen(points[i + 2], points[i + 3], player);
-    drawPerspectiveLine(context, p1, p2);
-  }
-}
-function drawPerspectiveLine(context, p1, p2) {
   context.beginPath();
-  context.moveTo(p1.x, p1.y);
-  context.lineTo(p2.x, p2.y);
-  context.closePath();
+  for (var i = 0; i < points.length - 1; i += 2) {
+    var p1 = coordinateToScreen(points[i + 0], points[i + 1], player);
+    if (i === 0) {
+      context.moveTo(p1.x, p1.y);
+    } else {
+      context.lineTo(p1.x, p1.y);
+    }
+  }
+
+  var grd = context.createLinearGradient(150.000, 0.000, 150.000, 300.000);
+  grd.addColorStop(0.000, "rgba(196, 194, 194, 1.000)");
+  grd.addColorStop(0.398, "rgba(255, 255, 255, 1.000)");
+  grd.addColorStop(1.000, "rgba(255, 255, 255, 1.000)");
+  context.fillStyle = grd;
+
+  context.fill();
+  context.strokeStyle = "rgba(196, 194, 194, 1.000)";
   context.stroke();
 }
+
 
 function draw(game, entity, player) {
   var position = game.entities.getComponent(entity, "position");
