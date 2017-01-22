@@ -1,4 +1,5 @@
 var math2d = require("splat-ecs/lib/math2d");
+var vec2 = require("../../vec2");
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
@@ -39,15 +40,63 @@ function collide(game, a, b) {
   var massA = 10;
   var massB = 10;
 
-  var newVelocityAX = (velocityA.x * (massA - massB) + (2 * massB * velocityB.x)) / (massA + massB);
-  var newVelocityAY = (velocityA.y * (massA - massB) + (2 * massB * velocityB.y)) / (massA + massB);
-  var newVelocityBX = (velocityB.x * (massB - massA) + (2 * massA * velocityA.x)) / (massA + massB);
-  var newVelocityBY = (velocityB.y * (massB - massA) + (2 * massA * velocityA.y)) / (massA + massB);
-  velocityA.x = newVelocityAX;
-  velocityA.y = newVelocityAY;
-  velocityB.x = newVelocityBX;
-  velocityB.y = newVelocityBY;
+  var v1 = vec2.create(velocityA.x, velocityA.y);
+  var x1 = vec2.create(positionA.x, positionA.y);
+
+  var v2 = vec2.create(velocityB.x, velocityB.y);
+  var x2 = vec2.create(positionB.x, positionB.y);
+
+  var v1Prime = vec2.subtract(
+    v1,
+    vec2.multiply(
+      vec2.subtract(x1, x2),
+      (
+        (2 * massB)
+        /
+        (massA + massB)
+      )
+      *
+      (
+        vec2.dot(
+          vec2.subtract(v1, v2),
+          vec2.subtract(x1, x2)
+        )
+        /
+        (
+          vec2.magnitudeSquared(vec2.subtract(x1, x2))
+        )
+      )
+    )
+  );
+  velocityA.x = v1Prime[0];
+  velocityA.y = v1Prime[1];
+
+  var v2Prime = vec2.subtract(
+    v2,
+    vec2.multiply(
+      vec2.subtract(x2, x1),
+      (
+        (2 * massA)
+        /
+        (massA + massB)
+      )
+      *
+      (
+        vec2.dot(
+          vec2.subtract(v2, v1),
+          vec2.subtract(x2, x1)
+        )
+        /
+        (
+          vec2.magnitudeSquared(vec2.subtract(x2, x1))
+        )
+      )
+    )
+  );
+  velocityB.x = v2Prime[0];
+  velocityB.y = v2Prime[1];
 }
+
 
 var screenWidth = 800;
 var screenHeight = 600;
