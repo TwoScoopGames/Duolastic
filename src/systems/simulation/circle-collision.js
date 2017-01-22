@@ -106,16 +106,16 @@ function keepOnScreen(game, entity) {
   var circle = game.entities.getComponent(entity, "circle");
   var velocity = game.entities.getComponent(entity, "velocity");
 
-  if (position.x - circle.radius < 0) {
-    position.x = circle.radius;
-    if (velocity.x < 0) {
-      velocity.x *= -1;
+  if (position.y - circle.radius < 0) {
+    position.y = circle.radius;
+    if (velocity.y < 0) {
+      velocity.y *= -1;
     }
   }
-  if (position.x + circle.radius > constants.screenWidth) {
-    position.x = constants.screenWidth - circle.radius;
-    if (velocity.x > 0) {
-      velocity.x *= -1;
+  if (position.y + circle.radius > constants.screenHeight) {
+    position.y = constants.screenHeight - circle.radius;
+    if (velocity.y > 0) {
+      velocity.y *= -1;
     }
   }
 
@@ -128,18 +128,18 @@ function keepInSides(game, entity) {
   var velocity = game.entities.getComponent(entity, "velocity");
   var ball = game.entities.getComponent(entity, "ball");
 
-  if (position.y - circle.radius < 0) {
+  if (position.x - circle.radius < 0) {
     if (ball) { game.sounds.play(random.from(drums)); }
-    position.y = circle.radius;
-    if (velocity.y < 0) {
-      velocity.y *= -1;
+    position.x = circle.radius;
+    if (velocity.x < 0) {
+      velocity.x *= -1;
     }
   }
-  if (position.y + circle.radius > constants.screenHeight) {
+  if (position.x + circle.radius > constants.screenWidth) {
     if (ball) { game.sounds.play(random.from(drums)); }
-    position.y = constants.screenHeight - circle.radius;
-    if (velocity.y > 0) {
-      velocity.y *= -1;
+    position.x = constants.screenWidth - circle.radius;
+    if (velocity.x > 0) {
+      velocity.x *= -1;
     }
   }
 }
@@ -149,14 +149,14 @@ function checkScore(game, entity) {
   var circle = game.entities.getComponent(entity, "circle");
   var score = game.entities.getComponent(constants.score, "score");
 
-  if (position.x < -circle.radius) {
-    console.log("player 2 scored");
-    score.player2++;
-    reset(game);
-  }
-  if (position.x > constants.screenWidth + circle.radius) {
+  if (position.y < -circle.radius) {
     console.log("player 1 scored");
     score.player1++;
+    reset(game);
+  }
+  if (position.y > constants.screenHeight + circle.radius) {
+    console.log("player 2 scored");
+    score.player2++;
     reset(game);
   }
 }

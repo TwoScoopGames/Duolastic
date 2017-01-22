@@ -1,4 +1,5 @@
 var config = require("../../stack-config");
+var constants = require("../../constants");
 var drawShadowCircle = require("../../draw-shadow-circle");
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
@@ -11,15 +12,67 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }
 
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
+    var player = game.entities.getComponent(constants.network, "network").player;
+
+    game.context.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
+    game.context.strokeStyle = "#ff0000";
+    drawPerspectiveLines(game.context, field, player);
+    drawPerspectiveLines(game.context, centerLine, player);
+
     var toDraw = game.entities.find("drawCircleSearch").sort(compareHeight);
     for (var i = 0; i < toDraw.length; i++) {
-      draw(game, toDraw[i]);
+      draw(game, toDraw[i], player);
     }
+
   }, "drawCircleSearch");
 };
 
-function draw(game, entity) {
+var topDepth = 2;
+
+var field = [
+  0, 0,
+  0, constants.screenHeight,
+  constants.screenWidth, constants.screenHeight,
+  constants.screenWidth, 0,
+  0, 0,
+];
+var centerLine = [
+  0, constants.screenHeight / 2,
+  constants.screenWidth, constants.screenHeight / 2,
+];
+
+function drawPerspectiveLines(context, points, player) {
+  for (var i = 0; i < points.length - 3; i += 2) {
+    var p1 = coordinateToScreen(points[i + 0], points[i + 1], player);
+    var p2 = coordinateToScreen(points[i + 2], points[i + 3], player);
+    drawPerspectiveLine(context, p1, p2);
+  }
+}
+function drawPerspectiveLine(context, p1, p2) {
+  context.beginPath();
+  context.moveTo(p1.x, p1.y);
+  context.lineTo(p2.x, p2.y);
+  context.closePath();
+  context.stroke();
+}
+
+function coordinateToScreen(x, y, player) {
+  if (player === 2) {
+    y = constants.screenHeight - y;
+  }
+  var yratio = 1 - (y / constants.screenHeight);
+  var z = 1 + (topDepth - 1) * yratio;
+
+  x -= constants.screenWidth / 2;
+  return {
+    x: x / z,
+    y: y / z
+  };
+}
+
+function draw(game, entity, player) {
   var position = game.entities.getComponent(entity, "position");
+  position = coordinateToScreen(position.x, position.y, player);
   var circle = game.entities.getComponent(entity, "circle");
 
   var ball = game.entities.getComponent(entity, "ball");
@@ -71,13 +124,13 @@ function drawStack(game, position, circle, entity) {
     var shadowOffsetX = offsetX - config.shadowOffsetX;
     var shadowOffsetY = offsetY - config.shadowOffsetY;
 
-    ctx.setTransform(1, 0, 0, config.perspective, shadowOffsetX, shadowOffsetY);
+    ctx.setTransform(1, 0, 0, config.perspective, (constants.screenWidth / 2) + shadowOffsetX, shadowOffsetY);
     drawShadowCircle(ctx, 0, 0, newRadius, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
 
-    ctx.setTransform(1, 0, 0, config.perspective, offsetX, offsetY);
+    ctx.setTransform(1, 0, 0, config.perspective, (constants.screenWidth / 2) + offsetX, offsetY);
     drawCircle(ctx, 0, 0, newRadius, colors[i]);
 
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.setTransform(1, 0, 0, 1, (constants.screenWidth / 2), 0);
   }
 }
 
@@ -126,7 +179,7 @@ function drawBall(ctx, position, circle) {
   // var shadowOffsetX = config.x + config.shadowOffsetX;
   // var shadowOffsetY = config.y + config.shadowOffsetY;
 
-  // ctx.setTransform(1, 0, 0, 0.5, 0, 0);
+  // ctx.setTransform(1, 0, 0, 0.5, constants.screenWidth / 2, 0);
   // drawShadowCircle(ctx,
   //   shadowOffsetX,
   //   shadowOffsetY,
@@ -137,7 +190,7 @@ function drawBall(ctx, position, circle) {
   //   config.shadowOutsetSize,
   //   config.shadowOutsetColor);
 
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
   drawShadowCircle(ctx,
       config.x,
       config.y,
@@ -151,7 +204,7 @@ function drawBall(ctx, position, circle) {
   var hightlightOffsetX = config.x + config.hightlightOffsetX;
   var hightlightOffsetY = config.y + config.hightlightOffsetY;
 
-  ctx.setTransform(1, 0, 0, config.perspective, 0, 0);
+  ctx.setTransform(1, 0, 0, config.perspective, constants.screenWidth / 2, 0);
   drawShadowCircle(ctx,
         hightlightOffsetX,
         hightlightOffsetY,

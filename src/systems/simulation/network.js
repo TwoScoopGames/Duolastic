@@ -38,6 +38,7 @@ function handleServer(game, entity, elapsed) {
   game.entities.addComponent(constants.player1, "playerController2d");
 
   var network = game.entities.getComponent(entity, "network");
+  network.player = 1;
 
   importComponents(game, network);
 
@@ -63,9 +64,14 @@ function sendWorld(game, time) {
 }
 
 function handleClient(game, entity, elapsed) {
-  game.entities.addComponent(constants.player2, "playerController2d");
+  var playerController = game.entities.addComponent(constants.player2, "playerController2d");
+  playerController.up = "down";
+  playerController.down = "up";
+
   var network = game.entities.getComponent(entity, "network");
+  network.player = 2;
   network.time += elapsed;
+
   sendClient(game, network.time);
   importComponents(game, network);
 }

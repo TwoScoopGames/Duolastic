@@ -1,4 +1,5 @@
 module.exports = {
+  network: 1,
   player1: 2,
   player2: 3,
   ball: 4,
