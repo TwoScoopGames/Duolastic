@@ -40,9 +40,10 @@ var ball = 4;
 function handleServer(game, entity, elapsed) {
   game.entities.addComponent(player1, "playerController2d");
 
-  importComponents(game);
-
   var network = game.entities.getComponent(entity, "network");
+
+  importComponents(game, network);
+
   network.time += elapsed;
 
   if (network.time - network.lastPacketTime > PACKET_RATE) {
@@ -63,11 +64,12 @@ function sendWorld(game, time) {
   peer.send(JSON.stringify(message));
 }
 
-function handleClient(game, entity) {
+function handleClient(game, entity, elapsed) {
   game.entities.addComponent(player2, "playerController2d");
   var network = game.entities.getComponent(entity, "network");
+  network.time += elapsed;
   sendClient(game, network.time);
-  importComponents(game);
+  importComponents(game, network);
 }
 
 function sendClient(game, time) {
@@ -80,15 +82,19 @@ function sendClient(game, time) {
   peer.send(JSON.stringify(message));
 }
 
-function importComponents(game) {
-  if (incomingMessages.length === 0) {
-    return;
-  }
-  var msg = incomingMessages[incomingMessages.length - 1];
-  incomingMessages.length = 0;
+function importComponents(game, network) {
+  for (var i = 0; i < incomingMessages.length; i++) {
+    var msg = incomingMessages[i];
+    if (msg.time <= network.peerTime) {
+      console.log("skipping", msg.time, network.peerTime);
+      continue;
+    }
+    network.peerTime = msg.time;
 
-  var entities = msg.entities || [];
-  for (var i = 0; i < entities.length; i++) {
-    deserialize(game, entities[i]);
+    var entities = msg.entities || [];
+    for (var j = 0; j < entities.length; j++) {
+      deserialize(game, entities[j]);
+    }
   }
+  incomingMessages.length = 0;
 }
