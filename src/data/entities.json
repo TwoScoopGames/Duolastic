@@ -1,6 +1,18 @@
 {
   "main": [
     {
+      "id": 100,
+      "name": "viewport",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "width": 1136,
+        "height": 640
+      }
+    },
+    {
       "id": 0,
       "name": "camera",
       "camera": true,
@@ -8,7 +20,10 @@
         "x": 0,
         "y": 0
       },
-      "matchCanvasSize": true
+      "matchCanvasSize": true,
+      "matchCenter": {
+        "id": 100
+      }
     },
     {
       "id": 1,

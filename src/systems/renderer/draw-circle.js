@@ -82,7 +82,6 @@ function draw(game, entity, player) {
     drawBall(game.context, position, circle);
   } else {
     drawStack(game, position, circle, entity, player);
-    // drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
   }
 }
 
@@ -120,7 +119,7 @@ function drawStack(game, position, circle, entity, player) {
     var x = (constants.screenWidth / 2) + shadowOffsetX;
     var r = radiusInPerspective(newRadius, x, shadowOffsetY);
     ctx.setTransform(1, 0, 0, config.perspective, x, shadowOffsetY);
-    drawShadowCircle(ctx, 0, 0, r, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
+    drawShadowCircle(ctx, 0, 0, r, config.insetColor, config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
 
     x = (constants.screenWidth / 2) + offsetX;
     r = radiusInPerspective(newRadius, x, shadowOffsetY);
@@ -158,9 +157,9 @@ function drawBall(ctx, position, circle) {
   config.highlightColor = [190, 190, 190, 1];
   config.highlightInsetColor = [118, 118, 118, 1];
   config.highlightOutsetColor = [118, 118, 118, 1];
-  config.shadowColor = [0, 0, 0, 0.8];
-  config.shadowOutsetColor = [0, 0, 0, 0.8];
-  config.shadowInsetColor = [0, 0, 0, 0.8];
+  config.shadowColor = [0, 0, 0, 0.5];
+  config.shadowOutsetColor = [0, 0, 0, 0.5];
+  config.shadowInsetColor = [0, 0, 0, 0.5];
   config.debugLines = false;
   config.debugLineColor = [0, 0, 0, 1];
 

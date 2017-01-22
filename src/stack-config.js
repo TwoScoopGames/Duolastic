@@ -5,9 +5,9 @@ module.exports = {
   shadowOffsetX: 1.2,
   shadowOffsetY: -6,
   outsetSize: 10,
-  outsetColor: [0, 0, 0, 0.5],
+  outsetColor: [0, 0, 0, 0.3],
   insetSize: 10,
-  insetColor: [0, 0, 0, 1],
+  insetColor: [0, 0, 0, 0.3],
   debugLines: false,
   debugLineColor: [0, 0, 0, 1],
   colors: {
@@ -41,4 +41,3 @@ module.exports = {
     ]
   }
 };
-

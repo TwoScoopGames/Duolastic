@@ -4,6 +4,6 @@ module.exports = {
   player2: 3,
   ball: 4,
   score: 5,
-  screenWidth: 800,
-  screenHeight: 600
+  screenWidth: 1136,
+  screenHeight: 640
 };

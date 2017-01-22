@@ -9,6 +9,10 @@
    "scenes": "all"
   },
   {
+    "name": "splat-ecs/lib/systems/simulation/match-center",
+    "scenes": "all"
+  },
+  {
    "name": "splat-ecs/lib/systems/simulation/advance-timers",
    "scenes": "all"
   },
