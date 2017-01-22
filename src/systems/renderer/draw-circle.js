@@ -113,14 +113,24 @@ function drawStack(game, position, circle, entity) {
     var shadowOffsetX = offsetX - config.shadowOffsetX;
     var shadowOffsetY = offsetY - config.shadowOffsetY;
 
-    ctx.setTransform(1, 0, 0, config.perspective, (constants.screenWidth / 2) + shadowOffsetX, shadowOffsetY);
-    drawShadowCircle(ctx, 0, 0, newRadius, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
+    var x = (constants.screenWidth / 2) + shadowOffsetX;
+    var r = radiusInPerspective(newRadius, x, shadowOffsetY);
+    ctx.setTransform(1, 0, 0, config.perspective, x, shadowOffsetY);
+    drawShadowCircle(ctx, 0, 0, r, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
 
-    ctx.setTransform(1, 0, 0, config.perspective, (constants.screenWidth / 2) + offsetX, offsetY);
-    drawCircle(ctx, 0, 0, newRadius, colors[i]);
+    x = (constants.screenWidth / 2) + offsetX;
+    r = radiusInPerspective(newRadius, x, shadowOffsetY);
+    ctx.setTransform(1, 0, 0, config.perspective, x, offsetY);
+    drawCircle(ctx, 0, 0, r, colors[i]);
 
     ctx.setTransform(1, 0, 0, 1, (constants.screenWidth / 2), 0);
   }
+}
+
+function radiusInPerspective(radius, x, y) {
+  var left = coordinateToScreen(x - radius, y, 1);
+  var right = coordinateToScreen(x + radius, y, 1);
+  return (right.x - left.x) / 2;
 }
 
 function drawCircle(ctx, x, y, radius, color) {
