@@ -27,6 +27,7 @@
    },
    "circle": {
      "fillStyle": "#0000ff",
+     "mass": 20,
      "radius": 50
    },
    "velocity": {
@@ -57,6 +58,7 @@
    },
    "circle": {
      "fillStyle": "#ff0000",
+     "mass": 20,
      "radius": 50
    },
    "velocity": {
@@ -87,6 +89,7 @@
    },
    "circle": {
      "fillStyle": "#000000",
+     "mass": 15,
      "radius": 25
    },
    "velocity": {

@@ -32,28 +32,23 @@ function collide(game, a, b) {
     return;
   }
 
-  // velocityB.x *= -1;
-  // velocityB.y *= -1;
-  // velocityB.x += velocityA.x;
-  // velocityB.y += velocityA.y;
-
-  var massA = 10;
-  var massB = 10;
-
   var v1 = vec2.create(velocityA.x, velocityA.y);
   var x1 = vec2.create(positionA.x, positionA.y);
 
   var v2 = vec2.create(velocityB.x, velocityB.y);
   var x2 = vec2.create(positionB.x, positionB.y);
 
+  var m1 = circleA.mass;
+  var m2 = circleB.mass;
+
   var v1Prime = vec2.subtract(
     v1,
     vec2.multiply(
       vec2.subtract(x1, x2),
       (
-        (2 * massB)
+        (2 * m2)
         /
-        (massA + massB)
+        (m1 + m2)
       )
       *
       (
@@ -76,9 +71,9 @@ function collide(game, a, b) {
     vec2.multiply(
       vec2.subtract(x2, x1),
       (
-        (2 * massA)
+        (2 * m1)
         /
-        (massA + massB)
+        (m1 + m2)
       )
       *
       (
