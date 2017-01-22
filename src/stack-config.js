@@ -1,7 +1,7 @@
 module.exports = {
   perspective: 0.5,
   offsetX: 2,
-  offsetY: 32,
+  offsetY: 16,
   shadowOffsetX: 1.2,
   shadowOffsetY: -6,
   outsetSize: 10,
