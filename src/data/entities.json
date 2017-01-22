@@ -96,6 +96,14 @@
     "x": 0,
     "y": 0
    }
+  },
+  {
+   "id": 5,
+   "name": "scores",
+   "score": {
+     "player1": 0,
+     "player2": 0
+   }
   }
  ]
 }

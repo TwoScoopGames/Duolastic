@@ -1,3 +1,4 @@
+var constants = require("../../constants");
 var createPeerConnection = require("../../peer");
 var deserialize = require("../../serialize").deserialize;
 var serialize = require("../../serialize").serialize;
@@ -33,12 +34,8 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "network");
 };
 
-var player1 = 2;
-var player2 = 3;
-var ball = 4;
-
 function handleServer(game, entity, elapsed) {
-  game.entities.addComponent(player1, "playerController2d");
+  game.entities.addComponent(constants.player1, "playerController2d");
 
   var network = game.entities.getComponent(entity, "network");
 
@@ -56,16 +53,17 @@ function sendWorld(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, player1, ["position", "velocity"]),
-      serialize(game, player2, ["position", "velocity"]),
-      serialize(game, ball, ["position", "velocity"])
+      serialize(game, constants.player1, ["position", "velocity"]),
+      serialize(game, constants.player2, ["position", "velocity"]),
+      serialize(game, constants.ball, ["position", "velocity"]),
+      serialize(game, constants.score, ["score"])
     ]
   };
   peer.send(JSON.stringify(message));
 }
 
 function handleClient(game, entity, elapsed) {
-  game.entities.addComponent(player2, "playerController2d");
+  game.entities.addComponent(constants.player2, "playerController2d");
   var network = game.entities.getComponent(entity, "network");
   network.time += elapsed;
   sendClient(game, network.time);
@@ -76,7 +74,7 @@ function sendClient(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, player2, ["movement2d"])
+      serialize(game, constants.player2, ["movement2d"])
     ]
   };
   peer.send(JSON.stringify(message));

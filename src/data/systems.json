@@ -111,6 +111,10 @@
    "scenes": "all"
   },
   {
+   "name": "./systems/renderer/draw-scores",
+   "scenes": "all"
+  },
+  {
    "name": "splat-ecs/lib/systems/renderer/draw-rectangles",
    "scenes": "all"
   },

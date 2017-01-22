@@ -134,13 +134,16 @@ function keepInSides(game, entity) {
 function checkScore(game, entity) {
   var position = game.entities.getComponent(entity, "position");
   var circle = game.entities.getComponent(entity, "circle");
+  var score = game.entities.getComponent(constants.score, "score");
 
   if (position.x < -circle.radius) {
     console.log("player 2 scored");
+    score.player2++;
     reset(game);
   }
   if (position.x > constants.screenWidth + circle.radius) {
     console.log("player 1 scored");
+    score.player1++;
     reset(game);
   }
 }
