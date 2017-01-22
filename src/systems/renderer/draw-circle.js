@@ -18,14 +18,9 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 };
 
 function drawStack(ctx, position, circle) {
-  //console.log(circle.colorSet);
-  if (circle.colorSet === "inverted") {
-    colors = config.colors.inverted;
-  }
-
   var centerX = position.x;
   var centerY = position.y;
-  var colors = config.colors.standard;
+  var colors = config.colors[circle.colorSet];
   var onepart = circle.radius / colors.length;
   var newRadius = circle.radius;
 
