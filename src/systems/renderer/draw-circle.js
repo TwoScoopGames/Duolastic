@@ -12,7 +12,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
       drawCircle(game.context, position.x, position.y, circle.radius, "rgba(50, 50, 50, 1)");
     } else {
       drawStack(game.context, position, circle);
-      drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
+      // drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
     }
   }, "drawCircleSearch");
 };
@@ -32,12 +32,13 @@ function drawStack(ctx, position, circle) {
     var shadowOffsetX = offsetX - config.shadowOffsetX;
     var shadowOffsetY = offsetY - config.shadowOffsetY;
 
-    ctx.setTransform(1,0,0,config.perspective,0,0);
-    drawShadowCircle(ctx, shadowOffsetX, shadowOffsetY, newRadius, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
+    ctx.setTransform(1, 0, 0, config.perspective, shadowOffsetX, shadowOffsetY);
+    drawShadowCircle(ctx, 0, 0, newRadius, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
 
-    drawCircle(ctx, offsetX, offsetY, newRadius, colors[i]);
+    ctx.setTransform(1, 0, 0, config.perspective, offsetX, offsetY);
+    drawCircle(ctx, 0, 0, newRadius, colors[i]);
 
-    ctx.setTransform(1,0,0,1,0,0);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 }
 
