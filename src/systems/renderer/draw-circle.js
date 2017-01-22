@@ -72,7 +72,7 @@ function draw(game, entity, player) {
   } else if (ball) {
     drawBall(game.context, position, circle);
   } else {
-    drawStack(game, position, circle, entity);
+    drawStack(game, position, circle, entity, player);
     // drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
   }
 }
@@ -82,10 +82,9 @@ function getLength(point1, point2) {
 }
 
 
-function drawStack(game, position, circle, entity) {
+function drawStack(game, position, circle, entity, player) {
   var ctx = game.context;
-  // var centerX = position.x;
-  // var centerY = position.y;
+
   var colors = config.colors[circle.colorSet];
   var onepart = circle.radius / colors.length;
   var newRadius = circle.radius;
@@ -94,21 +93,17 @@ function drawStack(game, position, circle, entity) {
     return follow.id === entity;
   })[0];
   var childPosition = game.entities.getComponent(child, "position");
+  childPosition = coordinateToScreen(childPosition.x, childPosition.y, player);
   var length = getLength(position, childPosition);
   var angle = Math.atan2(childPosition.y - position.y, childPosition.x - position.x);
 
   for (var i = 1; i < colors.length; i++) {
-    var segment = (length / 12) * i;
-
-
+    var segment = (length / colors.length) * i;
 
     var offsetX = position.x + (segment * Math.cos(angle));
     var offsetY = position.y + (segment * Math.sin(angle));
 
-
     newRadius -= onepart;
-    // var offsetX = centerX - stackOffsets[i].x);
-    // var offsetY = centerY - stackOffsets[i].y;
 
     var shadowOffsetX = offsetX - config.shadowOffsetX;
     var shadowOffsetY = offsetY - config.shadowOffsetY;
