@@ -116,7 +116,7 @@
   },
   {
    "name": "splat-ecs/lib/systems/renderer/draw-rectangles",
-   "scenes": "all"
+   "scenes": []
   },
   {
    "name": "splat-ecs/lib/systems/renderer/viewport-reset",
