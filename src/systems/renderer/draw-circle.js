@@ -27,6 +27,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
       draw(game, toDraw[i], player);
     }
 
+    game.context.setTransform(1, 0, 0, 1, 0, 0);
   }, "drawCircleSearch");
 };
 
