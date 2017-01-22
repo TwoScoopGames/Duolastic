@@ -57,6 +57,12 @@
    "scenes": "all"
   },
   {
+   "name": "./systems/simulation/circle-collision",
+   "scenes": [
+     "main"
+   ]
+  },
+  {
    "name": "splat-ecs/lib/systems/simulation/box-group-collider",
    "scenes": "all"
   },
