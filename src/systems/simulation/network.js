@@ -35,6 +35,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 
 var player1 = 2;
 var player2 = 3;
+var ball = 4;
 
 function handleServer(game, entity, elapsed) {
   game.entities.addComponent(player1, "playerController2d");
@@ -54,7 +55,9 @@ function sendWorld(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, player1, ["position", "velocity"])
+      serialize(game, player1, ["position", "velocity"]),
+      serialize(game, player2, ["position", "velocity"]),
+      serialize(game, ball, ["position", "velocity"])
     ]
   };
   peer.send(JSON.stringify(message));
