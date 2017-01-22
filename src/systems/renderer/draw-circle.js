@@ -23,25 +23,50 @@ function draw(game, entity) {
   var circle = game.entities.getComponent(entity, "circle");
 
   var ball = game.entities.getComponent(entity, "ball");
-  if (ball) {
+  var debug = game.entities.getComponent(entity, "debug");
+
+  if (debug) {
+    drawCircle(game.context, position.x, position.y, circle.radius, "rgba(100, 100, 200, 0.5)");
+  } else if (ball) {
     drawBall(game.context, position, circle);
   } else {
-    drawStack(game.context, position, circle);
+    drawStack(game, position, circle, entity);
     // drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 50, 50, 1)");
   }
 }
 
-function drawStack(ctx, position, circle) {
-  var centerX = position.x;
-  var centerY = position.y;
+function getLength(point1, point2) {
+  return Math.sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
+}
+
+
+function drawStack(game, position, circle, entity) {
+  var ctx = game.context;
+  // var centerX = position.x;
+  // var centerY = position.y;
   var colors = config.colors[circle.colorSet];
   var onepart = circle.radius / colors.length;
   var newRadius = circle.radius;
+  var child = game.entities.find("follow").filter(function(id) {
+    var follow = game.entities.getComponent(id, "follow");
+    return follow.id === entity;
+  })[0];
+  var childPosition = game.entities.getComponent(child, "position");
+  var length = getLength(position, childPosition);
+  var angle = Math.atan2(childPosition.y - position.y, childPosition.x - position.x);
 
   for (var i = 1; i < colors.length; i++) {
+    var segment = (length / 12) * i;
+
+
+
+    var offsetX = position.x + (segment * Math.cos(angle));
+    var offsetY = position.y + (segment * Math.sin(angle));
+
+
     newRadius -= onepart;
-    var offsetX = centerX - (i * config.offsetX);
-    var offsetY = centerY - (i * config.offsetY);
+    // var offsetX = centerX - stackOffsets[i].x);
+    // var offsetY = centerY - stackOffsets[i].y;
 
     var shadowOffsetX = offsetX - config.shadowOffsetX;
     var shadowOffsetY = offsetY - config.shadowOffsetY;

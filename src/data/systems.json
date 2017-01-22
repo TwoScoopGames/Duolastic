@@ -111,6 +111,10 @@
    "scenes": "all"
   },
   {
+   "name": "./systems/renderer/line-to-parent",
+   "scenes": "all"
+  },
+  {
    "name": "./systems/renderer/draw-scores",
    "scenes": "all"
   },

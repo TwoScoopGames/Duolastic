@@ -1,109 +1,159 @@
 {
- "main": [
-  {
-   "id": 0,
-   "name": "camera",
-   "camera": true,
-   "position": {
-    "x": 0,
-    "y": 0
-   },
-   "matchCanvasSize": true
-  },
-  {
-   "id": 1,
-   "name": "network",
-   "network": {
-     "lastPacketTime": 0,
-     "time": 0
-   }
-  },
-  {
-   "id": 2,
-   "name": "player 1",
-   "position": {
-    "x": 100,
-    "y": 100
-   },
-   "circle": {
-     "colorSet": "standard",
-     "mass": 20,
-     "radius": 50
-   },
-   "velocity": {
-    "x": 0,
-    "y": 0
-   },
-   "movement2d": {
-    "upMax": -0.5,
-    "downMax": 0.5,
-    "leftMax": -0.5,
-    "rightMax": 0.5,
-    "upAccel": -0.02,
-    "downAccel": 0.02,
-    "leftAccel": -0.02,
-    "rightAccel": 0.02
-   },
-   "friction": {
-    "x": 0.97,
-    "y": 0.97
-   }
-  },
-  {
-   "id": 3,
-   "name": "player 2",
-   "position": {
-    "x": 400,
-    "y": 100
-   },
-   "circle": {
-     "colorSet": "inverted",
-     "mass": 20,
-     "radius": 50
-   },
-   "velocity": {
-    "x": 0,
-    "y": 0
-   },
-   "movement2d": {
-    "upMax": -0.5,
-    "downMax": 0.5,
-    "leftMax": -0.5,
-    "rightMax": 0.5,
-    "upAccel": -0.02,
-    "downAccel": 0.02,
-    "leftAccel": -0.02,
-    "rightAccel": 0.02
-   },
-   "friction": {
-    "x": 0.97,
-    "y": 0.97
-   }
-  },
-  {
-   "id": 4,
-   "name": "ball",
-   "position": {
-    "x": 250,
-    "y": 200
-   },
-   "ball": true,
-   "circle": {
-     "mass": 15,
-     "radius": 25
-   },
-   "velocity": {
-    "x": 0,
-    "y": 0
-   }
-  },
-  {
-   "id": 5,
-   "name": "scores",
-   "score": {
-     "player1": 0,
-     "player2": 0
-   }
-  }
- ]
+  "main": [
+    {
+      "id": 0,
+      "name": "camera",
+      "camera": true,
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "matchCanvasSize": true
+    },
+    {
+      "id": 1,
+      "name": "network",
+      "network": {
+        "lastPacketTime": 0,
+        "time": 0
+      }
+    },
+    {
+      "id": 2,
+      "name": "player 1",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "circle": {
+        "colorSet": "standard",
+        "mass": 20,
+        "radius": 125
+      },
+      "velocity": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "movement2d": {
+        "upMax": -0.5,
+        "downMax": 0.5,
+        "leftMax": -0.5,
+        "rightMax": 0.5,
+        "upAccel": -0.02,
+        "downAccel": 0.02,
+        "leftAccel": -0.02,
+        "rightAccel": 0.02
+      },
+      "friction": {
+        "x": 0.97,
+        "y": 0.97
+      }
+    },
+    {
+      "id": 22,
+      "name": "player 1 top",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "debug": true,
+      "circle": {
+        "mass": 20,
+        "radius": 20
+      },
+      "follow": {
+        "id": 2,
+        "distance": 100
+      }
+    },
+    {
+      "id": 3,
+      "name": "player 2",
+      "position": {
+        "x": 400,
+        "y": 100
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "circle": {
+        "colorSet": "inverted",
+        "mass": 20,
+        "radius": 125
+      },
+      "velocity": {
+        "x": 0,
+        "y": 0
+      },
+      "movement2d": {
+        "upMax": -0.5,
+        "downMax": 0.5,
+        "leftMax": -0.5,
+        "rightMax": 0.5,
+        "upAccel": -0.02,
+        "downAccel": 0.02,
+        "leftAccel": -0.02,
+        "rightAccel": 0.02
+      },
+      "friction": {
+        "x": 0.97,
+        "y": 0.97
+      }
+    },
+    {
+      "id": 33,
+      "name": "player 2 top",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "debug": true,
+      "circle": {
+        "mass": 20,
+        "radius": 20
+      },
+      "follow": {
+        "id": 3,
+        "distance": 100
+      }
+    },
+    {
+      "id": 4,
+      "name": "ball",
+      "position": {
+        "x": 250,
+        "y": 200
+      },
+      "ball": true,
+      "circle": {
+        "mass": 15,
+        "radius": 25
+      },
+      "velocity": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": 5,
+      "name": "scores",
+      "score": {
+        "player1": 0,
+        "player2": 0
+      }
+    }
+  ]
 }
