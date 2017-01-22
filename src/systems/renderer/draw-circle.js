@@ -154,7 +154,7 @@ function drawBall(ctx, position, circle) {
   // var shadowOffsetX = config.x + config.shadowOffsetX;
   // var shadowOffsetY = config.y + config.shadowOffsetY;
 
-  // ctx.setTransform(1, 0, 0, 0.5, 0, 0);
+  // ctx.setTransform(1, 0, 0, 0.5, constants.screenWidth / 2, 0);
   // drawShadowCircle(ctx,
   //   shadowOffsetX,
   //   shadowOffsetY,
@@ -165,7 +165,7 @@ function drawBall(ctx, position, circle) {
   //   config.shadowOutsetSize,
   //   config.shadowOutsetColor);
 
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
   drawShadowCircle(ctx,
       config.x,
       config.y,
@@ -179,7 +179,7 @@ function drawBall(ctx, position, circle) {
   var hightlightOffsetX = config.x + config.hightlightOffsetX;
   var hightlightOffsetY = config.y + config.hightlightOffsetY;
 
-  ctx.setTransform(1, 0, 0, config.perspective, 0, 0);
+  ctx.setTransform(1, 0, 0, config.perspective, constants.screenWidth / 2, 0);
   drawShadowCircle(ctx,
         hightlightOffsetX,
         hightlightOffsetY,
