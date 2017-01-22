@@ -77,7 +77,7 @@ function draw(game, entity, player) {
   var debug = game.entities.getComponent(entity, "debug");
 
   if (debug) {
-    drawCircle(game.context, position.x, position.y, circle.radius, "rgba(100, 100, 200, 0.5)");
+    return;
   } else if (ball) {
     drawBall(game.context, position, circle);
   } else {

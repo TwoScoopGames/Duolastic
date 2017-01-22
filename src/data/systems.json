@@ -118,7 +118,7 @@
   },
   {
    "name": "./systems/renderer/line-to-parent",
-   "scenes": "all"
+   "scenes": []
   },
   {
    "name": "./systems/renderer/draw-scores",
@@ -134,7 +134,7 @@
   },
   {
    "name": "splat-ecs/lib/systems/renderer/draw-frame-rate",
-   "scenes": "all"
+   "scenes": []
   },
   {
    "name": "splat-ecs/lib/systems/renderer/revert-shake",
