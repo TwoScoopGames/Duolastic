@@ -1,5 +1,6 @@
 var config = require("../../stack-config");
 var constants = require("../../constants");
+var coordinateToScreen = require("../../coordinate-to-screen");
 var drawShadowCircle = require("../../draw-shadow-circle");
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
@@ -31,8 +32,6 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "drawCircleSearch");
 };
 
-var topDepth = 2;
-
 var field = [
   0, 0,
   0, constants.screenHeight,
@@ -58,20 +57,6 @@ function drawPerspectiveLine(context, p1, p2) {
   context.lineTo(p2.x, p2.y);
   context.closePath();
   context.stroke();
-}
-
-function coordinateToScreen(x, y, player) {
-  if (player === 2) {
-    y = constants.screenHeight - y;
-  }
-  var yratio = 1 - (y / constants.screenHeight);
-  var z = 1 + (topDepth - 1) * yratio;
-
-  x -= constants.screenWidth / 2;
-  return {
-    x: x / z,
-    y: y / z
-  };
 }
 
 function draw(game, entity, player) {
