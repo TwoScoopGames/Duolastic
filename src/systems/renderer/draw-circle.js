@@ -1,6 +1,5 @@
 
 var config = {
-  radius: 180,
   perspective: 0.5,
   offsetX: 2,
   offsetY: 32,
@@ -49,47 +48,44 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var position = game.entities.getComponent(entity, "position");
     var circle = game.entities.getComponent(entity, "circle");
+
     var ball = game.entities.getComponent(entity, "ball");
-
-    var ctx = game.context;
-    var centerX = position.x;
-    var centerY = position.y;
-    var colors = config.colors.standard;
-
-
-    //console.log(circle.colorSet);
-    if (circle.colorSet === "inverted") {
-      colors = config.colors.inverted;
-    }
-
-    var onepart = config.radius / colors.length;
-    var newRadius = config.radius;
-
     if (ball) {
-      drawCircle(ctx, centerX, centerY, 20, "rgba(50,50,50, 1)");
-      return;
+      drawCircle(game.context, position.x, position.y, circle.radius, "rgba(50,50,50, 1)");
+    } else {
+      drawStack(game.context, position, circle);
     }
-
-    for (var i = 1; i < colors.length; i++) {
-      newRadius -= onepart;
-      var offsetX = centerX - (i * config.offsetX);
-      var offsetY = centerY - (i * config.offsetY);
-
-      var shadowOffsetX = offsetX - config.shadowOffsetX;
-      var shadowOffsetY = offsetY - config.shadowOffsetY;
-
-      ctx.setTransform(1,0,0,config.perspective,0,0);
-      drawShadowCircle(ctx, shadowOffsetX, shadowOffsetY, newRadius, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
-
-      drawCircle(ctx, offsetX, offsetY, newRadius, colors[i]);
-
-      ctx.setTransform(1,0,0,1,0,0);
-    }
-
   }, "drawCircleSearch");
 };
 
+function drawStack(ctx, position, circle) {
+  //console.log(circle.colorSet);
+  if (circle.colorSet === "inverted") {
+    colors = config.colors.inverted;
+  }
 
+  var centerX = position.x;
+  var centerY = position.y;
+  var colors = config.colors.standard;
+  var onepart = circle.radius / colors.length;
+  var newRadius = circle.radius;
+
+  for (var i = 1; i < colors.length; i++) {
+    newRadius -= onepart;
+    var offsetX = centerX - (i * config.offsetX);
+    var offsetY = centerY - (i * config.offsetY);
+
+    var shadowOffsetX = offsetX - config.shadowOffsetX;
+    var shadowOffsetY = offsetY - config.shadowOffsetY;
+
+    ctx.setTransform(1,0,0,config.perspective,0,0);
+    drawShadowCircle(ctx, shadowOffsetX, shadowOffsetY, newRadius, "rgba(0,0,0,1)", config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
+
+    drawCircle(ctx, offsetX, offsetY, newRadius, colors[i]);
+
+    ctx.setTransform(1,0,0,1,0,0);
+  }
+}
 
 function drawCircle(ctx, x, y, radius, color) {
   ctx.beginPath();
@@ -103,9 +99,9 @@ function drawShadowCircle(ctx, x, y, r, color, inset, insetColor, outset, outset
   var radgrad = ctx.createRadialGradient(x, y, 0, x, y, radius);
 
   radgrad.addColorStop(0, parseRGBA(color));
-  var stop = (r - inset) / radius;
-
+  var stop = Math.max(r - inset, 0) / radius;
   radgrad.addColorStop(stop, parseRGBA(color));
+
   if (inset === 0 && outset === 0) {
     radgrad.addColorStop(1, colorWithZeroAlpha(color));
   }
