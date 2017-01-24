@@ -41,12 +41,10 @@ function collide(game, a, b) {
     return;
   }
 
-  var toMove = Math.sqrt(distSq) - collisionDistance;
-  if (toMove > 0) {
-    var angle = Math.atan2(positionA.y - positionB.y, positionA.x - positionB.x);
-    positionB.x += (toMove * Math.cos(angle));
-    positionB.y += (toMove * Math.sin(angle));
-  }
+  var toMove = collisionDistance - Math.sqrt(distSq);
+  var angle = Math.atan2(positionA.y - positionB.y, positionA.x - positionB.x);
+  positionB.x += (toMove * Math.cos(angle));
+  positionB.y += (toMove * Math.sin(angle));
 
   var v1 = vec2.create(velocityA.x, velocityA.y);
   var x1 = vec2.create(positionA.x, positionA.y);
