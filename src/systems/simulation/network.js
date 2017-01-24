@@ -6,7 +6,7 @@ var serialize = require("../../serialize").serialize;
 var peer;
 var incomingMessages = [];
 
-createPeerConnection(function(err, p) {
+function peerConnected(err, p) {
   if (err) {
     console.error(err);
     return;
@@ -14,16 +14,21 @@ createPeerConnection(function(err, p) {
   peer = p;
   console.log("got a peer", peer, peer.initiator);
   peer.on("data", function(data) {
-    // console.log("got data", JSON.parse(data.toString()));
     incomingMessages.push(JSON.parse(data.toString()));
   });
   peer.on("close", function() {
     console.log("close");
     peer = undefined;
   });
-});
+}
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
+  game.entities.onAddComponent("network", function() {
+    createPeerConnection(peerConnected);
+  });
+  game.entities.onRemoveComponent("network", function() {
+    peer.close();
+  });
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var network = game.entities.getComponent(entity, "network");
     if (!peer) {
