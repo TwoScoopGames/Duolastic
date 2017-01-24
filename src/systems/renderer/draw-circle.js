@@ -1,8 +1,7 @@
 var config = require("../../stack-config");
 var constants = require("../../constants");
 var coordinateToScreen = require("../../coordinate-to-screen");
-var drawCircularOuterShadow = require("../../draw-circular-outer-shadow");
-var drawCircularInnerOuterShadow = require("../../draw-circular-inner-and-outer-shadow");
+var shadow = require("../../shadow");
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   game.entities.registerSearch("drawCircleSearch", ["circle", "position"]);
@@ -14,7 +13,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }
 
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
-    var player = game.entities.getComponent(constants.network, "network").role === "server" ? 1 : 2;
+    var player = game.entities.getComponent(constants.network, "network").player;
 
     game.context.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
     game.context.strokeStyle = "#ff0000";
@@ -101,6 +100,9 @@ function drawStack(game, position, circle, entity, player) {
     var follow = game.entities.getComponent(id, "follow");
     return follow.id === entity;
   })[0];
+  if (!child) {
+    debugger; //eslint-disable-line no-debugger
+  }
   var childPosition = game.entities.getComponent(child, "position");
   childPosition = coordinateToScreen(childPosition.x, childPosition.y, player);
   var length = getLength(position, childPosition);
@@ -121,7 +123,8 @@ function drawStack(game, position, circle, entity, player) {
     var r = radiusInPerspective(newRadius, x, shadowOffsetY);
     ctx.setTransform(1, 0, 0, config.perspective, x, shadowOffsetY);
 
-    drawCircularOuterShadow(ctx,
+    shadow.outer(
+      ctx,
       shadowOffsetX,
       shadowOffsetY,
       restrictPositive(r + config.shadowRadiusModifier),
@@ -152,25 +155,23 @@ function drawCircle(ctx, x, y, radius, color) {
   ctx.fill();
 }
 
-
-
 function drawBall(ctx, position, circle) {
 
   var config = {};
   config.x = position.x;
   config.y = position.y;
   config.radius = circle.radius;
-  config.color = [118, 118, 118, 1];
-  config.insetColor = [50, 50, 50, 1];
-  config.outsetColor = [0, 0, 0, 0.5];
-  config.highlightColor = [190, 190, 190, 1];
-  config.highlightInsetColor = [118, 118, 118, 1];
-  config.highlightOutsetColor = [118, 118, 118, 1];
-  config.shadowColor = [0, 0, 0, 0.5];
-  config.shadowOutsetColor = [0, 0, 0, 0.5];
-  config.shadowInsetColor = [0, 0, 0, 0.5];
+  config.color = "rgba(118, 118, 118, 1)";
+  config.insetColor = "rgba(50, 50, 50, 1)";
+  config.outsetColor = "rgba(0, 0, 0, 0.5)";
+  config.highlightColor = "rgba(190, 190, 190, 1)";
+  config.highlightInsetColor = "rgba(118, 118, 118, 1)";
+  config.highlightOutsetColor = "rgba(118, 118, 118, 1)";
+  config.shadowColor = "rgba(0, 0, 0, 0.5)";
+  config.shadowOutsetColor = "rgba(0, 0, 0, 0.5)";
+  config.shadowInsetColor = "rgba(0, 0, 0, 0.5)";
   config.debugLines = false;
-  config.debugLineColor = [0, 0, 0, 1];
+  config.debugLineColor = "rgba(0, 0, 0, 1)";
 
 
   config.insetSize = config.radius * 0.46;
@@ -188,21 +189,21 @@ function drawBall(ctx, position, circle) {
 
 
   ctx.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
-  // drawCircularInnerOuterShadow(ctx,
-  //     config.x,
-  //     config.y,
-  //     config.radius,
-  //     config.color,
-  //     config.insetSize,
-  //     config.insetColor,
-  //     config.outsetSize,
-  //     config.outsetColor);
+  shadow.both(ctx,
+      config.x,
+      config.y,
+      config.radius,
+      config.color,
+      config.insetSize,
+      config.insetColor,
+      config.outsetSize,
+      config.outsetColor);
 
   var hightlightOffsetX = config.x + config.hightlightOffsetX;
   var hightlightOffsetY = config.y + config.hightlightOffsetY;
 
   ctx.setTransform(1, 0, 0, config.perspective, constants.screenWidth / 2, 0);
-  drawCircularInnerOuterShadow(ctx,
+  shadow.both(ctx,
         hightlightOffsetX,
         hightlightOffsetY,
         config.highlightRadius,
