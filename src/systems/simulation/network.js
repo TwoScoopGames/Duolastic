@@ -12,10 +12,14 @@ createPeerConnection(function(err, p) {
     return;
   }
   peer = p;
-  console.log("got a peer", peer);
+  console.log("got a peer", peer, peer.initiator);
   peer.on("data", function(data) {
     // console.log("got data", JSON.parse(data.toString()));
     incomingMessages.push(JSON.parse(data.toString()));
+  });
+  peer.on("close", function() {
+    console.log("close");
+    peer = undefined;
   });
 });
 
