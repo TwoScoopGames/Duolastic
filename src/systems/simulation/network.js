@@ -32,7 +32,9 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var network = game.entities.getComponent(entity, "network");
     if (!peer) {
-      network.state = "disconnected";
+      if (network.state === "connected") {
+        network.state = "disconnected";
+      }
       return;
     }
     network.state = "connected";

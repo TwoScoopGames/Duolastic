@@ -129,6 +129,10 @@
    "scenes": "all"
   },
   {
+   "name": "./systems/renderer/draw-connection-state",
+   "scenes": "all"
+  },
+  {
    "name": "splat-ecs/lib/systems/renderer/draw-rectangles",
    "scenes": []
   },
