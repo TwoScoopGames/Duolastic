@@ -14,7 +14,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }
 
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
-    var player = game.entities.getComponent(constants.network, "network").player;
+    var player = game.entities.getComponent(constants.network, "network").role === "server" ? 1 : 2;
 
     game.context.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
     game.context.strokeStyle = "#ff0000";

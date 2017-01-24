@@ -19,34 +19,35 @@ createPeerConnection(function(err, p) {
   });
 });
 
-var PACKET_RATE = 50;
-
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
+    var network = game.entities.getComponent(entity, "network");
     if (!peer) {
+      network.state = "disconnected";
       return;
     }
+    network.state = "connected";
+
     if (peer.initiator) {
-      handleServer(game, entity, elapsed);
+      handleServer(game, network, elapsed);
     } else {
-      handleClient(game, entity, elapsed);
+      handleClient(game, network, elapsed);
     }
   }, "network");
 };
 
-function handleServer(game, entity, elapsed) {
+function handleServer(game, network, elapsed) {
+  // FIXME: this belongs in user code
   game.entities.addComponent(constants.player1, "playerController2d");
 
-  var network = game.entities.getComponent(entity, "network");
-  network.player = 1;
+  network.role = "server";
+  network.time += elapsed;
 
   importComponents(game, network);
 
-  network.time += elapsed;
-
-  if (network.time - network.lastPacketTime > PACKET_RATE) {
+  if (network.time - network.lastPacketTime > network.packetRate) {
     network.lastPacketTime = network.time;
-    sendWorld(game, network.lastPacketTime);
+    sendWorld(game, network.time);
   }
 }
 
@@ -63,17 +64,21 @@ function sendWorld(game, time) {
   peer.send(JSON.stringify(message));
 }
 
-function handleClient(game, entity, elapsed) {
+function handleClient(game, network, elapsed) {
+  // FIXME: this belongs in user code
   var playerController = game.entities.addComponent(constants.player2, "playerController2d");
   playerController.up = "down";
   playerController.down = "up";
 
-  var network = game.entities.getComponent(entity, "network");
-  network.player = 2;
+  network.role = "client";
   network.time += elapsed;
 
-  sendClient(game, network.time);
   importComponents(game, network);
+
+  if (network.time - network.lastPacketTime > network.packetRate) {
+    network.lastPacketTime = network.time;
+    sendClient(game, network.time);
+  }
 }
 
 function sendClient(game, time) {

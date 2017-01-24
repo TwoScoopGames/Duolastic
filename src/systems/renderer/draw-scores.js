@@ -4,7 +4,7 @@ var coordinateToScreen = require("../../coordinate-to-screen");
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var score = game.entities.getComponent(entity, "score");
-    var player = game.entities.getComponent(constants.network, "network").player;
+    var player = game.entities.getComponent(constants.network, "network").role === "server" ? 1 : 2;
 
     game.context.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
 

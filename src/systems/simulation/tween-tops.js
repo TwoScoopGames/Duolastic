@@ -6,7 +6,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     var position = game.entities.getComponent(entity, "position");
     var parentPosition = game.entities.getComponent(follow.id, "position");
 
-    var player = game.entities.getComponent(constants.network, "network").player;
+    var player = game.entities.getComponent(constants.network, "network").role === "server" ? 1 : 2;
 
     // FIXME: this is broken, and causes position to become NaN
     // Not sure why :-(
