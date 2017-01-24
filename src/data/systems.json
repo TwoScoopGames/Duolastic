@@ -25,6 +25,10 @@
    "scenes": "all"
   },
   {
+   "name": "./systems/simulation/network",
+   "scenes": "all"
+  },
+  {
    "name": "splat-ecs/lib/systems/simulation/set-virtual-buttons",
    "scenes": "all"
   },
@@ -37,12 +41,16 @@
    "scenes": "all"
   },
   {
-   "name": "./systems/simulation/network",
+   "name": "splat-ecs/lib/systems/simulation/apply-movement-2d",
    "scenes": "all"
   },
   {
-   "name": "splat-ecs/lib/systems/simulation/apply-movement-2d",
-   "scenes": "all"
+    "name": "./systems/simulation/control-player-analog",
+    "scenes": "all"
+  },
+  {
+    "name": "./systems/simulation/apply-movement-2d-analog",
+    "scenes": "all"
   },
   {
    "name": "splat-ecs/lib/systems/simulation/apply-acceleration",

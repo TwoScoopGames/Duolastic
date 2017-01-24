@@ -50,6 +50,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 function handleServer(game, network, elapsed) {
   // FIXME: this belongs in user code
   game.entities.addComponent(constants.player1, "playerController2d");
+  game.entities.addComponent(constants.player1, "playerController2dAnalog");
 
   network.role = "server";
   network.time += elapsed;
@@ -80,6 +81,7 @@ function handleClient(game, network, elapsed) {
   var playerController = game.entities.addComponent(constants.player2, "playerController2d");
   playerController.up = "down";
   playerController.down = "up";
+  game.entities.addComponent(constants.player2, "playerController2dAnalog");
 
   network.role = "client";
   network.time += elapsed;

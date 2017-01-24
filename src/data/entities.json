@@ -63,6 +63,10 @@
         "leftAccel": -0.02,
         "rightAccel": 0.02
       },
+      "movement2dAnalog": {
+        "accel": 0.02,
+        "max": 1
+      },
       "friction": {
         "x": 0.97,
         "y": 0.97
@@ -113,6 +117,10 @@
         "downAccel": 0.02,
         "leftAccel": -0.02,
         "rightAccel": 0.02
+      },
+      "movement2dAnalog": {
+        "accel": 0.02,
+        "max": 1
       },
       "friction": {
         "x": 0.97,
