@@ -76,12 +76,13 @@ function draw(game, entity, player) {
   var ball = game.entities.getComponent(entity, "ball");
   var debug = game.entities.getComponent(entity, "debug");
 
-  if (debug) {
-    return;
-  } else if (ball) {
+  if (ball) {
     drawBall(game.context, position, circle);
   } else {
     drawStack(game, position, circle, entity, player);
+  }
+  if (debug) {
+    drawCircle(game.context, position.x, position.y, circle.radius, "rgba(255, 0, 0, 0.5)");
   }
 }
 
