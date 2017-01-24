@@ -5,7 +5,7 @@ module.exports = {
       packetRate: 50,
       peerTime: 0,
       role: "server",
-      state: "disconnected",
+      state: "connecting",
       time: 0
     };
   },
@@ -14,7 +14,7 @@ module.exports = {
     network.packetRate = 50;
     network.peerTime = 0;
     network.role = "server";
-    network.state = "disconnected";
+    network.state = "connecting";
     network.time = 0;
   }
 };
