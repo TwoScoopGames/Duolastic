@@ -79,11 +79,6 @@
         "x": 0,
         "y": 0
       },
-      "debug": true,
-      "circle": {
-        "mass": 20,
-        "radius": 20
-      },
       "follow": {
         "id": 2,
         "distance": 100
@@ -134,11 +129,6 @@
       "size": {
         "x": 0,
         "y": 0
-      },
-      "debug": true,
-      "circle": {
-        "mass": 20,
-        "radius": 20
       },
       "follow": {
         "id": 3,

@@ -1,7 +1,8 @@
 var config = require("../../stack-config");
 var constants = require("../../constants");
 var coordinateToScreen = require("../../coordinate-to-screen");
-var drawShadowCircle = require("../../draw-shadow-circle");
+var drawCircularOuterShadow = require("../../draw-circular-outer-shadow");
+var drawCircularInnerOuterShadow = require("../../draw-circular-inner-and-outer-shadow");
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   game.entities.registerSearch("drawCircleSearch", ["circle", "position"]);
@@ -113,17 +114,25 @@ function drawStack(game, position, circle, entity, player) {
 
     newRadius -= onepart;
 
-    var shadowOffsetX = offsetX - config.shadowOffsetX;
-    var shadowOffsetY = offsetY - config.shadowOffsetY;
+    var shadowOffsetX = offsetX - config.shadowX;
+    var shadowOffsetY = offsetY - config.shadowY;
 
     var x = (constants.screenWidth / 2) + shadowOffsetX;
     var r = radiusInPerspective(newRadius, x, shadowOffsetY);
     ctx.setTransform(1, 0, 0, config.perspective, x, shadowOffsetY);
-    drawShadowCircle(ctx, 0, 0, r, config.insetColor, config.insetSize, config.insetColor, config.outsetSize, config.outsetColor);
+
+    drawCircularOuterShadow(ctx,
+      shadowOffsetX,
+      shadowOffsetY,
+      restrictPositive(r + config.shadowRadiusModifier),
+      config.shadowColor,
+      config.shadowSpread
+    );
 
     x = (constants.screenWidth / 2) + offsetX;
     r = radiusInPerspective(newRadius, x, shadowOffsetY);
     ctx.setTransform(1, 0, 0, config.perspective, x, offsetY);
+
     drawCircle(ctx, 0, 0, r, colors[i]);
 
     ctx.setTransform(1, 0, 0, 1, (constants.screenWidth / 2), 0);
@@ -178,36 +187,22 @@ function drawBall(ctx, position, circle) {
   config.shadowInsetSize = config.radius * 0.2;
 
 
-  // var shadowOffsetX = config.x + config.shadowOffsetX;
-  // var shadowOffsetY = config.y + config.shadowOffsetY;
-
-  // ctx.setTransform(1, 0, 0, 0.5, constants.screenWidth / 2, 0);
-  // drawShadowCircle(ctx,
-  //   shadowOffsetX,
-  //   shadowOffsetY,
-  //   config.shadowRadius,
-  //   config.shadowColor,
-  //   config.shadowInsetSize,
-  //   config.shadowInsetColor,
-  //   config.shadowOutsetSize,
-  //   config.shadowOutsetColor);
-
   ctx.setTransform(1, 0, 0, 1, constants.screenWidth / 2, 0);
-  drawShadowCircle(ctx,
-      config.x,
-      config.y,
-      config.radius,
-      config.color,
-      config.insetSize,
-      config.insetColor,
-      config.outsetSize,
-      config.outsetColor);
+  // drawCircularInnerOuterShadow(ctx,
+  //     config.x,
+  //     config.y,
+  //     config.radius,
+  //     config.color,
+  //     config.insetSize,
+  //     config.insetColor,
+  //     config.outsetSize,
+  //     config.outsetColor);
 
   var hightlightOffsetX = config.x + config.hightlightOffsetX;
   var hightlightOffsetY = config.y + config.hightlightOffsetY;
 
   ctx.setTransform(1, 0, 0, config.perspective, constants.screenWidth / 2, 0);
-  drawShadowCircle(ctx,
+  drawCircularInnerOuterShadow(ctx,
         hightlightOffsetX,
         hightlightOffsetY,
         config.highlightRadius,
@@ -216,5 +211,11 @@ function drawBall(ctx, position, circle) {
         config.highlightInsetColor,
         config.highlightOutsetSize,
         config.highlightOutsetColor);
+}
 
+function restrictPositive(num) {
+  if (num < 0 || isNaN(num)) {
+    return 0;
+  }
+  return num;
 }

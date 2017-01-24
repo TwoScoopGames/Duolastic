@@ -1,18 +1,20 @@
 module.exports = {
   perspective: 0.5,
+  //circle properties
   offsetX: 2,
   offsetY: 16,
-  shadowOffsetX: 1.2,
-  shadowOffsetY: -6,
-  outsetSize: 10,
-  outsetColor: [0, 0, 0, 0.3],
-  insetSize: 10,
-  insetColor: [0, 0, 0, 0.3],
+  //shadow properties
+  shadowRadiusModifier: -6,
+  shadowX: 3,
+  shadowY: -6,
+  shadowSpread: 7,
+  shadowColor: "rgba(0, 0, 0, 0.3)",
+
   debugLines: false,
-  debugLineColor: [0, 0, 0, 1],
+  debugLineColor: "rgba(0, 0, 0, 1)",
   colors: {
-    "standard": [
-      "rgba(62,88,137,0)",
+    standard: [
+      "rgba(62,88,137,1)",
       "rgba(76,128,175,1)",
       "rgba(85,188,221,1)",
       "rgba(147,213,186,1)",
@@ -25,7 +27,7 @@ module.exports = {
       "rgba(142,40,62,1)",
       "rgba(89,49,75,1)"
     ],
-    "inverted": [
+    inverted: [
       "rgba(89,49,75,1)",
       "rgba(142,40,62,1)",
       "rgba(198,55,47,1)",
@@ -37,7 +39,7 @@ module.exports = {
       "rgba(147,213,186,1)",
       "rgba(85,188,221,1)",
       "rgba(76,128,175,1)",
-      "rgba(62,88,137,0)"
+      "rgba(62,88,137,1)"
     ]
   }
 };
