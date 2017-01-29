@@ -40,6 +40,15 @@
         "x": 100,
         "y": 100
       },
+      "model": {
+        "name": "cube",
+        "options": {
+          "width": 250,
+          "height": 250,
+          "depth": 250,
+          "color": "0xff0000"
+        }
+      },
       "circle": {
         "colorSet": "standard",
         "mass": 20,
@@ -95,6 +104,15 @@
         "x": 400,
         "y": 100
       },
+      "model": {
+        "name": "cube",
+        "options": {
+          "width": 250,
+          "height": 250,
+          "depth": 250,
+          "color": "0x0000ff"
+        }
+      },
       "size": {
         "x": 0,
         "y": 0
@@ -149,6 +167,15 @@
       "position": {
         "x": 250,
         "y": 200
+      },
+      "model": {
+        "name": "cube",
+        "options": {
+          "width": 50,
+          "height": 50,
+          "depth": 50,
+          "color": "0xffffff"
+        }
       },
       "ball": true,
       "circle": {

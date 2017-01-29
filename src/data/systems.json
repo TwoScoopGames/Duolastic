@@ -94,7 +94,9 @@
  "renderer": [
   {
    "name": "./systems/renderer/three-js",
-   "scenes": "all"
+   "scenes": [
+     "main"
+   ]
   }
  ]
 }
