@@ -37,14 +37,14 @@ function collide(game, a, b) {
 
   var collisionDistance = circleA.radius + circleB.radius;
   var distSq = math2d.distanceSquared(positionA.x, positionA.y, positionB.x, positionB.y);
-  if (distSq > collisionDistance * collisionDistance) {
+  if (distSq >= collisionDistance * collisionDistance) {
     return;
   }
 
   var toMove = collisionDistance - Math.sqrt(distSq);
   var angle = Math.atan2(positionA.y - positionB.y, positionA.x - positionB.x);
-  positionB.x += (toMove * Math.cos(angle));
-  positionB.y += (toMove * Math.sin(angle));
+  positionA.x += (toMove * Math.cos(angle));
+  positionA.y += (toMove * Math.sin(angle));
 
   var v1 = vec2.create(velocityA.x, velocityA.y);
   var x1 = vec2.create(positionA.x, positionA.y);
