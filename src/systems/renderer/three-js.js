@@ -29,6 +29,13 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     model.mesh.position.z = position.z;
   }, "updateModelPosition");
 
+  game.entities.registerSearch("updateModelQuaternion", ["model", "quaternion"]);
+  ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
+    var model = game.entities.getComponent(entity, "model");
+    var quaternion = game.entities.getComponent(entity, "quaternion");
+    model.mesh.quaternion.set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+  }, "updateModelQuaternion");
+
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
     var cameras = game.entities.find("camera");
     if (cameras.length > 0) {
