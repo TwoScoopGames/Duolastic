@@ -1,4 +1,5 @@
 module.exports = {
+  camera: 0,
   network: 1,
   player1: 2,
   player2: 3,
