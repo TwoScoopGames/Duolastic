@@ -41,18 +41,18 @@
         "y": 100
       },
       "model": {
-        "name": "cube",
+        "name": "cylinder",
         "options": {
-          "width": 250,
-          "height": 250,
-          "depth": 250,
+          "radiusTop": 50,
+          "radiusBottom": 50,
+          "height": 1,
           "color": "0xff0000"
         }
       },
       "circle": {
         "colorSet": "standard",
         "mass": 20,
-        "radius": 125
+        "radius": 50
       },
       "velocity": {
         "x": 0,
@@ -105,11 +105,11 @@
         "y": 100
       },
       "model": {
-        "name": "cube",
+        "name": "cylinder",
         "options": {
-          "width": 250,
-          "height": 250,
-          "depth": 250,
+          "radiusTop": 50,
+          "radiusBottom": 50,
+          "height": 1,
           "color": "0x0000ff"
         }
       },
@@ -120,7 +120,7 @@
       "circle": {
         "colorSet": "inverted",
         "mass": 20,
-        "radius": 125
+        "radius": 50
       },
       "velocity": {
         "x": 0,
@@ -169,11 +169,11 @@
         "y": 200
       },
       "model": {
-        "name": "cube",
+        "name": "cylinder",
         "options": {
-          "width": 50,
-          "height": 50,
-          "depth": 50,
+          "radiusTop": 25,
+          "radiusBottom": 25,
+          "height": 1,
           "color": "0xffffff"
         }
       },
