@@ -34,6 +34,28 @@
       }
     },
     {
+      "id": 6,
+      "name": "court",
+      "position": {
+        "x": 568,
+        "y": 320,
+        "z": 0
+      },
+      "model": {
+        "name": "box",
+        "options": {
+          "width": 1136,
+          "height": 1,
+          "depth": 640,
+          "color": "0xffffff"
+        }
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
       "id": 2,
       "name": "player 1",
       "position": {
@@ -174,7 +196,7 @@
           "radiusTop": 25,
           "radiusBottom": 25,
           "height": 1,
-          "color": "0xffffff"
+          "color": "0xcccccc"
         }
       },
       "ball": true,

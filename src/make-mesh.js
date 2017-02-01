@@ -68,5 +68,12 @@ function makeBox(options) { // eslint-disable-line no-unused-vars
 
   var geometry = new THREE.BoxGeometry(width, height, depth);
   var material = new THREE.MeshBasicMaterial({ color: color });
-  return new THREE.Mesh(geometry, material);
+  var mesh = new THREE.Mesh(geometry, material);
+
+  // FIXME: this is a hack, should come from component
+  mesh.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
+
+  return mesh;
+
+
 }
