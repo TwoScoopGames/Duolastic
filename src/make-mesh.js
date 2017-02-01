@@ -28,7 +28,7 @@ function makeCylinder(options) {
     radiusSegments = 64;
   }
   var color = options.color;
-  if (typeof color === "string") {
+  if (typeof color === "string" && color.indexOf("x") !== -1) {
     color = parseInt(color, 16);
   }
   if (color === undefined) {
@@ -36,7 +36,7 @@ function makeCylinder(options) {
   }
 
   var geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments);
-  var material = new THREE.MeshBasicMaterial({ color: color });
+  var material = new THREE.MeshLambertMaterial({ color: color });
   var mesh = new THREE.Mesh(geometry, material);
 
   // FIXME: this is a hack, should come from component
@@ -59,7 +59,7 @@ function makeBox(options) { // eslint-disable-line no-unused-vars
     depth = 1;
   }
   var color = options.color;
-  if (typeof color === "string") {
+  if (typeof color === "string" && color.indexOf("x") !== -1) {
     color = parseInt(color, 16);
   }
   if (color === undefined) {
@@ -67,7 +67,7 @@ function makeBox(options) { // eslint-disable-line no-unused-vars
   }
 
   var geometry = new THREE.BoxGeometry(width, height, depth);
-  var material = new THREE.MeshBasicMaterial({ color: color });
+  var material = new THREE.MeshLambertMaterial({ color: color });
   var mesh = new THREE.Mesh(geometry, material);
 
   // FIXME: this is a hack, should come from component

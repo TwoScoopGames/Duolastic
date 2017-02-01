@@ -68,7 +68,7 @@
           "radiusTop": 50,
           "radiusBottom": 50,
           "height": 1,
-          "color": "0xff0000"
+          "color": "rgb(89,49,75)"
         }
       },
       "circle": {
@@ -132,7 +132,7 @@
           "radiusTop": 50,
           "radiusBottom": 50,
           "height": 1,
-          "color": "0x0000ff"
+          "color": "rgb(62,88,137)"
         }
       },
       "size": {

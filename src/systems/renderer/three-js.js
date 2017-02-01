@@ -16,6 +16,11 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   camera.position.y = 300;
   camera.position.z = 1000;
 
+  var topLightPosition = { x: 568, y: 320, z: 500 };
+  var topLightTarget = { x: 568, y: 320, z: 0 };
+  createLight(scene, "Top Light", "white", 1, topLightPosition, topLightTarget, false, 200);
+
+
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var model = game.entities.getComponent(entity, "model");
     if (model.mesh !== undefined) {
@@ -39,3 +44,18 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     renderer.render(scene, camera);
   });
 };
+
+
+
+function createLight(scene, name, color, intensity, position, targetPosition, shadows, helperSize) {
+  var light = new THREE.DirectionalLight(color, intensity);
+  light.name = name;
+  light.castShadow = shadows;
+  light.position.set(position.x, position.y, position.z);
+  light.target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
+  scene.add(light.target);
+  scene.add(light);
+
+  // var helper = new THREE.DirectionalLightHelper(light, helperSize);
+  // scene.add(helper);
+}
