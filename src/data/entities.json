@@ -39,8 +39,8 @@
         "name": "box",
         "options": {
           "width": 1136,
-          "height": 1,
-          "depth": 640,
+          "height": 640,
+          "depth": 1,
           "color": "0xffffff"
         }
       },
