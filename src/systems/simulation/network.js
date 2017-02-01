@@ -47,10 +47,26 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "network");
 };
 
+// FIME: this should go somewhere else
+var THREE = require("three");
+function setFromAxisAngle(quaternion, x, y, z, angle) {
+  var q = new THREE.Quaternion();
+  q.setFromAxisAngle(new THREE.Vector3(x, y, z), angle);
+  quaternion.x = q.x;
+  quaternion.y = q.y;
+  quaternion.z = q.z;
+  quaternion.w = q.w;
+}
+
 function handleServer(game, network, elapsed) {
   // FIXME: this belongs in user code
-  game.entities.addComponent(constants.player1, "playerController2d");
+  var playerController = game.entities.addComponent(constants.player1, "playerController2d");
+  playerController.left = "right";
+  playerController.right = "left";
   game.entities.addComponent(constants.player1, "playerController2dAnalog");
+
+  var quaternion = game.entities.getComponent(constants.camera, "quaternion");
+  setFromAxisAngle(quaternion, 0, 0, 1, Math.PI);
 
   network.role = "server";
   network.time += elapsed;

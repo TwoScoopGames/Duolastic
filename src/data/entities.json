@@ -1,28 +1,22 @@
 {
   "main": [
     {
-      "id": 100,
-      "name": "viewport",
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "size": {
-        "width": 1136,
-        "height": 640
-      }
-    },
-    {
       "id": 0,
       "name": "camera",
       "camera": true,
       "position": {
-        "x": 0,
-        "y": 0
+        "x": 500,
+        "y": 300,
+        "z": 1000
       },
-      "matchCanvasSize": true,
-      "matchCenter": {
-        "id": 100
+      "quaternion": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 0
+      },
+      "model": {
+        "name": "camera"
       }
     },
     {
@@ -45,8 +39,8 @@
         "name": "box",
         "options": {
           "width": 1136,
-          "height": 1,
-          "depth": 640,
+          "height": 640,
+          "depth": 1,
           "color": "0xffffff"
         }
       },
@@ -61,6 +55,12 @@
       "position": {
         "x": 100,
         "y": 100
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
       },
       "model": {
         "name": "cylinder",
@@ -126,6 +126,12 @@
         "x": 400,
         "y": 100
       },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
+      },
       "model": {
         "name": "cylinder",
         "options": {
@@ -189,6 +195,12 @@
       "position": {
         "x": 250,
         "y": 200
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
       },
       "model": {
         "name": "cylinder",
