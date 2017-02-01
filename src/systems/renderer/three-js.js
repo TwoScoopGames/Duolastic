@@ -10,18 +10,12 @@ oldCanvas.parentNode.removeChild(oldCanvas);
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-  camera.position.x = 500;
-  camera.position.y = 300;
-  camera.position.z = 1000;
 
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var model = game.entities.getComponent(entity, "model");
     if (model.mesh !== undefined) {
       return;
     }
-    console.log("make mesh");
     model.mesh = makeMesh(model.name, model.options);
     scene.add(model.mesh);
   }, "model");
@@ -36,6 +30,11 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "updateModelPosition");
 
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
-    renderer.render(scene, camera);
+    var cameras = game.entities.find("camera");
+    if (cameras.length > 0) {
+      var camera = cameras[0];
+      var model = game.entities.getComponent(camera, "model");
+      renderer.render(scene, model.mesh);
+    }
   });
 };

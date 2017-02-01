@@ -2,6 +2,8 @@ var THREE = require("three");
 
 module.exports = function makeMesh(name, options) { // eslint-disable-line no-unused-vars
   switch (name) {
+  case "camera":
+    return makeCamera(options);
   case "cylinder":
     return makeCylinder(options);
   case "box":
@@ -9,6 +11,26 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
     return makeBox(options);
   }
 };
+
+function makeCamera(options) {
+  var fieldOfView = options.fieldOfView;
+  if (fieldOfView === undefined) {
+    fieldOfView = 75;
+  }
+  var aspectRatio = options.aspectRatio;
+  if (aspectRatio === undefined) {
+    aspectRatio = window.innerWidth / window.innerHeight;
+  }
+  var near = options.near;
+  if (near === undefined) {
+    near = 1;
+  }
+  var far = options.far;
+  if (far === undefined) {
+    far = 1000;
+  }
+  return new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
+}
 
 function makeCylinder(options) {
   var radiusTop = options.radiusTop;
