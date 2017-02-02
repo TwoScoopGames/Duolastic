@@ -11,11 +11,6 @@ oldCanvas.parentNode.removeChild(oldCanvas);
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   var scene = new THREE.Scene();
 
-  var topLightPosition = { x: 568, y: 320, z: 500 };
-  var topLightTarget = { x: 568, y: 320, z: 0 };
-  createLight(scene, "Top Light", "white", 1, topLightPosition, topLightTarget, false, 200);
-
-
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var model = game.entities.getComponent(entity, "model");
     if (model.mesh !== undefined) {
@@ -23,6 +18,10 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     }
     model.mesh = makeMesh(model.name, model.options);
     scene.add(model.mesh);
+    // FIXME: this is kinda gross
+    if (model.mesh.target) {
+      scene.add(model.mesh.target);
+    }
   }, "model");
 
   game.entities.registerSearch("updateModelPosition", ["model", "position"]);
@@ -50,18 +49,3 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     }
   });
 };
-
-
-
-function createLight(scene, name, color, intensity, position, targetPosition, shadows, helperSize) {
-  var light = new THREE.DirectionalLight(color, intensity);
-  light.name = name;
-  light.castShadow = shadows;
-  light.position.set(position.x, position.y, position.z);
-  light.target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
-  scene.add(light.target);
-  scene.add(light);
-
-  // var helper = new THREE.DirectionalLightHelper(light, helperSize);
-  // scene.add(helper);
-}

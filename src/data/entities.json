@@ -7,7 +7,7 @@
       "position": {
         "x": 500,
         "y": 300,
-        "z": 1000
+        "z": 900
       },
       "quaternion": {
         "x": 0,
@@ -25,28 +25,6 @@
       "network": {
         "lastPacketTime": 0,
         "time": 0
-      }
-    },
-    {
-      "id": 6,
-      "name": "court",
-      "position": {
-        "x": 568,
-        "y": 320,
-        "z": 0
-      },
-      "model": {
-        "name": "box",
-        "options": {
-          "width": 1136,
-          "height": 640,
-          "depth": 1,
-          "color": "0xffffff"
-        }
-      },
-      "size": {
-        "x": 0,
-        "y": 0
       }
     },
     {
@@ -227,6 +205,52 @@
       "score": {
         "player1": 0,
         "player2": 0
+      }
+    },
+    {
+      "id": 6,
+      "name": "court",
+      "position": {
+        "x": 568,
+        "y": 320,
+        "z": -1
+      },
+      "model": {
+        "name": "box",
+        "options": {
+          "width": 1136,
+          "height": 640,
+          "depth": 1,
+          "color": "0xffffff"
+        }
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": 7,
+      "name": "light",
+      "position": {
+        "x": 250,
+        "y": 500,
+        "z": 500
+      },
+      "model": {
+        "name": "directionalLight",
+        "options": {
+          "castShadow": false,
+          "color": "0xffffff",
+          "intensity": 0.9,
+          "targetX": 250,
+          "targetY": 500,
+          "targetZ": 0
+        }
+      },
+      "size": {
+        "x": 0,
+        "y": 0
       }
     }
   ]

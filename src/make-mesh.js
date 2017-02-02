@@ -2,60 +2,62 @@ var THREE = require("three");
 
 module.exports = function makeMesh(name, options) { // eslint-disable-line no-unused-vars
   switch (name) {
+  case "box":
+  default:
+    return makeBox(options);
   case "camera":
     return makeCamera(options);
   case "cylinder":
     return makeCylinder(options);
-  case "box":
-  default:
-    return makeBox(options);
+  case "directionalLight":
+    return makeDirectionalLight(options);
   }
 };
 
+function makeBox(options) {
+  var width = getOption(options.width, 1);
+  var height = getOption(options.height, 1);
+  var depth = getOption(options.depth, 1);
+  var color = getColorOption(options.color, 0xffffff);
+
+  var geometry = new THREE.BoxGeometry(width, height, depth);
+  var material = new THREE.MeshLambertMaterial({ color: color });
+  var mesh = new THREE.Mesh(geometry, material);
+
+  return mesh;
+}
+
+function getOption(value, defaultValue) {
+  if (value === undefined) {
+    return defaultValue;
+  }
+  return value;
+}
+
+function getColorOption(color, defaultValue) {
+  if (typeof color === "string" && color.indexOf("x") !== -1) {
+    return parseInt(color, 16);
+  }
+  if (color === undefined) {
+    return defaultValue;
+  }
+  return color;
+}
+
 function makeCamera(options) {
-  var fieldOfView = options.fieldOfView;
-  if (fieldOfView === undefined) {
-    fieldOfView = 75;
-  }
-  var aspectRatio = options.aspectRatio;
-  if (aspectRatio === undefined) {
-    aspectRatio = window.innerWidth / window.innerHeight;
-  }
-  var near = options.near;
-  if (near === undefined) {
-    near = 1;
-  }
-  var far = options.far;
-  if (far === undefined) {
-    far = 1000;
-  }
+  var fieldOfView = getOption(options.fieldOfView, 75);
+  var aspectRatio = getOption(options.aspectRatio, window.innerWidth / window.innerHeight);
+  var near = getOption(options.near, 1);
+  var far = getOption(options.far, 1000);
   return new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
 }
 
 function makeCylinder(options) {
-  var radiusTop = options.radiusTop;
-  if (radiusTop === undefined) {
-    radiusTop = 1;
-  }
-  var radiusBottom = options.radiusBottom;
-  if (radiusBottom === undefined) {
-    radiusBottom = 1;
-  }
-  var height = options.height;
-  if (height === undefined) {
-    height = 1;
-  }
-  var radiusSegments = options.radiusSegments;
-  if (radiusSegments === undefined) {
-    radiusSegments = 64;
-  }
-  var color = options.color;
-  if (typeof color === "string" && color.indexOf("x") !== -1) {
-    color = parseInt(color, 16);
-  }
-  if (color === undefined) {
-    color = 0xffffff;
-  }
+  var radiusTop = getOption(options.radiusTop, 1);
+  var radiusBottom = getOption(options.radiusBottom, 1);
+  var height = getOption(options.height, 1);
+  var radiusSegments = getOption(options.radiusSegments, 64);
+  var color = getColorOption(options.color, 0xffffff);
 
   var geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments);
   var material = new THREE.MeshLambertMaterial({ color: color });
@@ -64,30 +66,16 @@ function makeCylinder(options) {
   return mesh;
 }
 
-function makeBox(options) { // eslint-disable-line no-unused-vars
-  var width = options.width;
-  if (width === undefined) {
-    width = 1;
-  }
-  var height = options.height;
-  if (height === undefined) {
-    height = 1;
-  }
-  var depth = options.depth;
-  if (depth === undefined) {
-    depth = 1;
-  }
-  var color = options.color;
-  if (typeof color === "string" && color.indexOf("x") !== -1) {
-    color = parseInt(color, 16);
-  }
-  if (color === undefined) {
-    color = 0xffffff;
-  }
+function makeDirectionalLight(options) {
+  var color = getColorOption(options.color, 0xffffff);
+  var intensity = getOption(options.intensity, 1);
+  var castShadow = getOption(options.castShadow, false);
+  var targetX = getOption(options.targetX, 0);
+  var targetY = getOption(options.targetY, 0);
+  var targetZ = getOption(options.targetZ, 0);
 
-  var geometry = new THREE.BoxGeometry(width, height, depth);
-  var material = new THREE.MeshLambertMaterial({ color: color });
-  var mesh = new THREE.Mesh(geometry, material);
-
-  return mesh;
+  var light = new THREE.DirectionalLight(color, intensity);
+  light.castShadow = castShadow;
+  light.target.position.set(targetX, targetY, targetZ);
+  return light;
 }
