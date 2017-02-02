@@ -1,3 +1,8 @@
+var courtHeight = 1000;
+var courtWidthRatio = 0.55;
+var puckDiameterRatio = 0.028735632183908;
+var paddleDiameterRatio = 0.041666666666667;
+
 module.exports = {
   camera: 0,
   network: 1,
@@ -5,6 +10,9 @@ module.exports = {
   player2: 3,
   ball: 4,
   score: 5,
-  screenWidth: 1136,
-  screenHeight: 640
+  court: 6,
+  courtWidth: courtHeight * courtWidthRatio,
+  courtHeight: courtHeight,
+  puckDiameter: courtHeight * puckDiameterRatio,
+  paddleDiameter: courtHeight * paddleDiameterRatio
 };

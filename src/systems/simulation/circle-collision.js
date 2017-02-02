@@ -19,8 +19,8 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     collide(game, constants.player1, constants.ball);
     collide(game, constants.player2, constants.ball);
 
-    keepOnScreen(game, constants.player1);
-    keepOnScreen(game, constants.player2);
+    keepOnCourt(game, constants.player1);
+    keepOnCourt(game, constants.player2);
     keepInSides(game, constants.ball);
     checkScore(game, constants.ball);
   });
@@ -106,19 +106,24 @@ function collide(game, a, b) {
   velocityB.y = v2Prime[1];
 }
 
-function keepOnScreen(game, entity) {
+function keepOnCourt(game, entity) {
+  var courtPos = game.entities.getComponent(constants.court, "position");
+  var courtSize = game.entities.getComponent(constants.court, "size");
+  var courtTop = courtPos.y - (courtSize.height / 2);
+  var courtBottom = courtTop + courtSize.height;
+
   var position = game.entities.getComponent(entity, "position");
   var circle = game.entities.getComponent(entity, "circle");
   var velocity = game.entities.getComponent(entity, "velocity");
 
-  if (position.y - circle.radius < 0) {
-    position.y = circle.radius;
+  if (position.y - circle.radius < courtTop) {
+    position.y = courtTop + circle.radius;
     if (velocity.y < 0) {
       velocity.y *= -1;
     }
   }
-  if (position.y + circle.radius > constants.screenHeight) {
-    position.y = constants.screenHeight - circle.radius;
+  if (position.y + circle.radius > courtBottom) {
+    position.y = courtBottom - circle.radius;
     if (velocity.y > 0) {
       velocity.y *= -1;
     }
@@ -128,21 +133,26 @@ function keepOnScreen(game, entity) {
 }
 
 function keepInSides(game, entity) {
+  var courtPos = game.entities.getComponent(constants.court, "position");
+  var courtSize = game.entities.getComponent(constants.court, "size");
+  var courtLeft = courtPos.x - (courtSize.width / 2);
+  var courtRight = courtLeft + courtSize.width;
+
   var position = game.entities.getComponent(entity, "position");
   var circle = game.entities.getComponent(entity, "circle");
   var velocity = game.entities.getComponent(entity, "velocity");
   var ball = game.entities.getComponent(entity, "ball");
 
-  if (position.x - circle.radius < 0) {
+  if (position.x - circle.radius < courtLeft) {
     if (ball) { game.sounds.play(random.from(drums)); }
-    position.x = circle.radius;
+    position.x = courtLeft + circle.radius;
     if (velocity.x < 0) {
       velocity.x *= -1;
     }
   }
-  if (position.x + circle.radius > constants.screenWidth) {
+  if (position.x + circle.radius > courtRight) {
     if (ball) { game.sounds.play(random.from(drums)); }
-    position.x = constants.screenWidth - circle.radius;
+    position.x = courtRight - circle.radius;
     if (velocity.x > 0) {
       velocity.x *= -1;
     }
@@ -150,16 +160,21 @@ function keepInSides(game, entity) {
 }
 
 function checkScore(game, entity) {
+  var courtPos = game.entities.getComponent(constants.court, "position");
+  var courtSize = game.entities.getComponent(constants.court, "size");
+  var courtTop = courtPos.y - (courtSize.height / 2);
+  var courtBottom = courtTop + courtSize.height;
+
   var position = game.entities.getComponent(entity, "position");
   var circle = game.entities.getComponent(entity, "circle");
   var score = game.entities.getComponent(constants.score, "score");
 
-  if (position.y < -circle.radius) {
+  if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
     score.player1++;
     reset(game);
   }
-  if (position.y > constants.screenHeight + circle.radius) {
+  if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
     score.player2++;
     reset(game);
