@@ -45,9 +45,6 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 
   createStack(game, constants.player1);
   createStack(game, constants.player2);
-  // var test = game.entities.create();
-  // console.log("new entity:", test);
-
 };
 
 function setRadius(game, entity, radius) {
@@ -62,30 +59,42 @@ function setRadius(game, entity, radius) {
 function createStack(game, baseEntity) {
   var baseEntityModel = game.entities.getComponent(baseEntity, "model");
   var baseEntityPosition = game.entities.getComponent(baseEntity, "position");
-  //console.log(baseEntityModel);
-  //var startZ = baseEntityModel.options.height * config.colors.length;
   var segmentSize = baseEntityModel.options.radiusBottom / config.colors.length;
+  var entity = baseEntity;
   for (var i = 0; i < config.colors.length; i++) {
-    var newEntity = game.entities.create();
-    var model = game.entities.addComponent(newEntity, "model");
-    model.name = "cylinder";
-    model.options = {};
-    model.options.radiusTop = baseEntityModel.options.radiusTop - (segmentSize * i);
-    model.options.radiusBottom = baseEntityModel.options.radiusBottom - (segmentSize * i);
-    model.options.height = baseEntityModel.options.height;
-    model.options.radiusSegments = baseEntityModel.options.radiusSegments;
-    model.options.color = config.colors[i];
-    // var newEntityModel = game.entities.getComponent(newEntity, "model");
-    var newEntityPosition = game.entities.addComponent(newEntity, "position");
-    newEntityPosition.x = baseEntityPosition.x;
-    newEntityPosition.y = baseEntityPosition.y;
-    newEntityPosition.z = baseEntityPosition.z + baseEntityModel.options.height;
-    var quaternion = game.entities.addComponent(newEntity, "quaternion");
-    quaternion.x = 0.7071067811865475;
-    quaternion.y = 0;
-    quaternion.z = 0;
-    quaternion.w = 0.7071067811865476;
-
-    //console.log(newEntityModel.options);
+    entity = createCylinder(game, entity, baseEntityPosition, baseEntityModel, segmentSize, i);
   }
+}
+
+
+function createCylinder(game, previousEntity, baseEntityPosition, baseEntityModel, segmentSize, i) {
+  var newEntity = game.entities.create();
+
+  var model = game.entities.addComponent(newEntity, "model");
+  model.name = "cylinder";
+  model.options = {};
+  model.options.radiusTop = baseEntityModel.options.radiusTop - (segmentSize * i);
+  model.options.radiusBottom = baseEntityModel.options.radiusBottom - (segmentSize * i);
+  model.options.height = baseEntityModel.options.height;
+  model.options.radiusSegments = baseEntityModel.options.radiusSegments;
+  model.options.color = config.colors[i];
+
+  var previousEntityPosition = game.entities.getComponent(previousEntity, "position");
+  var newEntityPosition = game.entities.addComponent(newEntity, "position");
+  newEntityPosition.x = previousEntityPosition.x;
+  newEntityPosition.y = previousEntityPosition.y;
+  newEntityPosition.z = previousEntityPosition.z + baseEntityModel.options.height;
+
+  var quaternion = game.entities.addComponent(newEntity, "quaternion");
+  quaternion.x = 0.7071067811865475;
+  quaternion.y = 0;
+  quaternion.z = 0;
+  quaternion.w = 0.7071067811865476;
+
+  game.entities.addComponent(newEntity, "size");
+
+  var follow = game.entities.addComponent(newEntity, "follow");
+  follow.id = previousEntity;
+  follow.distance = 10;
+  return newEntity;
 }

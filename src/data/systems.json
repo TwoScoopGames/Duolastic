@@ -70,7 +70,7 @@
   },
   {
    "name": "./systems/simulation/tween-tops",
-   "scenes": "all"
+   "scenes": []
   },
   {
    "name": "./systems/simulation/circle-collision",
