@@ -3,7 +3,7 @@ var constants = require("../constants");
 var config = {
   radiusTop: 0.2,
   radiusBottom: 0.75,
-  height: 1,
+  height: 2.5,
   radiusSegments: 64,
   heightSegments: 1,
   openEnded: false,
@@ -23,7 +23,9 @@ var config = {
     "rgb(147,213,186)",
     "rgb(85,188,221)",
     "rgb(76,128,175)",
-    "rgb(62,88,137)"
+    "rgb(62,88,137)",
+    "rgb(89,49,75)"
+
   ]
 };
 
@@ -73,8 +75,10 @@ function createCylinder(game, previousEntity, baseEntityPosition, baseEntityMode
   var model = game.entities.addComponent(newEntity, "model");
   model.name = "cylinder";
   model.options = {};
-  model.options.radiusTop = baseEntityModel.options.radiusTop - (segmentSize * i);
+  model.options.radiusTop = baseEntityModel.options.radiusBottom - (segmentSize * (i + 1));
   model.options.radiusBottom = baseEntityModel.options.radiusBottom - (segmentSize * i);
+  console.log(model.options.radiusTop, model.options.radiusBottom);
+
   model.options.height = baseEntityModel.options.height;
   model.options.radiusSegments = baseEntityModel.options.radiusSegments;
   model.options.color = config.colors[i];
@@ -95,6 +99,6 @@ function createCylinder(game, previousEntity, baseEntityPosition, baseEntityMode
 
   var follow = game.entities.addComponent(newEntity, "follow");
   follow.id = previousEntity;
-  follow.distance = 10;
+  follow.distance = segmentSize;
   return newEntity;
 }

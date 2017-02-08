@@ -47,15 +47,15 @@
         "name": "cylinder",
         "options": {
           "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 1,
+          "radiusBottom": 150,
+          "height": 15,
           "color": "rgb(89,49,75)"
         }
       },
       "circle": {
         "colorSet": "standard",
         "mass": 20,
-        "radius": 50
+        "radius": 200
       },
       "velocity": {
         "x": 0,
@@ -84,22 +84,7 @@
         "y": 0.97
       }
     },
-    {
-      "id": 22,
-      "name": "player 1 top",
-      "position": {
-        "x": 100,
-        "y": 100
-      },
-      "size": {
-        "x": 0,
-        "y": 0
-      },
-      "follow": {
-        "id": 2,
-        "distance": 100
-      }
-    },
+
     {
       "id": 3,
       "name": "player 2",
@@ -117,8 +102,8 @@
         "name": "cylinder",
         "options": {
           "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 1,
+          "radiusBottom": 150,
+          "height": 15,
           "color": "rgb(62,88,137)"
         }
       },
@@ -129,7 +114,7 @@
       "circle": {
         "colorSet": "inverted",
         "mass": 20,
-        "radius": 50
+        "radius": 200
       },
       "velocity": {
         "x": 0,
@@ -154,22 +139,7 @@
         "y": 0.97
       }
     },
-    {
-      "id": 33,
-      "name": "player 2 top",
-      "position": {
-        "x": 100,
-        "y": 100
-      },
-      "size": {
-        "x": 0,
-        "y": 0
-      },
-      "follow": {
-        "id": 3,
-        "distance": 100
-      }
-    },
+
     {
       "id": 4,
       "name": "ball",
@@ -188,7 +158,7 @@
         "options": {
           "radiusTop": 25,
           "radiusBottom": 25,
-          "height": 1,
+          "height": 25,
           "color": "0xcccccc"
         }
       },
@@ -223,7 +193,7 @@
         "options": {
           "width": 1136,
           "height": 640,
-          "depth": 1,
+          "depth": 10,
           "color": "0xffffff"
         }
       },
