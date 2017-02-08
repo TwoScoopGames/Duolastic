@@ -54,7 +54,7 @@ function handleServer(game, network, elapsed) {
   playerController.right = "left";
   game.entities.addComponent(constants.player1, "playerController2dAnalog");
 
-  moveCamera(game, 900, Math.PI / 4);
+  moveCamera(game, 900, Math.PI / 4, constants.player1);
 
   network.role = "server";
   network.time += elapsed;
@@ -69,8 +69,18 @@ function handleServer(game, network, elapsed) {
 
 // FIME: this should go somewhere else
 var THREE = require("three");
-function moveCamera(game, distance, angle) {
+var math2d = require("splat-ecs/lib/math2d");
+function moveCamera(game, distance, angle, follow) {
+  var followPosition = game.entities.getComponent(follow, "position");
+
   var courtPosition = game.entities.getComponent(constants.court, "position");
+
+  var followAngle = Math.atan2(followPosition.y - courtPosition.y, followPosition.x - courtPosition.x);
+  var dist = Math.sqrt(math2d.distanceSquared(followPosition.x, followPosition.y, courtPosition.x, courtPosition.y)) * 0.1;
+
+  var followX = courtPosition.x + (dist * Math.cos(followAngle));
+  var followY = courtPosition.y + (dist * Math.sin(followAngle));
+  var followZ = courtPosition.z;
 
   var position = game.entities.getComponent(constants.camera, "position");
   position.x = courtPosition.x;
@@ -79,7 +89,7 @@ function moveCamera(game, distance, angle) {
 
   var quaternion = game.entities.getComponent(constants.camera, "quaternion");
   var model = game.entities.getComponent(constants.camera, "model");
-  model.mesh.lookAt(new THREE.Vector3(courtPosition.x, courtPosition.y, courtPosition.z));
+  model.mesh.lookAt(new THREE.Vector3(followX, followY, followZ));
   model.mesh.up.set(0, 0, 1);
   quaternion.x = model.mesh.quaternion.x;
   quaternion.y = model.mesh.quaternion.y;
@@ -107,7 +117,7 @@ function handleClient(game, network, elapsed) {
   playerController.down = "up";
   game.entities.addComponent(constants.player2, "playerController2dAnalog");
 
-  moveCamera(game, 900, 3 * Math.PI / 4);
+  moveCamera(game, 900, 3 * Math.PI / 4, constants.player2);
 
   network.role = "client";
   network.time += elapsed;
