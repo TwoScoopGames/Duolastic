@@ -47,17 +47,6 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "network");
 };
 
-// FIME: this should go somewhere else
-var THREE = require("three");
-function setFromAxisAngle(quaternion, x, y, z, angle) {
-  var q = new THREE.Quaternion();
-  q.setFromAxisAngle(new THREE.Vector3(x, y, z), angle);
-  quaternion.x = q.x;
-  quaternion.y = q.y;
-  quaternion.z = q.z;
-  quaternion.w = q.w;
-}
-
 function handleServer(game, network, elapsed) {
   // FIXME: this belongs in user code
   var playerController = game.entities.addComponent(constants.player1, "playerController2d");
@@ -65,8 +54,7 @@ function handleServer(game, network, elapsed) {
   playerController.right = "left";
   game.entities.addComponent(constants.player1, "playerController2dAnalog");
 
-  var quaternion = game.entities.getComponent(constants.camera, "quaternion");
-  setFromAxisAngle(quaternion, 0, 0, 1, Math.PI);
+  moveCamera(game, 900, Math.PI / 4);
 
   network.role = "server";
   network.time += elapsed;
@@ -77,6 +65,26 @@ function handleServer(game, network, elapsed) {
     network.lastPacketTime = network.time;
     sendWorld(game, network.time);
   }
+}
+
+// FIME: this should go somewhere else
+var THREE = require("three");
+function moveCamera(game, distance, angle) {
+  var courtPosition = game.entities.getComponent(constants.court, "position");
+
+  var position = game.entities.getComponent(constants.camera, "position");
+  position.x = courtPosition.x;
+  position.y = courtPosition.y + (distance * Math.cos(angle));
+  position.z = courtPosition.z + (distance * Math.sin(angle));
+
+  var quaternion = game.entities.getComponent(constants.camera, "quaternion");
+  var model = game.entities.getComponent(constants.camera, "model");
+  model.mesh.lookAt(new THREE.Vector3(courtPosition.x, courtPosition.y, courtPosition.z));
+  model.mesh.up.set(0, 0, 1);
+  quaternion.x = model.mesh.quaternion.x;
+  quaternion.y = model.mesh.quaternion.y;
+  quaternion.z = model.mesh.quaternion.z;
+  quaternion.w = model.mesh.quaternion.w;
 }
 
 function sendWorld(game, time) {
@@ -98,6 +106,8 @@ function handleClient(game, network, elapsed) {
   playerController.up = "down";
   playerController.down = "up";
   game.entities.addComponent(constants.player2, "playerController2dAnalog");
+
+  moveCamera(game, 900, 3 * Math.PI / 4);
 
   network.role = "client";
   network.time += elapsed;

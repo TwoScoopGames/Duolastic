@@ -16,7 +16,10 @@
         "w": 0
       },
       "model": {
-        "name": "camera"
+        "name": "camera",
+        "options": {
+          "far": 2000
+        }
       }
     },
     {
