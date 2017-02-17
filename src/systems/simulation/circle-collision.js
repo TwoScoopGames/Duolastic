@@ -4,13 +4,27 @@ var reset = require("../../reset");
 var vec2 = require("../../vec2");
 var random = require("splat-ecs/lib/random");
 
-var drums = [
-  "drum-01.mp3",
-  "drum-02.mp3",
-  "drum-03.mp3",
-  "drum-04.mp3",
-  "drum-05.mp3"
+// var drums = [
+//   "drum-01.mp3",
+//   "drum-02.mp3",
+//   "drum-03.mp3",
+//   "drum-04.mp3",
+//   "drum-05.mp3"
+// ];
+var bounces = [
+  "bounce-1.mp3",
+  "bounce-2.mp3",
+  "bounce-3.mp3"
 ];
+
+var hits = [
+  "hit-1.mp3",
+  "hit-2.mp3",
+  "hit-3.mp3",
+  "hit-4.mp3",
+  "hit-5.mp3"
+];
+
 
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
@@ -42,7 +56,7 @@ function collide(game, a, b) {
   }
 
   var ball = game.entities.getComponent(a, "ball") || game.entities.getComponent(b, "ball");
-  if (ball) { game.sounds.play(random.from(drums)); }
+  if (ball) { game.sounds.play(random.from(hits)); }
 
   var toMove = collisionDistance - Math.sqrt(distSq);
   var angle = Math.atan2(positionA.y - positionB.y, positionA.x - positionB.x);
@@ -147,14 +161,14 @@ function keepInSides(game, entity, elasticity) {
   var ball = game.entities.getComponent(entity, "ball");
 
   if (position.x - circle.radius < courtLeft) {
-    if (ball) { game.sounds.play(random.from(drums)); }
+    if (ball) { game.sounds.play(random.from(bounces)); }
     position.x = courtLeft + circle.radius;
     if (velocity.x < 0) {
       velocity.x *= -1 * elasticity;
     }
   }
   if (position.x + circle.radius > courtRight) {
-    if (ball) { game.sounds.play(random.from(drums)); }
+    if (ball) { game.sounds.play(random.from(bounces)); }
     position.x = courtRight - circle.radius;
     if (velocity.x > 0) {
       velocity.x *= -1 * elasticity;
@@ -172,13 +186,32 @@ function checkScore(game, entity) {
   var circle = game.entities.getComponent(entity, "circle");
   var score = game.entities.getComponent(constants.score, "score");
 
+
+
+  var networkRole = game.entities.getComponent(constants.network, "network").role;
+
+
+  var youArePlayer1 = networkRole === "server";
+
   if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
+    game.sounds.play("goal.mp3");
+    if (youArePlayer1) {
+      game.sounds.play("score-player-1.mp3");
+    } else {
+      game.sounds.play("fail.mp3");
+    }
     score.player1++;
     reset(game);
   }
   if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
+    game.sounds.play("goal.mp3");
+    if (youArePlayer1) {
+      game.sounds.play("fail.mp3");
+    } else {
+      game.sounds.play("score-player-1.mp3");
+    }
     score.player2++;
     reset(game);
   }

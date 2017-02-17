@@ -30,6 +30,7 @@ var config = {
 };
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
+  game.sounds.play("game-start.mp3");
   var model = game.entities.getComponent(constants.court, "model");
   model.options.width = constants.courtWidth;
   model.options.height = constants.courtHeight;
