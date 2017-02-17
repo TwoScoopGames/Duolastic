@@ -12,7 +12,8 @@ function peerConnected(err, p) {
     return;
   }
   peer = p;
-  console.log("got a peer", peer, peer.initiator);
+  console.log("got a peer", peer);
+  console.log("i am ", peer.initiator ? "server" : "client");
   peer.on("data", function(data) {
     incomingMessages.push(JSON.parse(data.toString()));
   });
