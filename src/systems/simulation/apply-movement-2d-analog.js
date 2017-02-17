@@ -7,7 +7,7 @@ module.exports = function(ecs, game) {
     velocity.x += movement2dAnalog.magnitude * movement2dAnalog.accel * Math.cos(movement2dAnalog.angle);
     velocity.y += movement2dAnalog.magnitude * movement2dAnalog.accel * Math.sin(movement2dAnalog.angle);
 
-    var magnitude = Math.sqrt((velocity.x * velocity.x) + (velocity.y + velocity.y));
+    var magnitude = Math.sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
     if (magnitude > movement2dAnalog.max) {
       var angle = Math.atan2(velocity.y, velocity.x);
       velocity.x = movement2dAnalog.max * Math.cos(angle);
