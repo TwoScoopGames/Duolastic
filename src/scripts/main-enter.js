@@ -77,7 +77,6 @@ function createCylinder(game, previousEntity, baseEntityPosition, baseEntityMode
   model.options = {};
   model.options.radiusTop = baseEntityModel.options.radiusBottom - (segmentSize * (i + 1));
   model.options.radiusBottom = baseEntityModel.options.radiusBottom - (segmentSize * i);
-  console.log(model.options.radiusTop, model.options.radiusBottom);
 
   model.options.height = baseEntityModel.options.height;
   model.options.radiusSegments = baseEntityModel.options.radiusSegments;
