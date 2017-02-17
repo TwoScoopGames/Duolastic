@@ -55,7 +55,7 @@ function handleServer(game, network, elapsed) {
   playerController.right = "left";
   game.entities.addComponent(constants.player1, "playerController2dAnalog");
 
-  moveCamera(game, 900, Math.PI / 4, constants.player1);
+  moveCamera(game, 900, Math.PI / 8, constants.player1);
 
   network.role = "server";
   network.time += elapsed;
@@ -118,7 +118,7 @@ function handleClient(game, network, elapsed) {
   playerController.down = "up";
   game.entities.addComponent(constants.player2, "playerController2dAnalog");
 
-  moveCamera(game, 900, 3 * Math.PI / 4, constants.player2);
+  moveCamera(game, 900, 7 * Math.PI / 8, constants.player2);
 
   network.role = "client";
   network.time += elapsed;
