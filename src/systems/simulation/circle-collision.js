@@ -19,8 +19,8 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     collide(game, constants.player1, constants.ball);
     collide(game, constants.player2, constants.ball);
 
-    keepOnCourt(game, constants.player1, 0);
-    keepOnCourt(game, constants.player2, 0);
+    keepOnCourt(game, constants.player1, 0.9);
+    keepOnCourt(game, constants.player2, 0.9);
     keepInSides(game, constants.ball, 1);
     checkScore(game, constants.ball);
   });
