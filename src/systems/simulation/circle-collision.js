@@ -19,9 +19,9 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     collide(game, constants.player1, constants.ball);
     collide(game, constants.player2, constants.ball);
 
-    keepOnCourt(game, constants.player1);
-    keepOnCourt(game, constants.player2);
-    keepInSides(game, constants.ball);
+    keepOnCourt(game, constants.player1, 0);
+    keepOnCourt(game, constants.player2, 0);
+    keepInSides(game, constants.ball, 1);
     checkScore(game, constants.ball);
   });
 };
@@ -109,7 +109,7 @@ function collide(game, a, b) {
   velocityB.y = v2Prime[1];
 }
 
-function keepOnCourt(game, entity) {
+function keepOnCourt(game, entity, elasticity) {
   var courtPos = game.entities.getComponent(constants.court, "position");
   var courtSize = game.entities.getComponent(constants.court, "size");
   var courtTop = courtPos.y - (courtSize.height / 2);
@@ -122,20 +122,20 @@ function keepOnCourt(game, entity) {
   if (position.y - circle.radius < courtTop) {
     position.y = courtTop + circle.radius;
     if (velocity.y < 0) {
-      velocity.y *= -1;
+      velocity.y *= -1 * elasticity;
     }
   }
   if (position.y + circle.radius > courtBottom) {
     position.y = courtBottom - circle.radius;
     if (velocity.y > 0) {
-      velocity.y *= -1;
+      velocity.y *= -1 * elasticity;
     }
   }
 
-  keepInSides(game, entity);
+  keepInSides(game, entity, elasticity);
 }
 
-function keepInSides(game, entity) {
+function keepInSides(game, entity, elasticity) {
   var courtPos = game.entities.getComponent(constants.court, "position");
   var courtSize = game.entities.getComponent(constants.court, "size");
   var courtLeft = courtPos.x - (courtSize.width / 2);
@@ -150,14 +150,14 @@ function keepInSides(game, entity) {
     if (ball) { game.sounds.play(random.from(drums)); }
     position.x = courtLeft + circle.radius;
     if (velocity.x < 0) {
-      velocity.x *= -1;
+      velocity.x *= -1 * elasticity;
     }
   }
   if (position.x + circle.radius > courtRight) {
     if (ball) { game.sounds.play(random.from(drums)); }
     position.x = courtRight - circle.radius;
     if (velocity.x > 0) {
-      velocity.x *= -1;
+      velocity.x *= -1 * elasticity;
     }
   }
 }
