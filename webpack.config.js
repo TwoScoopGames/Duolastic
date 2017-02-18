@@ -27,7 +27,7 @@ function pathForRegexp(url) {
 
 module.exports = {
   entry: {
-    index: [ "./src/game" ]
+    index: [ __dirname + "/src/game" ]
   },
   devtool: "source-map",
   output: {
