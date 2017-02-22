@@ -17,13 +17,44 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
 };
 
 function makeBox(options) {
+
   var width = getOption(options.width, 1);
   var height = getOption(options.height, 1);
   var depth = getOption(options.depth, 1);
   var color = getColorOption(options.color, 0xffffff);
 
   var geometry = new THREE.BoxGeometry(width, height, depth);
+
   var material = new THREE.MeshLambertMaterial({ color: color });
+
+  if (options.material) {
+    console.log(options.material.type);
+    var directions, textureCube;
+    if (options.material.type === "skybox") {
+      directions = options.skybox;
+      textureCube = THREE.ImageUtils.loadTextureCube(directions);
+      textureCube.minFilter = THREE.NearestFilter;
+
+      var shader = THREE.ShaderLib["cube"];
+      shader.uniforms["tCube"].value = textureCube;
+      material = new THREE.ShaderMaterial({
+        fragmentShader: shader.fragmentShader,
+        vertexShader: shader.vertexShader,
+        uniforms: shader.uniforms,
+        depthWrite: false,
+        side: THREE.BackSide
+      });
+    } else if (options.material.type === "skybox-reflection") {
+      material = new THREE.MeshPhongMaterial({ color: color });
+      directions = options.skybox;
+      textureCube = THREE.ImageUtils.loadTextureCube(directions);
+      textureCube.minFilter = THREE.NearestFilter;
+      material.envMap = textureCube;
+      material.reflectivity = getOption(options.material.reflectivity, 1);
+      //material.specular = 0x050505;
+      material.shininess = 10000;
+    }
+  }
   var mesh = new THREE.Mesh(geometry, material);
 
   return mesh;

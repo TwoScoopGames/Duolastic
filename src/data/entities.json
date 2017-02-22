@@ -194,7 +194,12 @@
           "width": 1136,
           "height": 640,
           "depth": 640,
-          "color": "0xffffff"
+          "color": "0xffffff",
+          "material": {
+            "type":"skybox-reflection",
+            "reflectivity": 0.25
+            },
+          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
         },
         "receiveShadow": true
       },
@@ -203,77 +208,10 @@
         "y": 0
       }
     },
-    {
-      "id": 700,
-      "name": "light",
-      "position": {
-        "x": 250,
-        "y": 500,
-        "z": 500
-      },
-      "model": {
-        "name": "directionalLight",
-        "options": {
-          "castShadow": true,
-          "color": "0xffffff",
-          "intensity": 0.9,
-          "targetX": 250,
-          "targetY": 500,
-          "targetZ": 0
-        }
-      }
-    },
-    {
-      "id": 800,
-      "name": "light",
-      "position": {
-        "x": 0,
-        "y": -500,
-        "z": 30
-      },
-      "model": {
-        "name": "Back light",
-        "options": {
-          "castShadow": true,
-          "color": "0xffffff",
-          "intensity": 0.55
-        }
-      }
-    },
-    {
-      "id": 900,
-      "name": "light",
-      "position": {
-        "x": -375,
-        "y": 500,
-        "z": 30
-      },
-      "model": {
-        "name": "Key light",
-        "options": {
-          "castShadow": true,
-          "color": "0xffffff",
-          "intensity": 0.375
-        }
-      }
-    },
-    {
-      "id": 1000,
-      "name": "light",
-      "position": {
-        "x": 375,
-        "y": 500,
-        "z": 30
-      },
-      "model": {
-        "name": "Fill light",
-        "options": {
-          "castShadow": true,
-          "color": "0xffffff",
-          "intensity": 0.25
-        }
-      }
-    },
+
+
+
+    
     {
       "id": 80,
       "name": "p1 score",
@@ -350,6 +288,38 @@
           "width": 512,
           "height": 64
         }
+      }
+    },
+    {
+      "id": 600,
+      "name": "space",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "model": {
+        "name": "space",
+        "options": {
+          "width": 2000,
+          "height": 2000,
+          "depth": 2000,
+          "material": {
+            "type": "skybox"
+            },
+          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
+        },
+        "receiveShadow": true
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
       }
     }
   ]

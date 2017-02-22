@@ -84,6 +84,7 @@ function createCylinder(game, previousEntity, baseEntityPosition, baseEntityMode
   model.options.color = config.colors[i];
 
   model.castShadow = true;
+  model.receiveShadow = true;
 
   var previousEntityPosition = game.entities.getComponent(previousEntity, "position");
   var newEntityPosition = game.entities.addComponent(newEntity, "position");
