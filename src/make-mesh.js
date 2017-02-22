@@ -84,10 +84,6 @@ function makeDirectionalLight(options) {
   return light;
 }
 
-var textCanvas = document.createElement("canvas");
-var textContext = textCanvas.getContext("2d");
-textCanvas.width = 256;
-textCanvas.height = 256;
 
 // var textMeasurementDiv = document.createElement("div");
 // textMeasurementDiv.style.display = "block";
@@ -106,20 +102,20 @@ textCanvas.height = 256;
 // }
 
 function makeText(options) {
+
   var text = getOption(options.text, "Hello, world!");
   var fillStyle = getOption(options.fillStyle, "rgba(255, 0, 0, 0.95)");
   var font = getOption(options.font, "40px sans-serif");
-  var textWidth = getOption(options.textWidth, textCanvas.textWidth);
-  var textHeight = getOption(options.textHeight, textCanvas.textHeight);
-  var width = getOption(options.width, textCanvas.width);
-  var height = getOption(options.height, textCanvas.height);
+  var textWidth = getOption(options.textWidth, 256);
+  var textHeight = getOption(options.textHeight, 256);
+  var width = getOption(options.width, textWidth);
+  var height = getOption(options.height, textHeight);
 
-  if (textCanvas.width < textWidth) {
-    textCanvas.width = textWidth;
-  }
-  if (textCanvas.height < textHeight) {
-    textCanvas.height = textHeight;
-  }
+  var textCanvas = document.createElement("canvas");
+  var textContext = textCanvas.getContext("2d");
+  textCanvas.width = textWidth;
+  textCanvas.height = textHeight;
+
   textContext.clearRect(0, 0, textCanvas.width, textCanvas.height);
   textContext.textBaseline = "hanging";
   textContext.font = font;
