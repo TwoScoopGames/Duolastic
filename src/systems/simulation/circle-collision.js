@@ -186,33 +186,38 @@ function checkScore(game, entity) {
   var circle = game.entities.getComponent(entity, "circle");
   var score = game.entities.getComponent(constants.score, "score");
 
-
-
   var networkRole = game.entities.getComponent(constants.network, "network").role;
-
-
   var youArePlayer1 = networkRole === "server";
 
   if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
-    game.sounds.play("goal.mp3");
-    if (youArePlayer1) {
-      game.sounds.play("score-player-1.mp3");
-    } else {
-      game.sounds.play("fail.mp3");
-    }
+
+    playScoreSound(game, youArePlayer1);
     score.player1++;
+    updateScoreText(game, constants.player1ScoreText, score.player1);
     reset(game);
   }
   if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
-    game.sounds.play("goal.mp3");
-    if (youArePlayer1) {
-      game.sounds.play("fail.mp3");
-    } else {
-      game.sounds.play("score-player-1.mp3");
-    }
+
+    playScoreSound(game, !youArePlayer1);
     score.player2++;
+    updateScoreText(game, constants.player2ScoreText, score.player2);
     reset(game);
+  }
+}
+
+function updateScoreText(game, entity, score) {
+  var model = game.entities.getComponent(entity, "model");
+  model.options.text = score;
+  model.needsUpdate = true;
+}
+
+function playScoreSound(game, isGood) {
+  game.sounds.play("goal.mp3");
+  if (isGood) {
+    game.sounds.play("score-player-1.mp3");
+  } else {
+    game.sounds.play("fail.mp3");
   }
 }
