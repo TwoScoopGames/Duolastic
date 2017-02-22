@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 build
 upload.sh
+*.DS_Store

@@ -1,17 +1,14 @@
-![Splat ECS Starter Project](./src/images/logo.png)
+# Duolastic
 
-A sample starter game using [splat-ecs](https://github.com/SplatJS/splat-ecs)
+Game originally created for #GGJ17 Global Game Jam 2017 theme: Waves
 
-# Get started
-
-1. Fork this repo & clone it to your computer
-2. Install [Node.js](https://nodejs.org)
-3. Run `npm install` inside the project folder
-4. Run `npm start` inside the project folder
-5. Navigate to [localhost:4000](localhost:4000) in your browser
+[View the Duolastic Design Document here](design-document.md)
 
 
-# Sharing your game
+# Starting the game locally
 
-1. Run `npm run build` inside the project folder
-2. Zip and distribute build folder - or - Rename, upload, and serve build directory from your website
+1. Run `npm install` inside the project folder
+2. Run `npm run build` inside the project folder
+3. Run `npm install` inside the server folder
+2. Run `npm start` inside the sever folder
+5. Navigate to [localhost:4001](localhost:4001) in your browser (two windows or tabs)
