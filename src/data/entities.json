@@ -5,9 +5,9 @@
       "name": "camera",
       "camera": true,
       "position": {
-        "x": 500,
-        "y": 300,
-        "z": 1200
+        "x": 0,
+        "y": 0,
+        "z": 800
       },
       "quaternion": {
         "x": 0,
