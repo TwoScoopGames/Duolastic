@@ -9,6 +9,8 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
     return makeCamera(options);
   case "cylinder":
     return makeCylinder(options);
+  case "sphere":
+    return makeSphere(options);
   case "directionalLight":
     return makeDirectionalLight(options);
   case "text":
@@ -83,6 +85,21 @@ function makeCamera(options) {
   var near = getOption(options.near, 1);
   var far = getOption(options.far, 1000);
   return new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
+}
+
+function makeSphere(options) {
+  var radius = getOption(options.radius, 1);
+  var widthSegments = getOption(options.widthSegments, 64);
+  var heightSegments = getOption(options.heightSegments, 64);
+  var color = getColorOption(options.color, 0xffffff);
+
+  var geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+  var material = new THREE.MeshPhongMaterial({ color: color });
+  options.material.reflectivity = getOption(options.material.reflectivity, 1);
+  options.material.shininess = 10000;
+  var mesh = new THREE.Mesh(geometry, material);
+  mesh.castShadow = true;
+  return mesh;
 }
 
 function makeCylinder(options) {

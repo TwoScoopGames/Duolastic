@@ -176,7 +176,8 @@
       "name": "ball",
       "position": {
         "x": 250,
-        "y": 200
+        "y": 200,
+        "z": 17.5
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -185,12 +186,15 @@
         "w": 0.7071067811865476
       },
       "model": {
-        "name": "cylinder",
+        "name": "sphere",
         "options": {
-          "radiusTop": 25,
-          "radiusBottom": 25,
-          "height": 25,
-          "color": "0xcccccc"
+          "radius": 25,
+          "widthSegments": 64,
+          "heightSegments": 64,
+          "color": "0xcccccc",
+          "material": {
+            "reflectivity": 0.35
+            }
         }
       },
       "ball": true,
