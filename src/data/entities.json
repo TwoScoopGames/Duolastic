@@ -201,8 +201,7 @@
             },
 
 
-          "skybox": [
-            "images/dawnmountain-xpos.png", "images/dawnmountain-xneg.png", "images/dawnmountain-ypos.png", "images/dawnmountain-yneg.png", "images/dawnmountain-zpos.png", "images/dawnmountain-zneg.png"]
+          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
         },
         "receiveShadow": true
       },
@@ -310,8 +309,7 @@
           "material": {
             "type": "skybox"
             },
-            "skybox": [
-              "images/dawnmountain-xpos.png", "images/dawnmountain-xneg.png", "images/dawnmountain-ypos.png", "images/dawnmountain-yneg.png", "images/dawnmountain-zpos.png", "images/dawnmountain-zneg.png"]
+          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
         },
         "receiveShadow": true
       },
