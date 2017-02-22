@@ -1,33 +1,5 @@
 var reset = require("../reset");
 var constants = require("../constants");
-var config = {
-  radiusTop: 0.2,
-  radiusBottom: 0.75,
-  height: 2.5,
-  radiusSegments: 64,
-  heightSegments: 1,
-  openEnded: false,
-  thetaStart: 0,
-  thetaLength: 0,
-  circleSize: 1,
-  scaleY: 1,
-  colors: [
-    "rgb(89,49,75)",
-    "rgb(142,40,62)",
-    "rgb(198,55,47)",
-    "rgb(241,81,57)",
-    "rgb(255,156,31)",
-    "rgb(255,207,92)",
-    "rgb(249,229,114)",
-    "rgb(228,240,128)",
-    "rgb(147,213,186)",
-    "rgb(85,188,221)",
-    "rgb(76,128,175)",
-    "rgb(62,88,137)",
-    "rgb(89,49,75)"
-
-  ]
-};
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
   game.sounds.play("game-start.mp3");
@@ -60,17 +32,18 @@ function setRadius(game, entity, radius) {
 }
 
 function createStack(game, baseEntity) {
+  var circle = game.entities.getComponent(baseEntity, "circle");
   var baseEntityModel = game.entities.getComponent(baseEntity, "model");
   var baseEntityPosition = game.entities.getComponent(baseEntity, "position");
-  var segmentSize = baseEntityModel.options.radiusBottom / config.colors.length;
+  var segmentSize = baseEntityModel.options.radiusBottom / circle.colorSet.length;
   var entity = baseEntity;
-  for (var i = 0; i < config.colors.length; i++) {
-    entity = createCylinder(game, entity, baseEntityPosition, baseEntityModel, segmentSize, i);
+  for (var i = 0; i < circle.colorSet.length; i++) {
+    entity = createCylinder(game, entity, baseEntityPosition, baseEntityModel, segmentSize, circle.colorSet, i);
   }
 }
 
 
-function createCylinder(game, previousEntity, baseEntityPosition, baseEntityModel, segmentSize, i) {
+function createCylinder(game, previousEntity, baseEntityPosition, baseEntityModel, segmentSize, colorSet,i) {
   var newEntity = game.entities.create();
 
   var model = game.entities.addComponent(newEntity, "model");
@@ -81,7 +54,7 @@ function createCylinder(game, previousEntity, baseEntityPosition, baseEntityMode
 
   model.options.height = baseEntityModel.options.height;
   model.options.radiusSegments = baseEntityModel.options.radiusSegments;
-  model.options.color = config.colors[i];
+  model.options.color = colorSet[i];
 
   model.castShadow = true;
   model.receiveShadow = true;
