@@ -32,7 +32,7 @@ function makeBox(options) {
     var directions, textureCube;
     if (options.material.type === "skybox") {
       directions = options.skybox;
-      textureCube = THREE.ImageUtils.loadTextureCube(directions);
+      textureCube = new THREE.CubeTextureLoader().setPath("./").load(directions);
       textureCube.minFilter = THREE.NearestFilter;
 
       var shader = THREE.ShaderLib["cube"];

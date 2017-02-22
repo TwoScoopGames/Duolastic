@@ -18,7 +18,7 @@
       "model": {
         "name": "camera",
         "options": {
-          "far": 2000
+          "far": 11000
         }
       }
     },
@@ -214,6 +214,7 @@
     {
       "id": 6,
       "name": "court",
+      "court": true,
       "position": {
         "x": 0,
         "y": 0,
@@ -228,17 +229,28 @@
           "color": "0xffffff",
           "material": {
             "type":"skybox-reflection",
-            "reflectivity": 0.25
+            "reflectivity": 0.35
             },
-
-
-          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
+            "skybox": [
+              "images/bkg1_right.png",
+              "images/bkg1_left.png",
+              "images/bkg1_top.png",
+              "images/bkg1_bot.png",
+              "images/bkg1_front.png",
+              "images/bkg1_back.png"
+            ]
         },
         "receiveShadow": true
       },
       "size": {
         "x": 0,
         "y": 0
+      },
+      "quaternion": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 0
       }
     },
 
@@ -326,6 +338,7 @@
     {
       "id": 600,
       "name": "space",
+      "skybox": true,
       "position": {
         "x": 0,
         "y": 0,
@@ -334,13 +347,20 @@
       "model": {
         "name": "space",
         "options": {
-          "width": 2000,
-          "height": 2000,
-          "depth": 2000,
+          "width": 10000,
+          "height": 10000,
+          "depth": 10000,
           "material": {
             "type": "skybox"
             },
-          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
+          "skybox": [
+            "images/bkg1_right.png",
+            "images/bkg1_left.png",
+            "images/bkg1_top.png",
+            "images/bkg1_bot.png",
+            "images/bkg1_front.png",
+            "images/bkg1_back.png"
+          ]
         },
         "receiveShadow": true
       },
