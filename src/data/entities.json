@@ -199,7 +199,10 @@
             "type":"skybox-reflection",
             "reflectivity": 0.25
             },
-          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
+
+
+          "skybox": [
+            "images/dawnmountain-xpos.png", "images/dawnmountain-xneg.png", "images/dawnmountain-ypos.png", "images/dawnmountain-yneg.png", "images/dawnmountain-zpos.png", "images/dawnmountain-zneg.png"]
         },
         "receiveShadow": true
       },
@@ -211,7 +214,7 @@
 
 
 
-    
+
     {
       "id": 80,
       "name": "p1 score",
@@ -307,7 +310,8 @@
           "material": {
             "type": "skybox"
             },
-          "skybox": ["images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png", "images/space-skybox.png"]
+            "skybox": [
+              "images/dawnmountain-xpos.png", "images/dawnmountain-xneg.png", "images/dawnmountain-ypos.png", "images/dawnmountain-yneg.png", "images/dawnmountain-zpos.png", "images/dawnmountain-zneg.png"]
         },
         "receiveShadow": true
       },
