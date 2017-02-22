@@ -62,7 +62,7 @@ function makeCylinder(options) {
   var geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments);
   var material = new THREE.MeshLambertMaterial({ color: color });
   var mesh = new THREE.Mesh(geometry, material);
-
+  mesh.castShadow = true;
   return mesh;
 }
 
@@ -74,8 +74,10 @@ function makeDirectionalLight(options) {
   var targetY = getOption(options.targetY, 0);
   var targetZ = getOption(options.targetZ, 0);
 
+
   var light = new THREE.DirectionalLight(color, intensity);
   light.castShadow = castShadow;
+  light.shadowDarkness = 1;
   light.target.position.set(targetX, targetY, targetZ);
   return light;
 }

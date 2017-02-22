@@ -75,18 +75,20 @@ function moveCamera(game, distance, angle, follow) {
   var followPosition = game.entities.getComponent(follow, "position");
 
   var courtPosition = game.entities.getComponent(constants.court, "position");
+  var courtModel = game.entities.getComponent(constants.court, "model");
+
 
   var followAngle = Math.atan2(followPosition.y - courtPosition.y, followPosition.x - courtPosition.x);
   var dist = Math.sqrt(math2d.distanceSquared(followPosition.x, followPosition.y, courtPosition.x, courtPosition.y)) * 0.1;
 
   var followX = courtPosition.x + (dist * Math.cos(followAngle));
   var followY = courtPosition.y + (dist * Math.sin(followAngle));
-  var followZ = courtPosition.z;
+  var followZ = courtPosition.z + (courtModel.options.depth / 2);
 
   var position = game.entities.getComponent(constants.camera, "position");
   position.x = courtPosition.x;
   position.y = courtPosition.y + (distance * Math.cos(angle));
-  position.z = courtPosition.z + (distance * Math.sin(angle));
+  position.z = courtPosition.z + (distance * Math.sin(angle)) + (courtModel.options.depth / 2);
 
   var quaternion = game.entities.getComponent(constants.camera, "quaternion");
   var model = game.entities.getComponent(constants.camera, "model");
