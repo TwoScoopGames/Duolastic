@@ -273,6 +273,58 @@
           "intensity": 0.25
         }
       }
+    },
+    {
+      "id": 80,
+      "name": "p1 score",
+      "position": {
+        "x": -400,
+        "y": 0,
+        "z": 10
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
+      },
+      "model": {
+        "name": "text",
+        "options": {
+          "text": "1",
+          "fillStyle": "#00f",
+          "textWidth": 40,
+          "textHeight": 40,
+          "width": 50,
+          "height": 50
+        }
+      }
+    },
+    {
+      "id": 81,
+      "name": "p2 score",
+      "position": {
+        "x": 400,
+        "y": 0,
+        "z": 10
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
+      },
+      "model": {
+        "name": "text",
+        "options": {
+          "text": "2",
+          "fillStyle": "#0f0",
+          "textWidth": 40,
+          "textHeight": 40,
+          "width": 50,
+          "height": 50
+        }
+      }
     }
   ]
 }
