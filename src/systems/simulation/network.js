@@ -36,6 +36,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
       if (network.state === "connected") {
         network.state = "disconnected";
       }
+      updateNetworkStateText(game, network);
       return;
     }
     network.state = "connected";
@@ -57,6 +58,8 @@ function handleServer(game, network, elapsed) {
 
   moveCamera(game, 900, Math.PI / 8, constants.player1);
 
+  updateNetworkStateText(game, network);
+
   network.role = "server";
   network.time += elapsed;
 
@@ -65,6 +68,14 @@ function handleServer(game, network, elapsed) {
   if (network.time - network.lastPacketTime > network.packetRate) {
     network.lastPacketTime = network.time;
     sendWorld(game, network.time);
+  }
+}
+
+function updateNetworkStateText(game, network) {
+  var networkStateModel = game.entities.getComponent(constants.networkStateText, "model");
+  if (networkStateModel.options.text != network.state) {
+    networkStateModel.needsUpdate = true;
+    networkStateModel.options.text = network.state;
   }
 }
 
@@ -121,6 +132,8 @@ function handleClient(game, network, elapsed) {
   game.entities.addComponent(constants.player2, "playerController2dAnalog");
 
   moveCamera(game, 900, 7 * Math.PI / 8, constants.player2);
+
+  updateNetworkStateText(game, network);
 
   network.role = "client";
   network.time += elapsed;

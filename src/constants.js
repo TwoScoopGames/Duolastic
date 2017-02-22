@@ -13,6 +13,7 @@ module.exports = {
   court: 6,
   player1ScoreText: 80,
   player2ScoreText: 81,
+  networkStateText: 82,
   courtWidth: courtHeight * courtWidthRatio,
   courtHeight: courtHeight,
   puckDiameter: courtHeight * puckDiameterRatio,

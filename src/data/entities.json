@@ -325,6 +325,32 @@
           "height": 64
         }
       }
+    },
+    {
+      "id": 82,
+      "name": "connection state",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 250
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
+      },
+      "model": {
+        "name": "text",
+        "options": {
+          "text": "Connecting",
+          "fillStyle": "#0f0",
+          "textWidth": 512,
+          "textHeight": 64,
+          "width": 512,
+          "height": 64
+        }
+      }
     }
   ]
 }
