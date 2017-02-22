@@ -85,24 +85,23 @@ function makeDirectionalLight(options) {
 }
 
 
-// var textMeasurementDiv = document.createElement("div");
-// textMeasurementDiv.style.display = "block";
-// textMeasurementDiv.style.position = "absolute";
-// textMeasurementDiv.style.top  = "-9999px";
-// textMeasurementDiv.style.left = "-9999px";
-// document.body.appendChild(textMeasurementDiv);
+var textMeasurementDiv = document.createElement("div");
+textMeasurementDiv.style.display = "block";
+textMeasurementDiv.style.position = "absolute";
+textMeasurementDiv.style.top  = "-9999px";
+textMeasurementDiv.style.left = "-9999px";
+document.body.appendChild(textMeasurementDiv);
 
-// function measureTextInDiv(text, font) {
-//   textMeasurementDiv.style.font = font;
-//   textMeasurementDiv.textContent = text;
-//   return {
-//     width: textMeasurementDiv.offsetWidth,
-//     height: textMeasurementDiv.offsetHeight
-//   };
-// }
+function measureTextInDiv(text, font) {
+  textMeasurementDiv.style.font = font;
+  textMeasurementDiv.textContent = text;
+  return {
+    width: textMeasurementDiv.offsetWidth,
+    height: textMeasurementDiv.offsetHeight
+  };
+}
 
 function makeText(options) {
-
   var text = getOption(options.text, "Hello, world!");
   var fillStyle = getOption(options.fillStyle, "rgba(255, 0, 0, 0.95)");
   var font = getOption(options.font, "40px sans-serif");
@@ -116,11 +115,13 @@ function makeText(options) {
   textCanvas.width = textWidth;
   textCanvas.height = textHeight;
 
+  var metrics = measureTextInDiv(text, font);
+
   textContext.clearRect(0, 0, textCanvas.width, textCanvas.height);
-  textContext.textBaseline = "hanging";
+  textContext.textBaseline = "middle";
   textContext.font = font;
   textContext.fillStyle = fillStyle;
-  textContext.fillText(text, 0, 0);
+  textContext.fillText(text, (textWidth / 2) - (metrics.width / 2), (textHeight / 2));
 
   var texture1 = new THREE.Texture(textCanvas);
   texture1.needsUpdate = true;
@@ -129,16 +130,6 @@ function makeText(options) {
   material.transparent = true;
 
   var geometry = new THREE.PlaneGeometry(width, height);
-
-  geometry.faceVertexUvs[0] = [];
-  var maxU = textWidth / textCanvas.width;
-  var maxV = textHeight / textCanvas.height;
-  var bl = new THREE.Vector2(0, 1 - maxV);
-  var br = new THREE.Vector2(maxU, 1 - maxV);
-  var tr = new THREE.Vector2(maxU, 1);
-  var tl = new THREE.Vector2(0, 1);
-  geometry.faceVertexUvs[0][0] = [ tl, bl, tr ];
-  geometry.faceVertexUvs[0][1] = [ bl, br, tr ];
 
   return new THREE.Mesh(geometry, material);
 }

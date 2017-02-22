@@ -293,10 +293,10 @@
         "options": {
           "text": "0",
           "fillStyle": "#0f0",
-          "textWidth": 40,
-          "textHeight": 40,
-          "width": 50,
-          "height": 50
+          "textWidth": 64,
+          "textHeight": 64,
+          "width": 64,
+          "height": 64
         }
       }
     },
@@ -319,10 +319,10 @@
         "options": {
           "text": "0",
           "fillStyle": "#0f0",
-          "textWidth": 40,
-          "textHeight": 40,
-          "width": 50,
-          "height": 50
+          "textWidth": 64,
+          "textHeight": 64,
+          "width": 64,
+          "height": 64
         }
       }
     }
