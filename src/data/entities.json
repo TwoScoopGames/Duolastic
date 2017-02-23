@@ -177,7 +177,7 @@
       "position": {
         "x": 250,
         "y": 200,
-        "z": 17.5
+        "z": 22
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -233,7 +233,7 @@
           "color": "0xffffff",
           "material": {
             "type":"skybox-reflection",
-            "reflectivity": 0.35
+            "reflectivity": 0.30
             },
             "skybox": [
               "images/bkg1_right.png",
@@ -279,7 +279,7 @@
         "name": "text",
         "options": {
           "text": "0",
-          "fillStyle": "#0f0",
+          "fillStyle": "white",
           "textWidth": 64,
           "textHeight": 64,
           "width": 64,
@@ -305,7 +305,7 @@
         "name": "text",
         "options": {
           "text": "0",
-          "fillStyle": "#0f0",
+          "fillStyle": "white",
           "textWidth": 64,
           "textHeight": 64,
           "width": 64,
@@ -331,7 +331,7 @@
         "name": "text",
         "options": {
           "text": "Connecting",
-          "fillStyle": "#0f0",
+          "fillStyle": "white",
           "textWidth": 512,
           "textHeight": 64,
           "width": 512,
