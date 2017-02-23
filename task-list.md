@@ -1,19 +1,16 @@
 ## prioritized
 ### Arcade Expo version
 
-1. The player to wins the most rounds wins the match, then a rematch screen is displayed.
+1. Home / Rematch Screen MVP 
+	-The player who wins the most rounds wins the match, then rematch screen is displayed.
+	- option [rematch] is displayed.
+	- wait for players to both select rematch - new match starts
 
-2. Rematch Screen MVP option [rematch] is displayed.
-	- Players both select rematch - new match starts
-	
-3.  Home screen MVP
-	- Can this just be rematch sceen for now?
-
-4. Gamepad support
+2. Gamepad support
   - Tested working: PS4 (mac) and XBox 360 (mac/linux)
   - Issue with player 2
 
-4. `Funnel mode` MVP
+3. `Funnel mode` MVP
   - press button to toggle modes (cone/funnel)
   - directional controls do not allow player to move
   - player changes to single cylinder (the actual player entity remains?)
