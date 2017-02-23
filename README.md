@@ -2,8 +2,11 @@
 
 Game originally created for #GGJ17 Global Game Jam 2017 theme: Waves
 
-[View the Duolastic Design Document](design-document.md)
-[View the Duolastic Task List](task-list.md)
+
+## [Design Document](design-document.md)
+
+
+## [Task List](task-list.md)
 
 
 # Starting the game locally
