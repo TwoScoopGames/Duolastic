@@ -34,20 +34,21 @@ options  [leave match] and [rematch] are displayed.
   - Tested working: PS4 (mac) and XBox 360 (mac/linux)
   - Issue with player 2
 
-3. `Funnel mode`
-  - MVP
-    - press button to toggle modes (cone/funnel)
-    - directional controls do not allow player to move
-    - player changes to single cylinder (the actual player entity remains?)
-    - if ball touches player ball follows player
-    - direction player points directional controls is the direction the ball will "launch" when mode is toggled again
-  - Final
-    - Player becomes funnel into the ground
-      - cut out hole the shape of the player's bottom cylinder in the cube?
-      - lighting/ adjustments to make the funnel look right
-    - The player in funnel mode hears all sounds in reverse (duplicate audio files)
+3. `Funnel mode` MVP
+  - press button to toggle modes (cone/funnel)
+  - directional controls do not allow player to move
+  - player changes to single cylinder (the actual player entity remains?)
+  - if ball touches player ball follows player
+  - direction player points directional controls is the direction the ball will "launch" when mode is toggled again
+
 
 ## non-prioritized
+
+- `Funnel mode` Final
+  - Player becomes funnel into the ground
+    - cut out hole the shape of the player's bottom cylinder in the cube?
+    - lighting/ adjustments to make the funnel look right
+  - The player in funnel mode hears all sounds in reverse (duplicate audio files)
 
 - get shadows working
 
