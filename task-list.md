@@ -1,40 +1,19 @@
-
-# Home screen
-
-## non-prioritized
-- shows title of game and two options
-[Find a random match] and  [Play with someone you know]
-
-# Matchmaking
-
-## non-prioritized
-- players are given a randomly generated GUID which we can base a procedurally generated username off of
-- players are assigned random name
-- [Find a random match] - Players are matched at random where a player waits for the next 'random mode' player to arrive on the site, then they are paired and the game begins
-
-- [Play with someone you know] - User is provided a randomly generated 'game name' which will create a unique link to give to another player, they are matched until one player quits from the rematch screen
-
-# Rematch Screen
-
-## non-prioritized
-
-options  [leave match] and [rematch] are displayed.
-- Players both select rematch - new match starts
-- one player chooses [leave match] -> this player is taken to home screen, other player gets "Player left" message then is given one option [return to home] when clicked the player is taken to home screen
-- both players choose [leave match] -> both are taken to home screen
-
-
-# Game Loop
-
 ## prioritized
+### Arcade Expo version
 
 1. The player to wins the most rounds wins the match, then a rematch screen is displayed.
 
-2. Gamepad support
+2. Rematch Screen MVP option [rematch] is displayed.
+	- Players both select rematch - new match starts
+	
+3.  Home screen MVP
+	- Can this just be rematch sceen for now?
+
+4. Gamepad support
   - Tested working: PS4 (mac) and XBox 360 (mac/linux)
   - Issue with player 2
 
-3. `Funnel mode` MVP
+4. `Funnel mode` MVP
   - press button to toggle modes (cone/funnel)
   - directional controls do not allow player to move
   - player changes to single cylinder (the actual player entity remains?)
@@ -43,6 +22,24 @@ options  [leave match] and [rematch] are displayed.
 
 
 ## non-prioritized
+
+- Home screen Final shows title of game and two options
+[Find a random match] and  [Play with someone you know]
+
+- players are given a randomly generated GUID which we can base a procedurally generated username off of
+
+- players are assigned random name
+- [Find a random match] - Players are matched at random where a player waits for the next 'random mode' player to arrive on the site, then they are paired and the game begins
+
+- [Play with someone you know] - User is provided a randomly generated 'game name' which will create a unique link to give to another player, they are matched until one player quits from the rematch screen
+
+
+
+- Rematch Screen Final options  [leave match] and [rematch] are displayed.
+	- Players both select rematch - new match starts
+	- one player chooses [leave match] -> this player is taken to home screen, other player gets "Player left" message then is given one option [return to home] when clicked the player is taken to home screen
+	- both players choose [leave match] -> both are taken to home screen
+
 
 - `Funnel mode` Final
   - Player becomes funnel into the ground
