@@ -36,14 +36,15 @@ function createStack(game, baseEntity) {
   var baseEntityModel = game.entities.getComponent(baseEntity, "model");
   var baseEntityPosition = game.entities.getComponent(baseEntity, "position");
   var segmentSize = baseEntityModel.options.radiusBottom / circle.colorSet.length;
+  var parent = baseEntity;
   var entity = baseEntity;
   for (var i = 0; i < circle.colorSet.length; i++) {
-    entity = createCylinder(game, entity, baseEntityPosition, baseEntityModel, segmentSize, circle.colorSet, i);
+    entity = createCylinder(game, parent, entity, baseEntityPosition, baseEntityModel, segmentSize, circle.colorSet, i);
   }
 }
 
 
-function createCylinder(game, previousEntity, baseEntityPosition, baseEntityModel, segmentSize, colorSet,i) {
+function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEntityModel, segmentSize, colorSet, i) {
   var newEntity = game.entities.create();
 
   var model = game.entities.addComponent(newEntity, "model");
@@ -58,6 +59,11 @@ function createCylinder(game, previousEntity, baseEntityPosition, baseEntityMode
 
   model.castShadow = true;
   model.receiveShadow = true;
+
+  var childOf = game.entities.addComponent(newEntity, "childOf");
+  childOf.parent = parent;
+  childOf.nth = i;
+  console.log(childOf);
 
   var previousEntityPosition = game.entities.getComponent(previousEntity, "position");
   var newEntityPosition = game.entities.addComponent(newEntity, "position");

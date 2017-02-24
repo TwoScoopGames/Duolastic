@@ -191,7 +191,7 @@ function checkScore(game, entity) {
 
   if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
-
+    removeLowestSegment(game, constants.player2, 1);
     playScoreSound(game, youArePlayer1);
     score.player1++;
     updateScoreText(game, constants.player1ScoreText, score.player1);
@@ -199,7 +199,7 @@ function checkScore(game, entity) {
   }
   if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
-
+    removeLowestSegment(game, constants.player1, 2);
     playScoreSound(game, !youArePlayer1);
     score.player2++;
     updateScoreText(game, constants.player2ScoreText, score.player2);
@@ -220,4 +220,47 @@ function playScoreSound(game, isGood) {
   } else {
     game.sounds.play("fail.mp3");
   }
+}
+
+function getAllChildrenOf(game, parent) {
+  var ids = game.entities.find("childOf");
+  var children = [];
+  for (var i = 0; i < ids.length; i++) {
+    var childOf = game.entities.getComponent(ids[i], "childOf");
+    if (childOf.parent !== parent) {
+      continue;
+    }
+    children.push(ids[i]);
+  }
+  return children;
+}
+
+function removeLowestSegment(game, parent, playerNumber) {
+  var segments = getAllChildrenOf(game, parent);
+  if (segments.length > 1) {
+    var lowestSegment = segments[0];
+    segments.shift();
+    removeSegment(game, lowestSegment, playerNumber);
+    lowerSegments(game, segments, parent);
+  }
+}
+
+function removeSegment(game, segment, playerNumber) {
+  game.entities.removeComponent(segment, "follow");
+  game.entities.removeComponent(segment, "childOf");
+  var velocity = game.entities.addComponent(segment, "velocity");
+  if (playerNumber === 1) {
+    velocity.y = -3;
+  } else {
+    velocity.y = 3;
+  }
+}
+
+function lowerSegments(game, segments, parent) {
+  var follow = game.entities.getComponent(segments[0], "follow");
+  follow.id = parent;
+  segments.forEach(function(segment) {
+    var position = game.entities.getComponent(segment, "position");
+    position.z -= 15;
+  });
 }
