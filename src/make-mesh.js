@@ -55,6 +55,9 @@ function makeBox(options) {
       material.reflectivity = getOption(options.material.reflectivity, 1);
       //material.specular = 0x050505;
       material.shininess = 10000;
+    } else if (options.material.type === "transparent") {
+      material.transparent = getOption(options.material.transparent, true);
+      material.opacity = getOption(options.material.opacity, 1);
     }
   }
   var mesh = new THREE.Mesh(geometry, material);
