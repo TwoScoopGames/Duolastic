@@ -6,10 +6,6 @@
 	- option [rematch] is displayed.
 	- wait for players to both select rematch - new match starts
 
-2. Gamepad support
-  - Tested working: PS4 (mac) and XBox 360 (mac/linux)
-  - Issue with player 2
-
 3. `Funnel mode` MVP
   - press button to toggle modes (cone/funnel)
   - directional controls do not allow player to move
