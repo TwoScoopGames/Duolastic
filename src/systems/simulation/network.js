@@ -150,7 +150,7 @@ function sendClient(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, constants.player2, ["movement2d"])
+      serialize(game, constants.player2, ["movement2d", "movement2dAnalog"])
     ]
   };
   peer.send(JSON.stringify(message));
