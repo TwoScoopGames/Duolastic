@@ -260,14 +260,39 @@
 
 
 
-
+    {
+      "id": 8200,
+      "name": "connection state",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 320
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0,
+        "z": 0,
+        "w": 0.7071067811865476
+      },
+      "model": {
+        "name": "text",
+        "options": {
+          "text": "/",
+          "fillStyle": "white",
+          "textWidth": 512,
+          "textHeight": 64,
+          "width": 512,
+          "height": 64
+        }
+      }
+    },
     {
       "id": 80,
       "name": "p1 score",
       "position": {
-        "x": -400,
+        "x": -30,
         "y": 0,
-        "z": 10
+        "z": 320
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -279,7 +304,7 @@
         "name": "text",
         "options": {
           "text": "0",
-          "fillStyle": "white",
+          "fillStyle": "rgb(198,55,47)",
           "textWidth": 64,
           "textHeight": 64,
           "width": 64,
@@ -291,9 +316,9 @@
       "id": 81,
       "name": "p2 score",
       "position": {
-        "x": 400,
+        "x": 30,
         "y": 0,
-        "z": 10
+        "z": 320
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -305,7 +330,7 @@
         "name": "text",
         "options": {
           "text": "0",
-          "fillStyle": "white",
+          "fillStyle": "rgb(81,158,198)",
           "textWidth": 64,
           "textHeight": 64,
           "width": 64,
@@ -319,7 +344,7 @@
       "position": {
         "x": 0,
         "y": 0,
-        "z": 250
+        "z": 370
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -387,37 +412,6 @@
     {
       "id": 2000,
       "name": "player 1 goal",
-
-      "position": {
-        "x": 0,
-        "y": -640,
-        "z": 0
-      },
-      "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0.7071067811865476,
-        "z": 0,
-        "w": 0
-      },
-      "model": {
-        "name": "cylinder",
-        "options": {
-          "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 640,
-          "color": "rgba(81,158,198, 0.5)"
-        }
-      },
-      "size": {
-        "x": 0,
-        "y": 0
-      }
-    },
-
-    {
-      "id": 2001,
-      "name": "player 1 goal",
-
       "position": {
         "x": 0,
         "y": 640,
@@ -435,7 +429,36 @@
           "radiusTop": 50,
           "radiusBottom": 50,
           "height": 640,
-          "color": "rgba(198,55,47, 0.5)"
+          "color": "rgb(81,158,198)"
+        }
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      }
+    },
+
+    {
+      "id": 2001,
+      "name": "player 1 goal",
+      "position": {
+        "x": 0,
+        "y": -640,
+        "z": 0
+      },
+      "quaternion": {
+        "x": 0.7071067811865475,
+        "y": 0.7071067811865476,
+        "z": 0,
+        "w": 0
+      },
+      "model": {
+        "name": "cylinder",
+        "options": {
+          "radiusTop": 50,
+          "radiusBottom": 50,
+          "height": 640,
+          "color": "rgb(198,55,47)"
         }
       },
       "size": {
