@@ -54,7 +54,8 @@ function handleServer(game, network, elapsed) {
   var playerController = game.entities.addComponent(constants.player1, "playerController2d");
   playerController.left = "right";
   playerController.right = "left";
-  game.entities.addComponent(constants.player1, "playerController2dAnalog");
+  var playerControllerAnalog = game.entities.addComponent(constants.player1, "playerController2dAnalog");
+  playerControllerAnalog.xScale = -1;
 
   moveCamera(game, 900, Math.PI / 8, constants.player1);
 
@@ -129,7 +130,8 @@ function handleClient(game, network, elapsed) {
   var playerController = game.entities.addComponent(constants.player2, "playerController2d");
   playerController.up = "down";
   playerController.down = "up";
-  game.entities.addComponent(constants.player2, "playerController2dAnalog");
+  var playerControllerAnalog = game.entities.addComponent(constants.player2, "playerController2dAnalog");
+  playerControllerAnalog.yScale = -1;
 
   moveCamera(game, 900, 7 * Math.PI / 8, constants.player2);
 
