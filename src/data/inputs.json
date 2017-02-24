@@ -53,6 +53,28 @@
         "device": "keyboard",
         "button": "right"
       }
+    ],
+    "action": [
+      {
+        "device": "keyboard",
+        "button": "space"
+      },
+      {
+        "device": "gamepad",
+        "button": "a"
+      },
+      {
+        "device": "gamepad",
+        "button": "b"
+      },
+      {
+        "device": "gamepad",
+        "button": "x"
+      },
+      {
+        "device": "gamepad",
+        "button": "y"
+      }
     ]
   }
 }
