@@ -63,7 +63,6 @@ function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEn
   var childOf = game.entities.addComponent(newEntity, "childOf");
   childOf.parent = parent;
   childOf.nth = i;
-  console.log(childOf);
 
   var previousEntityPosition = game.entities.getComponent(previousEntity, "position");
   var newEntityPosition = game.entities.addComponent(newEntity, "position");

@@ -73,6 +73,12 @@
    "scenes": []
   },
   {
+   "name": "./systems/simulation/wall-hit",
+   "scenes": [
+     "main"
+   ]
+  },
+  {
    "name": "./systems/simulation/circle-collision",
    "scenes": [
      "main"

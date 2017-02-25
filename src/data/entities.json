@@ -471,10 +471,10 @@
 
     {
       "id": 3001,
-      "name": "side wall 1",
+      "name": "side wall left",
 
       "position": {
-        "x": -375,
+        "x": -3750,
         "y": 0,
         "z": 0
       },
@@ -501,15 +501,25 @@
       "size": {
         "x": 0,
         "y": 0
+      },
+
+      "timers": {
+        "showWall": {
+          "running": false,
+          "time": 0,
+          "max": 100,
+          "script": "./scripts/show-wall"
+        }
       }
+
     },
 
     {
       "id": 4001,
-      "name": "side wall 2",
+      "name": "side wall right",
 
       "position": {
-        "x": 375,
+        "x": 3750,
         "y": 0,
         "z": 0
       },
@@ -536,7 +546,17 @@
       "size": {
         "x": 0,
         "y": 0
+      },
+
+      "timers": {
+        "showWall": {
+          "running": false,
+          "time": 0,
+          "max": 100,
+          "script": "./scripts/show-wall"
+        }
       }
+
     }
 
 
