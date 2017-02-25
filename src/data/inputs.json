@@ -11,6 +11,18 @@
         "device": "gamepad",
         "axis": "left stick y"
       }
+    ],
+    "right stick x": [
+      {
+        "device": "gamepad",
+        "axis": "right stick x"
+      }
+    ],
+    "right stick y": [
+      {
+        "device": "gamepad",
+        "axis": "right stick y"
+      }
     ]
   },
   "buttons": {
