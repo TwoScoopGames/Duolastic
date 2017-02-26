@@ -36,20 +36,38 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     network.state = getNetworkState(network);
 
     if (oldState !== network.state) {
-      console.log(oldState, network.state);
+      if (network.state === "connected") {
+        network.role = getNetworkRole();
+      }
       var eventName = "on" + capitalizeFirstLetter(network.state);
       fireEvent(game, entity, network[eventName]);
     }
 
     if (network.state === "connected") {
-      if (peer.initiator) {
-        handleServer(game, network, elapsed);
-      } else {
-        handleClient(game, network, elapsed);
+      network.time += elapsed;
+      importComponents(game, network);
+      if (network.time - network.lastPacketTime > network.packetRate) {
+        network.lastPacketTime = network.time;
+        if (peer.initiator) {
+          sendWorld(game, network.time);
+        } else {
+          sendClient(game, network.time);
+        }
       }
     }
   }, "network");
 };
+
+function getNetworkRole() {
+  if (!peer) {
+    return "server";
+  }
+  if (peer.initiator) {
+    return "server";
+  } else {
+    return "client";
+  }
+}
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -74,59 +92,6 @@ function fireEvent(game, entity, script) {
   handler(entity, game);
 }
 
-function handleServer(game, network, elapsed) {
-  // FIXME: this belongs in user code
-  var playerController = game.entities.addComponent(constants.player1, "playerController2d");
-  playerController.left = "right";
-  playerController.right = "left";
-  var playerControllerAnalog = game.entities.addComponent(constants.player1, "playerController2dAnalog");
-  playerControllerAnalog.xScale = -1;
-
-  moveCamera(game, 900, Math.PI / 8, constants.player1);
-
-  network.role = "server";
-  network.time += elapsed;
-
-  importComponents(game, network);
-
-  if (network.time - network.lastPacketTime > network.packetRate) {
-    network.lastPacketTime = network.time;
-    sendWorld(game, network.time);
-  }
-}
-
-// FIME: this should go somewhere else
-var THREE = require("three");
-var math2d = require("splat-ecs/lib/math2d");
-function moveCamera(game, distance, angle, follow) {
-  var followPosition = game.entities.getComponent(follow, "position");
-
-  var courtPosition = game.entities.getComponent(constants.court, "position");
-  var courtModel = game.entities.getComponent(constants.court, "model");
-
-
-  var followAngle = Math.atan2(followPosition.y - courtPosition.y, followPosition.x - courtPosition.x);
-  var dist = Math.sqrt(math2d.distanceSquared(followPosition.x, followPosition.y, courtPosition.x, courtPosition.y)) * 0.1;
-
-  var followX = courtPosition.x + (dist * Math.cos(followAngle));
-  var followY = courtPosition.y + (dist * Math.sin(followAngle));
-  var followZ = courtPosition.z + (courtModel.options.depth / 2);
-
-  var position = game.entities.getComponent(constants.camera, "position");
-  position.x = courtPosition.x;
-  position.y = courtPosition.y + (distance * Math.cos(angle));
-  position.z = courtPosition.z + (distance * Math.sin(angle)) + (courtModel.options.depth / 2);
-
-  var quaternion = game.entities.getComponent(constants.camera, "quaternion");
-  var model = game.entities.getComponent(constants.camera, "model");
-  model.mesh.lookAt(new THREE.Vector3(followX, followY, followZ));
-  model.mesh.up.set(0, 0, 1);
-  quaternion.x = model.mesh.quaternion.x;
-  quaternion.y = model.mesh.quaternion.y;
-  quaternion.z = model.mesh.quaternion.z;
-  quaternion.w = model.mesh.quaternion.w;
-}
-
 function sendWorld(game, time) {
   var message = {
     time: time,
@@ -138,27 +103,6 @@ function sendWorld(game, time) {
     ]
   };
   peer.send(JSON.stringify(message));
-}
-
-function handleClient(game, network, elapsed) {
-  // FIXME: this belongs in user code
-  var playerController = game.entities.addComponent(constants.player2, "playerController2d");
-  playerController.up = "down";
-  playerController.down = "up";
-  var playerControllerAnalog = game.entities.addComponent(constants.player2, "playerController2dAnalog");
-  playerControllerAnalog.yScale = -1;
-
-  moveCamera(game, 900, 7 * Math.PI / 8, constants.player2);
-
-  network.role = "client";
-  network.time += elapsed;
-
-  importComponents(game, network);
-
-  if (network.time - network.lastPacketTime > network.packetRate) {
-    network.lastPacketTime = network.time;
-    sendClient(game, network.time);
-  }
 }
 
 function sendClient(game, time) {
