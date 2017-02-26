@@ -32,22 +32,47 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   });
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var network = game.entities.getComponent(entity, "network");
-    if (!peer) {
-      if (network.state === "connected") {
-        network.state = "disconnected";
-      }
-      updateNetworkStateText(game, network);
-      return;
-    }
-    network.state = "connected";
+    var oldState = network.state;
+    network.state = getNetworkState(network);
 
-    if (peer.initiator) {
-      handleServer(game, network, elapsed);
-    } else {
-      handleClient(game, network, elapsed);
+    if (oldState !== network.state) {
+      console.log(oldState, network.state);
+      var eventName = "on" + capitalizeFirstLetter(network.state);
+      fireEvent(game, entity, network[eventName]);
+    }
+
+    if (network.state === "connected") {
+      if (peer.initiator) {
+        handleServer(game, network, elapsed);
+      } else {
+        handleClient(game, network, elapsed);
+      }
     }
   }, "network");
 };
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getNetworkState(network) {
+  if (peer) {
+    return "connected";
+  }
+  if (network.state !== "connecting") {
+    return "disconnected";
+  }
+  return "connecting";
+}
+
+function fireEvent(game, entity, script) {
+  console.log("fire", script, entity);
+  if (!script) {
+    return;
+  }
+  var handler = game.require(script);
+  handler(entity, game);
+}
 
 function handleServer(game, network, elapsed) {
   // FIXME: this belongs in user code
@@ -59,8 +84,6 @@ function handleServer(game, network, elapsed) {
 
   moveCamera(game, 900, Math.PI / 8, constants.player1);
 
-  updateNetworkStateText(game, network);
-
   network.role = "server";
   network.time += elapsed;
 
@@ -69,14 +92,6 @@ function handleServer(game, network, elapsed) {
   if (network.time - network.lastPacketTime > network.packetRate) {
     network.lastPacketTime = network.time;
     sendWorld(game, network.time);
-  }
-}
-
-function updateNetworkStateText(game, network) {
-  var networkStateModel = game.entities.getComponent(constants.networkStateText, "model");
-  if (networkStateModel.options.text != network.state) {
-    networkStateModel.needsUpdate = true;
-    networkStateModel.options.text = network.state;
   }
 }
 
@@ -134,8 +149,6 @@ function handleClient(game, network, elapsed) {
   playerControllerAnalog.yScale = -1;
 
   moveCamera(game, 900, 7 * Math.PI / 8, constants.player2);
-
-  updateNetworkStateText(game, network);
 
   network.role = "client";
   network.time += elapsed;

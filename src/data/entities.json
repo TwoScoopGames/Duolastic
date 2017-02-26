@@ -27,6 +27,9 @@
       "name": "network",
       "network": {
         "lastPacketTime": 0,
+        "onConnected": "./scripts/update-network-state-text",
+        "onConnecting": "./scripts/update-network-state-text",
+        "onDisconnected": "./scripts/update-network-state-text",
         "time": 0
       }
     },

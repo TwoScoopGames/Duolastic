@@ -16,5 +16,8 @@ module.exports = {
     network.role = "server";
     network.state = "connecting";
     network.time = 0;
+    delete network.onConnected;
+    delete network.onConnecting;
+    delete network.onDisconnected;
   }
 };
