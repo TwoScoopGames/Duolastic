@@ -4,13 +4,6 @@ var reset = require("../../reset");
 var vec2 = require("../../vec2");
 var random = require("splat-ecs/lib/random");
 
-// var drums = [
-//   "drum-01.mp3",
-//   "drum-02.mp3",
-//   "drum-03.mp3",
-//   "drum-04.mp3",
-//   "drum-05.mp3"
-// ];
 var bounces = [
   "bounce-1.mp3",
   "bounce-2.mp3",
@@ -24,8 +17,6 @@ var hits = [
   "hit-4.mp3",
   "hit-5.mp3"
 ];
-
-
 
 module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   ecs.add(function(entities, elapsed) { // eslint-disable-line no-unused-vars
@@ -191,7 +182,7 @@ function checkScore(game, entity) {
 
   if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
-    removeLowestSegment(game, constants.player2, 1);
+    lowerPlayer(game, constants.player2, 1);
     playScoreSound(game, youArePlayer1);
     score.player1++;
     updateScoreText(game, constants.player1ScoreText, score.player1);
@@ -199,7 +190,7 @@ function checkScore(game, entity) {
   }
   if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
-    removeLowestSegment(game, constants.player1, 2);
+    lowerPlayer(game, constants.player1, 2);
     playScoreSound(game, !youArePlayer1);
     score.player2++;
     updateScoreText(game, constants.player2ScoreText, score.player2);
@@ -235,32 +226,81 @@ function getAllChildrenOf(game, parent) {
   return children;
 }
 
-function removeLowestSegment(game, parent, playerNumber) {
+function lowerPlayer(game, parent, playerWhoScored) {
+  /*
+  -
+  --
+  ---
+  ----   <--- make this one the player (newPlayerId)
+  ------  <--- sunken under court, shrinks to size of current circle on the coaurt top
+  */
   var segments = getAllChildrenOf(game, parent);
-  if (segments.length > 1) {
-    var lowestSegment = segments[0];
-    segments.shift();
-    removeSegment(game, lowestSegment, playerNumber);
-    lowerSegments(game, segments, parent);
-  }
-}
 
-function removeSegment(game, segment, playerNumber) {
-  game.entities.removeComponent(segment, "follow");
-  game.entities.removeComponent(segment, "childOf");
-  var velocity = game.entities.addComponent(segment, "velocity");
-  if (playerNumber === 1) {
-    velocity.y = -3;
+  var playerId;
+  if (playerWhoScored === 1) {
+    playerId = constants.player2;
   } else {
-    velocity.y = 3;
+    playerId = constants.player1;
   }
-}
 
-function lowerSegments(game, segments, parent) {
-  var follow = game.entities.getComponent(segments[0], "follow");
-  follow.id = parent;
+  var oldPlayerPos = game.entities.getComponent(playerId, "position");
+  oldPlayerPos.z -= 15;
+  var circle = game.entities.getComponent(playerId, "circle");
+  circle.radius -= 7.142857142857143; // 😲
+
+
   segments.forEach(function(segment) {
     var position = game.entities.getComponent(segment, "position");
     position.z -= 15;
   });
+
 }
+
+
+
+
+// function reassignPlayerCircle(game, entity, playerId) {
+//   console.log("playerNumber", playerId);
+//
+//   // cloneComponent(game, "velocity", playerId, entity);
+//   // cloneComponent(game, "position", playerId, entity);
+//   cloneComponent(game, "circle", playerId, entity);
+//   cloneComponent(game, "movement2d", playerId, entity);
+//   cloneComponent(game, "movement2dAnalog", playerId, entity);
+//   cloneComponent(game, "friction", playerId, entity);
+//   //game.entities.removeComponent(playerId, "circle");
+//   game.entities.removeComponent(playerId, "movement2d");
+//   game.entities.removeComponent(playerId, "movement2dAnalog");
+//   game.entities.removeComponent(playerId, "friction");
+// }
+
+
+
+
+//
+// function removeSegment(game, segment, playerNumber) {
+//   game.entities.removeComponent(segment, "follow");
+//   game.entities.removeComponent(segment, "childOf");
+//   game.entities.removeComponent(segment, "circle");
+//   game.entities.removeComponent(segment, "movement2d");
+//   game.entities.removeComponent(segment, "movement2dAnalog");
+//   game.entities.removeComponent(segment, "friction");
+//
+//   var velocity = game.entities.addComponent(segment, "velocity");
+//   if (playerNumber === 1) {
+//     velocity.y = -3;
+//   } else {
+//     velocity.y = 3;
+//   }
+// }
+
+// function cloneComponent(game, component, sourceID, destinationID) {
+//   console.log("cloning component", component);
+//
+//   var newComponent = game.entities.addComponent(destinationID, component);
+//   var oldComponent = game.entities.getComponent(sourceID, component);
+//   Object.keys(oldComponent).forEach(function(key) {
+//     console.log("key", key, "newComponent[key]",newComponent[key], "=", "oldComponent[key]", oldComponent[key]);
+//     newComponent[key] = oldComponent[key];
+//   });
+// }

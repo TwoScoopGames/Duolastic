@@ -409,26 +409,21 @@
 
 
 
+
     {
-      "id": 2000,
+      "id": 200,
       "name": "player 1 goal",
       "position": {
         "x": 0,
-        "y": 640,
-        "z": 0
-      },
-      "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0.7071067811865476,
-        "z": 0,
-        "w": 0
+        "y": -600,
+        "z": -375
       },
       "model": {
-        "name": "cylinder",
+        "name": "box",
         "options": {
-          "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 640,
+          "height": 200,
+          "width": 750,
+          "depth": 750,
           "color": "rgb(81,158,198)"
         }
       },
@@ -437,27 +432,20 @@
         "y": 0
       }
     },
-
     {
       "id": 2001,
-      "name": "player 1 goal",
+      "name": "player 2 goal",
       "position": {
         "x": 0,
-        "y": -640,
-        "z": 0
-      },
-      "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0.7071067811865476,
-        "z": 0,
-        "w": 0
+        "y": 600,
+        "z": -375
       },
       "model": {
-        "name": "cylinder",
+        "name": "box",
         "options": {
-          "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 640,
+          "height": 200,
+          "width": 750,
+          "depth": 750,
           "color": "rgb(198,55,47)"
         }
       },
