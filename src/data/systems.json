@@ -73,10 +73,6 @@
    "scenes": "all"
   },
   {
-   "name": "./systems/simulation/tween-tops",
-   "scenes": []
-  },
-  {
    "name": "./systems/simulation/wall-hit",
    "scenes": [
      "main"
