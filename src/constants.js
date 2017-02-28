@@ -1,7 +1,7 @@
 var courtHeight = 1000;
 var courtWidthRatio = 0.75;
 var puckDiameterRatio = 0.05;
-var paddleDiameterRatio = 0.2;
+var paddleDiameterRatio = 0.17;
 
 module.exports = {
   camera: 0,

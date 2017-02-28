@@ -40,7 +40,7 @@
       "position": {
         "x": 100,
         "y": 100,
-        "z": 15
+        "z": -7
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -51,28 +51,24 @@
       "model": {
         "name": "cylinder",
         "options": {
-          "radiusTop": 50,
-          "radiusBottom": 150,
           "height": 15,
-          "color": "rgb(89,49,75)"
+          "color": "rgb(150,150,150)"
         }
       },
       "circle": {
         "colorSet": [
-          "rgb(142,40,62)",
-          "rgb(170,48,55)",
-          "rgb(198,55,47)",
-          "rgb(241,81,57)",
-          "rgb(255,156,31)",
-          "rgb(255,207,92)",
-          "rgb(249,229,114)",
-          "rgb(228,240,128)",
-          "rgb(147,213,186)",
-          "rgb(116,201,204)",
-          "rgb(85,188,221)",
-          "rgb(81,158,198)",
-          "rgb(76,128,175)",
-          "rgb(62,88,137)"
+          "0xff1e7e",
+            "0xfb3c7d",
+        "0xff0b3c",
+            "0xfc2a2d",
+        "0xf82400",
+            "0xf56027",
+        "0xfa7200",
+            "0xfac629",
+        "0xf9f000",
+            "0xc9fd3b",
+        "0x83ff2a",
+            "0x85fc5e"
         ],
         "mass": 20,
         "radius": 200
@@ -111,7 +107,7 @@
       "position": {
         "x": 400,
         "y": 100,
-        "z": 15
+        "z": -7
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -122,10 +118,8 @@
       "model": {
         "name": "cylinder",
         "options": {
-          "radiusTop": 50,
-          "radiusBottom": 150,
           "height": 15,
-          "color": "rgb(62,88,137)"
+          "color": "rgb(150,150,150)"
         }
       },
       "size": {
@@ -134,20 +128,18 @@
       },
       "circle": {
         "colorSet": [
-          "rgb(76,128,175)",
-          "rgb(81,158,198)",
-          "rgb(85,188,221)",
-          "rgb(116,201,204)",
-          "rgb(147,213,186)",
-          "rgb(228,240,128)",
-          "rgb(249,229,114)",
-          "rgb(255,207,92)",
-          "rgb(255,156,31)",
-          "rgb(241,81,57)",
-          "rgb(198,55,47)",
-          "rgb(142,40,62)",
-          "rgb(170,48,55)",
-          "rgb(89,49,75)"
+          "0x9400c7",
+            "0x8822dc",
+          "0x3c00ed",
+            "0x303cfc",
+          "0x003cff",
+            "0x2a7afa",
+          "0x05beff",
+            "0x2bdcfc",
+          "0x00f5c5",
+            "0x24f0b0",
+          "0x00e386",
+            "0x26e494"
         ],
         "mass": 20,
         "radius": 200
@@ -196,9 +188,9 @@
           "radius": 25,
           "widthSegments": 64,
           "heightSegments": 64,
-          "color": "0xcccccc",
+          "color": "rgb(100,100,100)",
           "material": {
-            "reflectivity": 0.35
+            "reflectivity": 0
             }
         }
       },
@@ -428,60 +420,107 @@
       "name": "player 1 goal",
       "position": {
         "x": 0,
-        "y": 640,
-        "z": 0
+        "y": 505,
+        "z": -375
       },
       "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0.7071067811865476,
+        "x": 0,
+        "y": 0,
         "z": 0,
         "w": 0
       },
       "model": {
-        "name": "cylinder",
+        "name": "box",
         "options": {
-          "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 640,
-          "color": "rgb(81,158,198)"
+          "height": 10,
+          "width": 750,
+          "depth": 750,
+          "color": "0xffffff"
         }
       },
       "size": {
         "x": 0,
         "y": 0
+      },
+      "timers": {
+        "flashGoal": {
+          "running": false,
+          "time": 0,
+          "max": 200,
+          "script": "./scripts/flash-goal"
+        }
       }
     },
 
     {
       "id": 2001,
-      "name": "player 1 goal",
+      "name": "player 2 goal",
       "position": {
         "x": 0,
-        "y": -640,
-        "z": 0
+        "y": -505,
+        "z": -375
       },
       "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0.7071067811865476,
+        "x": 0,
+        "y": 0,
         "z": 0,
         "w": 0
       },
       "model": {
-        "name": "cylinder",
+        "name": "box",
         "options": {
-          "radiusTop": 50,
-          "radiusBottom": 50,
-          "height": 640,
-          "color": "rgb(198,55,47)"
+          "height": 10,
+          "width": 750,
+          "depth": 750,
+          "color": "0xffffff"
+        }
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "timers": {
+        "flashGoal": {
+          "running": false,
+          "time": 0,
+          "max": 200,
+          "script": "./scripts/flash-goal"
+        }
+      }
+    },
+
+    {
+      "id": 9000,
+      "name": "center devider",
+
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "quaternion": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 0
+      },
+      "model": {
+        "name": "box",
+        "options": {
+          "width": 750,
+          "height": 5,
+          "depth": 5,
+          "color": "0xCA0FA3"
         }
       },
       "size": {
         "x": 0,
         "y": 0
       }
+
+
+
     },
-
-
 
     {
       "id": 3001,

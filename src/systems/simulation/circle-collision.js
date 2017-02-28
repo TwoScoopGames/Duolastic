@@ -176,6 +176,29 @@ function keepInSides(game, entity, elasticity) {
   }
 }
 
+
+function flashGoals(game, player) {
+  var goal1 = 2000;
+  var goal2 = 2001;
+
+  if (player === 1) {
+    flashGoal(game, goal1, "0x0000ff");
+    flashGoal(game, goal2, "0xff0000");
+  } else {
+    flashGoal(game, goal1, "0xff0000");
+    flashGoal(game, goal2, "0x0000ff");
+  }
+}
+
+function flashGoal(game, goal, color) {
+  var timer = game.entities.getComponent(goal, "timers").flashGoal;
+  var model = game.entities.getComponent(goal, "model");
+  timer.running = true;
+  console.log(model);
+  model.options.color = color;
+}
+
+
 function checkScore(game, entity) {
   var courtPos = game.entities.getComponent(constants.court, "position");
   var courtSize = game.entities.getComponent(constants.court, "size");
@@ -191,6 +214,7 @@ function checkScore(game, entity) {
 
   if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
+    flashGoals(game, 1);
     if (constants.removeSegments) {
       removeLowestSegment(game, constants.player2, 1);
     }
@@ -205,6 +229,7 @@ function checkScore(game, entity) {
   }
   if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
+    flashGoals(game, 2);
     if (constants.removeSegments) {
       removeLowestSegment(game, constants.player1, 2);
     }
