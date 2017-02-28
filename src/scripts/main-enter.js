@@ -1,3 +1,5 @@
+var tinycolor = require("tinycolor2");
+
 var reset = require("../reset");
 var constants = require("../constants");
 var random = require("splat-ecs/lib/random");
@@ -81,7 +83,16 @@ function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEn
 
   model.options.height = baseEntityModel.options.height;
   model.options.radiusSegments = baseEntityModel.options.radiusSegments;
-  model.options.color = colorSet[i];
+  var newColor = colorSet[i];
+  if (isOdd(i)) {
+    console.log("change color", newColor);
+    // var color = tinycolor(newColor)
+    var newnewcolor = "#" + newColor.replace("0x","");
+    newColor =  tinycolor(newnewcolor).darken(9).toString();
+    console.log(newColor);
+  }
+  model.options.color = newColor;
+
 
   model.castShadow = true;
   model.receiveShadow = true;
@@ -143,3 +154,8 @@ function createStar(game, position) {
 //   game.entities.addComponent(newEntity, "size");
 //   return newEntity;
 // }
+
+
+function isOdd(num) { return num % 2; }
+
+

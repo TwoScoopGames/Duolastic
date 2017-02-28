@@ -35,6 +35,7 @@
   "dependencies": {
     "simple-peer": "^6.2.1",
     "splat-ecs": "^7.6.0",
-    "three": "^0.84.0"
+    "three": "^0.84.0",
+    "tinycolor2": "^1.4.1"
   }
 }
