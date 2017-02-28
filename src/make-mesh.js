@@ -15,8 +15,34 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
     return makeDirectionalLight(options);
   case "text":
     return makeText(options);
+  case "sprite":
+    return makeSprite(options);
   }
 };
+
+
+function makeSprite(options) {
+  // var crateMaterial = new THREE.SpriteMaterial({
+  //   map: crateTexture,
+  //   useScreenCoordinates: false,
+  //   color: 0xff0000 });
+  // var sprite2 = new THREE.Sprite( crateMaterial );
+  // sprite2.position.set( -100, 50, 0 );
+
+  // scene.add( sprite2 );
+  console.log(options.name);
+  console.log(options.texture);
+  var spriteMap = new THREE.TextureLoader().setPath("./").load(options.texture);
+  var spriteMaterial = new THREE.SpriteMaterial({
+    //color: options.color,
+    useScreenCoordinates: false,
+    map: spriteMap
+  });
+  var sprite = new THREE.Sprite(spriteMaterial);
+  sprite.scale.set(64, 64, 1.0); // imageWidth, imageHeight
+  console.log(sprite);
+  return sprite;
+}
 
 function makeBox(options) {
 
@@ -98,8 +124,8 @@ function makeSphere(options) {
 
   var geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
   var material = new THREE.MeshPhongMaterial({ color: color });
-  options.material.reflectivity = getOption(options.material.reflectivity, 1);
-  options.material.shininess = 10000;
+  //options.material.reflectivity = getOption(options.material.reflectivity, 1);
+  //options.material.shininess = 10000;
   var mesh = new THREE.Mesh(geometry, material);
   mesh.castShadow = true;
   return mesh;
@@ -152,10 +178,18 @@ function measureTextInDiv(text, font) {
   };
 }
 
+function canvasFont(options) {
+  var font = [];
+  Object.keys(options).forEach(function(key) {
+    font.push(options[key]);
+  });
+  return font.join(" ");
+}
+
 function makeText(options) {
   var text = getOption(options.text, "Hello, world!");
   var fillStyle = getOption(options.fillStyle, "rgba(255, 0, 0, 0.95)");
-  var font = getOption(options.font, "40px sans-serif");
+  var font = getOption(canvasFont(options.font), "40px sans serif");
   var textWidth = getOption(options.textWidth, 256);
   var textHeight = getOption(options.textHeight, 256);
   var width = getOption(options.width, textWidth);
@@ -179,6 +213,7 @@ function makeText(options) {
 
   var material = new THREE.MeshBasicMaterial({ map: texture1, side: THREE.DoubleSide });
   material.transparent = true;
+  material.side = THREE.FrontSide;
 
   var geometry = new THREE.PlaneGeometry(width, height);
 

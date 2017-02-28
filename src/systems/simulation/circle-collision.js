@@ -191,25 +191,37 @@ function checkScore(game, entity) {
 
   if (position.y < courtTop - circle.radius) {
     console.log("player 1 scored");
-    removeLowestSegment(game, constants.player2, 1);
+    if (constants.removeSegments) {
+      removeLowestSegment(game, constants.player2, 1);
+    }
     playScoreSound(game, youArePlayer1);
     score.player1++;
-    updateScoreText(game, constants.player1ScoreText, score.player1);
+    if (youArePlayer1) {
+      updateScoreText(game, constants.player1ScoreText, score.player1, "you ");
+    } else {
+      updateScoreText(game, constants.player1ScoreText, score.player1, "opponent ");
+    }
     reset(game);
   }
   if (position.y > courtBottom + circle.radius) {
     console.log("player 2 scored");
-    removeLowestSegment(game, constants.player1, 2);
+    if (constants.removeSegments) {
+      removeLowestSegment(game, constants.player1, 2);
+    }
     playScoreSound(game, !youArePlayer1);
     score.player2++;
-    updateScoreText(game, constants.player2ScoreText, score.player2);
+    if (youArePlayer1) {
+      updateScoreText(game, constants.player2ScoreText, score.player2, "opponent ");
+    } else {
+      updateScoreText(game, constants.player2ScoreText, score.player2, "you ");
+    }
     reset(game);
   }
 }
 
-function updateScoreText(game, entity, score) {
+function updateScoreText(game, entity, score, text) {
   var model = game.entities.getComponent(entity, "model");
-  model.options.text = score;
+  model.options.text = text + score;
   model.needsUpdate = true;
 }
 

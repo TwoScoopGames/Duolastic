@@ -1,5 +1,6 @@
 var reset = require("../reset");
 var constants = require("../constants");
+var random = require("splat-ecs/lib/random");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
   game.sounds.play("game-start.mp3");
@@ -20,7 +21,32 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 
   createStack(game, constants.player1);
   createStack(game, constants.player2);
+
+
+  for (var i = 0; i < 1000; i++) {
+    var cutOut = 250;
+    var asize = 5000;
+    var position = {};
+    position.x = positionNotInRange(asize, cutOut);
+    position.y = positionNotInRange(asize, cutOut);
+    position.z = positionNotInRange(asize, cutOut);
+    createStar(game, position);
+  }
+
 };
+
+
+
+
+function positionNotInRange(size, cutOut) {
+  var x = random.inRange(-size, size);
+  if (x > cutOut || x < -cutOut) {
+    return x;
+  } else {
+    positionNotInRange(size, cutOut);
+  }
+}
+
 
 function setRadius(game, entity, radius) {
   var model = game.entities.getComponent(entity, "model");
@@ -83,3 +109,37 @@ function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEn
   follow.distance = segmentSize;
   return newEntity;
 }
+
+
+function createStar(game, position) {
+  var newEntity = game.entities.create();
+  var model = game.entities.addComponent(newEntity, "model");
+  model.name = "sprite";
+  model.options = {};
+
+  model.options.color = "0xffffff";
+  // model.options.height = 50;
+  // model.options.width = 50;
+  // model.options.depth = 50;
+  model.options.texture = "images/star.png";
+  var newPosition = game.entities.addComponent(newEntity, "position");
+  newPosition.x = position.x;
+  newPosition.y = position.y;
+  newPosition.z = position.z;
+  game.entities.addComponent(newEntity, "size");
+  return newEntity;
+}
+// function createStar(game, position) {
+//   var newEntity = game.entities.create();
+//   var model = game.entities.addComponent(newEntity, "model");
+//   model.name = "sprite";
+//   model.options = {};
+//   //model.options.color = "0xffffff";
+//   model.options.texture = "images/star.png";
+//   var newPosition = game.entities.addComponent(newEntity, "position");
+//   newPosition.x = position.x;
+//   newPosition.y = position.y;
+//   newPosition.z = position.z;
+//   game.entities.addComponent(newEntity, "size");
+//   return newEntity;
+// }
