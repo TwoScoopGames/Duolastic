@@ -278,8 +278,8 @@
       "id": 80,
       "name": "p1 score",
       "position": {
-        "x": 450,
-        "y": -100,
+        "x": 350,
+        "y": 0,
         "z": 450
       },
       "quaternion": {
@@ -289,7 +289,7 @@
         "w": 0.7071067811865476
       },
       "model": {
-        "name": "text",
+        "name": "spriteText",
         "options": {
           "text": "0",
           "fillStyle": "white",
@@ -301,7 +301,7 @@
             "fontStyle": "normal",
             "fontVariant": "small-caps",
             "fontWeight": "200",
-            "fontSize": "60px",
+            "fontSize": "45px",
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }
@@ -311,8 +311,8 @@
       "id": 81,
       "name": "p2 score",
       "position": {
-        "x": -450,
-        "y": -100,
+        "x": -350,
+        "y": 0,
         "z": 450
       },
       "quaternion": {
@@ -322,7 +322,7 @@
         "w": 0.7071067811865476
       },
       "model": {
-        "name": "text",
+        "name": "spriteText",
 
         "options": {
           "text": "0",
@@ -335,7 +335,7 @@
             "fontStyle": "normal",
             "fontVariant": "small-caps",
             "fontWeight": "200",
-            "fontSize": "60px",
+            "fontSize": "45px",
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }
@@ -390,7 +390,7 @@
         "w": 0.7071067811865476
       },
       "model": {
-        "name": "text",
+        "name": "spriteText",
         "options": {
           "text": "menu",
           "fillStyle": "white",

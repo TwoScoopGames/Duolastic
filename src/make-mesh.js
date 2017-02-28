@@ -15,6 +15,8 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
     return makeDirectionalLight(options);
   case "text":
     return makeText(options);
+  case "spriteText":
+    return makeSpriteText(options);
   case "sprite":
     return makeSprite(options);
   }
@@ -22,19 +24,8 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
 
 
 function makeSprite(options) {
-  // var crateMaterial = new THREE.SpriteMaterial({
-  //   map: crateTexture,
-  //   useScreenCoordinates: false,
-  //   color: 0xff0000 });
-  // var sprite2 = new THREE.Sprite( crateMaterial );
-  // sprite2.position.set( -100, 50, 0 );
-
-  // scene.add( sprite2 );
-  console.log(options.name);
-  console.log(options.texture);
   var spriteMap = new THREE.TextureLoader().setPath("./").load(options.texture);
   var spriteMaterial = new THREE.SpriteMaterial({
-    //color: options.color,
     useScreenCoordinates: false,
     map: spriteMap
   });
@@ -184,6 +175,42 @@ function canvasFont(options) {
     font.push(options[key]);
   });
   return font.join(" ");
+}
+
+
+function makeSpriteText(options) {
+  var text = getOption(options.text, "Hello, world!");
+  var fillStyle = getOption(options.fillStyle, "rgba(255, 0, 0, 0.95)");
+  var font = getOption(canvasFont(options.font), "40px sans serif");
+  var textWidth = getOption(options.textWidth, 256);
+  var textHeight = getOption(options.textHeight, 256);
+  var width = getOption(options.width, textWidth);
+  var height = getOption(options.height, textHeight);
+
+  var textCanvas = document.createElement("canvas");
+  var textContext = textCanvas.getContext("2d");
+  textCanvas.width = textWidth;
+  textCanvas.height = textHeight;
+
+  var metrics = measureTextInDiv(text, font);
+
+  textContext.clearRect(0, 0, textCanvas.width, textCanvas.height);
+  textContext.textBaseline = "middle";
+  textContext.font = font;
+  textContext.fillStyle = fillStyle;
+  textContext.fillText(text, (textWidth / 2) - (metrics.width / 2), (textHeight / 2));
+
+  var texture1 = new THREE.Texture(textCanvas);
+  texture1.needsUpdate = true;
+
+  var spriteMaterial = new THREE.SpriteMaterial({
+    useScreenCoordinates: false,
+    map: texture1
+  });
+
+  var spriteText = new THREE.Sprite(spriteMaterial);
+  spriteText.scale.set(width, height, 0); // imageWidth, imageHeight
+  return spriteText;
 }
 
 function makeText(options) {
