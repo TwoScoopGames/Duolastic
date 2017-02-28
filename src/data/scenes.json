@@ -1,8 +1,13 @@
 {
  "loading": {
  },
- "main": {
+ "tsg": {
   "first": true,
+  "onEnter": "./scripts/tsg-enter",
+  "onExit": "./scripts/main-exit"
+},
+ "main": {
+  "first": false,
   "onEnter": "./scripts/main-enter",
   "onExit": "./scripts/main-exit"
  }
