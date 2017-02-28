@@ -233,19 +233,7 @@
           "width": 1136,
           "height": 640,
           "depth": 640,
-          "color": "0xffffff",
-          "material": {
-            "type":"skybox-reflection",
-            "reflectivity": 0.30
-            },
-            "skybox": [
-              "images/bkg1_right.png",
-              "images/bkg1_left.png",
-              "images/bkg1_top.png",
-              "images/bkg1_bot.png",
-              "images/bkg1_front.png",
-              "images/bkg1_back.png"
-            ]
+          "color": "0xffffff"
         },
         "receiveShadow": true
       },
@@ -260,9 +248,6 @@
         "w": 0
       }
     },
-
-
-
     {
       "id": 8200,
       "name": "slash",
@@ -293,9 +278,9 @@
       "id": 80,
       "name": "p1 score",
       "position": {
-        "x": -30,
-        "y": 0,
-        "z": 320
+        "x": 450,
+        "y": -100,
+        "z": 450
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -307,11 +292,18 @@
         "name": "text",
         "options": {
           "text": "0",
-          "fillStyle": "rgb(198,55,47)",
-          "textWidth": 64,
+          "fillStyle": "white",
+          "textWidth": 512,
           "textHeight": 64,
-          "width": 64,
-          "height": 64
+          "width": 512,
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "fontWeight": "200",
+            "fontSize": "60px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
         }
       }
     },
@@ -319,9 +311,9 @@
       "id": 81,
       "name": "p2 score",
       "position": {
-        "x": 30,
-        "y": 0,
-        "z": 320
+        "x": -450,
+        "y": -100,
+        "z": 450
       },
       "quaternion": {
         "x": 0.7071067811865475,
@@ -331,16 +323,25 @@
       },
       "model": {
         "name": "text",
+
         "options": {
           "text": "0",
-          "fillStyle": "rgb(81,158,198)",
-          "textWidth": 64,
+          "fillStyle": "white",
+          "textWidth": 512,
           "textHeight": 64,
-          "width": 64,
-          "height": 64
+          "width": 512,
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "fontWeight": "200",
+            "fontSize": "60px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
         }
       }
     },
+
     {
       "id": 83,
       "name": "menu",
@@ -396,7 +397,14 @@
           "textWidth": 512,
           "textHeight": 64,
           "width": 512,
-          "height": 64
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "fontWeight": "100",
+            "fontSize": "80px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
         }
       },
       "menuItem": {
@@ -407,46 +415,7 @@
         "onDeselect": "./scripts/deselect-menu-item"
       }
     },
-    {
-      "id": 600,
-      "name": "space",
-      "skybox": true,
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "model": {
-        "name": "space",
-        "options": {
-          "width": 10000,
-          "height": 10000,
-          "depth": 10000,
-          "material": {
-            "type": "skybox"
-            },
-          "skybox": [
-            "images/bkg1_right.png",
-            "images/bkg1_left.png",
-            "images/bkg1_top.png",
-            "images/bkg1_bot.png",
-            "images/bkg1_front.png",
-            "images/bkg1_back.png"
-          ]
-        },
-        "receiveShadow": true
-      },
-      "size": {
-        "x": 0,
-        "y": 0
-      },
-      "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0,
-        "z": 0,
-        "w": 0.7071067811865476
-      }
-    },
+
 
 
 

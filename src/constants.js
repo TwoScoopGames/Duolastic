@@ -10,10 +10,14 @@ module.exports = {
   ball: 4,
   score: 5,
   court: 6,
+
   player1ScoreText: 80,
   player2ScoreText: 81,
   courtWidth: courtHeight * courtWidthRatio,
   courtHeight: courtHeight,
   puckDiameter: courtHeight * puckDiameterRatio,
-  paddleDiameter: courtHeight * paddleDiameterRatio
+  paddleDiameter: courtHeight * paddleDiameterRatio,
+
+  removeSegments: false,
+  showScoreNumbers: false
 };
