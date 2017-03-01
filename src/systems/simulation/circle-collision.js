@@ -260,6 +260,12 @@ function spawnGameOver(game, youArePlayer1, score) {
 
   // var ids = game.entities.find("network");
   // game.entities.destroy(ids[0]);
+  var velocityP1 = game.entities.getComponent(constants.player1, "velocity");
+  velocityP1.x = 0;
+  velocityP1.y = 0;
+  var velocityP2 = game.entities.getComponent(constants.player2, "velocity");
+  velocityP2.x = 0;
+  velocityP2.y = 0;
 
   game.entities.removeComponent(constants.player1, "playerController2d");
   game.entities.removeComponent(constants.player1, "playerController2dAnalog");
