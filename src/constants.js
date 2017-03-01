@@ -11,6 +11,8 @@ module.exports = {
   score: 5,
   court: 6,
 
+  maxScore: 15,
+
   player1ScoreText: 80,
   player2ScoreText: 81,
   courtWidth: courtHeight * courtWidthRatio,

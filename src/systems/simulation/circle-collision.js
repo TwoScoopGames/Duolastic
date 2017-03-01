@@ -215,7 +215,7 @@ function checkScore(game, entity) {
   if (!network) {
     return;
   }
-  var networkRole = network.role;
+  var networkRole = game.entities.getComponent(network, "network").role;
   var youArePlayer1 = networkRole === "server";
 
   if (position.y < courtTop - circle.radius) {
@@ -247,6 +247,19 @@ function checkScore(game, entity) {
       updateScoreText(game, constants.player2ScoreText, score.player2, "you ");
     }
     reset(game);
+  }
+  spawnGameOver(game, youArePlayer1, score);
+}
+
+function spawnGameOver(game, youArePlayer1, score) {
+  if (game.entities.find("menuItem").length !== 0) {
+    return;
+  }
+
+  if (score.player1 === constants.maxScore) {
+    game.prefabs.instantiate(game.entities, youArePlayer1 ? "win-menu" : "lose-menu");
+  } else if (score.player2 === constants.maxScore) {
+    game.prefabs.instantiate(game.entities, youArePlayer1 ? "lose-menu" : "win-menu");
   }
 }
 

@@ -8,5 +8,77 @@
       "onDisconnected": "./scripts/update-network-state-text",
       "time": 0
     }
+  },
+  "lose-menu": {
+    "name": "win menu",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 350
+    },
+    "quaternion": {
+      "x": 0.7071067811865475,
+      "y": 0,
+      "z": 0,
+      "w": 0.7071067811865476
+    },
+    "model": {
+      "name": "spriteText",
+      "options": {
+        "text": "you lose",
+        "fillStyle": "white",
+        "textWidth": 1024,
+        "textHeight": 64,
+        "width": 1024,
+        "height": 64,
+        "font":{
+          "fontStyle": "normal",
+          "fontVariant": "small-caps",
+          "fontWeight": "100",
+          "fontSize": "80px",
+          "fontFamily": "'Helvetica Neue', Helvetica"
+        }
+      }
+    },
+    "menuItem": {
+      "selected": true,
+      "onActivate": "./scripts/switch-scene-main"
+    }
+  },
+  "win-menu": {
+    "name": "win menu",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 350
+    },
+    "quaternion": {
+      "x": 0.7071067811865475,
+      "y": 0,
+      "z": 0,
+      "w": 0.7071067811865476
+    },
+    "model": {
+      "name": "spriteText",
+      "options": {
+        "text": "you win",
+        "fillStyle": "white",
+        "textWidth": 1024,
+        "textHeight": 64,
+        "width": 1024,
+        "height": 64,
+        "font":{
+          "fontStyle": "normal",
+          "fontVariant": "small-caps",
+          "fontWeight": "100",
+          "fontSize": "80px",
+          "fontFamily": "'Helvetica Neue', Helvetica"
+        }
+      }
+    },
+    "menuItem": {
+      "selected": true,
+      "onActivate": "./scripts/switch-scene-main"
+    }
   }
 }
