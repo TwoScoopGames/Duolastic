@@ -453,11 +453,11 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "menu",
+          "text": "press button to start",
           "fillStyle": "white",
-          "textWidth": 512,
+          "textWidth": 1024,
           "textHeight": 64,
-          "width": 512,
+          "width": 1024,
           "height": 64,
           "font":{
             "fontStyle": "normal",
@@ -469,59 +469,10 @@
         }
       },
       "menuItem": {
-        "up": 84,
-        "down": 84,
         "selected": true,
-        "onSelect": "./scripts/select-menu-item",
-        "onDeselect": "./scripts/deselect-menu-item"
+        "onActivate": "./scripts/on-ready"
       }
     },
-    {
-      "id": 84,
-      "name": "menu",
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": 300
-      },
-      "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0,
-        "z": 0,
-        "w": 0.7071067811865476
-      },
-      "model": {
-        "name": "spriteText",
-        "options": {
-          "text": "menu",
-          "fillStyle": "white",
-          "textWidth": 512,
-          "textHeight": 64,
-          "width": 512,
-          "height": 64,
-          "font":{
-            "fontStyle": "normal",
-            "fontVariant": "small-caps",
-            "fontWeight": "100",
-            "fontSize": "80px",
-            "fontFamily": "'Helvetica Neue', Helvetica"
-          }
-        }
-      },
-      "menuItem": {
-        "up": 83,
-        "down": 83,
-        "selected": false,
-        "onSelect": "./scripts/select-menu-item",
-        "onDeselect": "./scripts/deselect-menu-item"
-      }
-    },
-
-
-
-
-
-
     {
       "id": 2000,
       "name": "player 1 goal",

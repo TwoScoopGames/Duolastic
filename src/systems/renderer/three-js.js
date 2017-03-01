@@ -16,6 +16,14 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 
   addLighting(scene);
 
+  game.entities.onRemoveComponent("model", function(entity, component, model) {
+    if (model.mesh !== undefined) {
+      if (model.mesh.target) {
+        scene.remove(model.mesh.target);
+      }
+      scene.remove(model.mesh);
+    }
+  });
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var model = game.entities.getComponent(entity, "model");
     if (model.needsUpdate && model.mesh !== undefined) {
