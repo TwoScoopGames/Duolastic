@@ -25,14 +25,6 @@
    "scenes": "all"
   },
   {
-    "name": "./systems/simulation/on-press",
-    "scenes": "all"
-  },
-  {
-    "name": "./systems/simulation/on-button-pressed",
-    "scenes": "all"
-  },
-  {
    "name": "./systems/simulation/network",
    "scenes": "all"
   },

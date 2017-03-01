@@ -31,9 +31,6 @@
           "y": 250,
           "z": 0
         },
-        "onButtonPressed": {
-	        "action": "./scripts/start-game"
-	       },
         "model": {
           "name": "spriteText",
           "options": {
@@ -50,6 +47,14 @@
               "fontSize": "45px",
               "fontFamily": "'Helvetica Neue', Helvetica"
             }
+          }
+        },
+        "timers": {
+          "nextScene": {
+            "max": 3000,
+            "running": true,
+            "script": "./scripts/switch-scene-main",
+            "time": 0
           }
         }
       },
