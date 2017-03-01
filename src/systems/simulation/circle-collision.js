@@ -186,7 +186,7 @@ function checkScore(game, entity) {
   var circle = game.entities.getComponent(entity, "circle");
   var score = game.entities.getComponent(constants.score, "score");
 
-  var networkRole = game.entities.getComponent(constants.network, "network").role;
+  var networkRole = game.entities.find("network")[0].role;
   var youArePlayer1 = networkRole === "server";
 
   if (position.y < courtTop - circle.radius) {

@@ -5,7 +5,6 @@ var paddleDiameterRatio = 0.2;
 
 module.exports = {
   camera: 0,
-  network: 1,
   player1: 2,
   player2: 3,
   ball: 4,
@@ -13,7 +12,6 @@ module.exports = {
   court: 6,
   player1ScoreText: 80,
   player2ScoreText: 81,
-  networkStateText: 82,
   courtWidth: courtHeight * courtWidthRatio,
   courtHeight: courtHeight,
   puckDiameter: courtHeight * puckDiameterRatio,
