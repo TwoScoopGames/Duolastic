@@ -28,7 +28,10 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     createPeerConnection(peerConnected);
   });
   game.entities.onRemoveComponent("network", function() {
-    peer.close();
+    if (peer !== undefined) {
+      peer.destroy();
+      peer = undefined;
+    }
   });
   ecs.addEach(function(entity, elapsed) { // eslint-disable-line no-unused-vars
     var network = game.entities.getComponent(entity, "network");

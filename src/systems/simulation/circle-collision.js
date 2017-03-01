@@ -195,7 +195,6 @@ function flashGoal(game, goal, color) {
   var timer = game.entities.getComponent(goal, "timers").flashGoal;
   var model = game.entities.getComponent(goal, "model");
   timer.running = true;
-  console.log(model);
   model.options.color = color;
   model.needsUpdate = true;
 }
@@ -252,9 +251,20 @@ function checkScore(game, entity) {
 }
 
 function spawnGameOver(game, youArePlayer1, score) {
+  if (score.player1 < constants.maxScore && score.player2 < constants.maxScore) {
+    return;
+  }
   if (game.entities.find("menuItem").length !== 0) {
     return;
   }
+
+  // var ids = game.entities.find("network");
+  // game.entities.destroy(ids[0]);
+
+  game.entities.removeComponent(constants.player1, "playerController2d");
+  game.entities.removeComponent(constants.player1, "playerController2dAnalog");
+  game.entities.removeComponent(constants.player2, "playerController2d");
+  game.entities.removeComponent(constants.player2, "playerController2dAnalog");
 
   if (score.player1 === constants.maxScore) {
     game.prefabs.instantiate(game.entities, youArePlayer1 ? "win-menu" : "lose-menu");

@@ -4,8 +4,7 @@
     "network": {
       "lastPacketTime": 0,
       "onConnected": "./scripts/network-connected",
-      "onConnecting": "./scripts/update-network-state-text",
-      "onDisconnected": "./scripts/update-network-state-text",
+      "onDisconnected": "./scripts/switch-scene-main",
       "time": 0
     }
   },
