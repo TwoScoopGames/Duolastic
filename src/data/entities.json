@@ -364,32 +364,6 @@
       }
     },
     {
-      "id": 8200,
-      "name": "slash",
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": 320
-      },
-      "quaternion": {
-        "x": 0.7071067811865475,
-        "y": 0,
-        "z": 0,
-        "w": 0.7071067811865476
-      },
-      "model": {
-        "name": "text",
-        "options": {
-          "text": "/",
-          "fillStyle": "white",
-          "textWidth": 512,
-          "textHeight": 64,
-          "width": 512,
-          "height": 64
-        }
-      }
-    },
-    {
       "id": 80,
       "name": "p1 score",
       "position": {
@@ -472,14 +446,21 @@
         "w": 0.7071067811865476
       },
       "model": {
-        "name": "text",
+        "name": "spriteText",
         "options": {
           "text": "menu",
-          "fillStyle": "green",
+          "fillStyle": "white",
           "textWidth": 512,
           "textHeight": 64,
           "width": 512,
-          "height": 64
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "fontWeight": "100",
+            "fontSize": "80px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
         }
       },
       "menuItem": {

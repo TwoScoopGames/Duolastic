@@ -216,7 +216,7 @@ function makeSpriteText(options) {
 function makeText(options) {
   var text = getOption(options.text, "Hello, world!");
   var fillStyle = getOption(options.fillStyle, "rgba(255, 0, 0, 0.95)");
-  var font = getOption(canvasFont(options.font), "40px sans serif");
+  var font = getOption(options.font, "40px sans serif");
   var textWidth = getOption(options.textWidth, 256);
   var textHeight = getOption(options.textHeight, 256);
   var width = getOption(options.width, textWidth);
