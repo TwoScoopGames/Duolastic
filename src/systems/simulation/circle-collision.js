@@ -177,17 +177,18 @@ function keepInSides(game, entity, elasticity) {
 }
 
 
-function flashGoals(game, player) {
+function flashGoals(game, playerWhoScored) {
   var goal1 = 2000;
   var goal2 = 2001;
 
-  if (player === 1) {
-    flashGoal(game, goal1, "0x0000ff");
-    flashGoal(game, goal2, "0xff0000");
-  } else {
-    flashGoal(game, goal1, "0xff0000");
-    flashGoal(game, goal2, "0x0000ff");
+  if (playerWhoScored === 1) {  // and player 1 scores
+    flashGoal(game, goal1, "0x9a1417");
+    flashGoal(game, goal2, "0x9a1417");
+  } else { // and player 2 scores
+    flashGoal(game, goal1, "0x9400c7");
+    flashGoal(game, goal2, "0x9400c7");
   }
+
 }
 
 function flashGoal(game, goal, color) {
@@ -196,6 +197,7 @@ function flashGoal(game, goal, color) {
   timer.running = true;
   console.log(model);
   model.options.color = color;
+  model.needsUpdate = true;
 }
 
 

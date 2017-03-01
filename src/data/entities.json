@@ -183,18 +183,18 @@
       },
       "circle": {
         "colorSet": [
-          "0xff1e7e",
-            "0xfb3c7d",
-        "0xff0b3c",
-            "0xfc2a2d",
-        "0xf82400",
-            "0xf56027",
-        "0xfa7200",
-            "0xfac629",
-        "0xf9f000",
-            "0xc9fd3b",
-        "0x83ff2a",
-            "0x85fc5e"
+          "0x9a1417",
+            "0xaa1418",
+        "0xd0131b",
+            "0xd9162c",
+        "0xe0241c",
+            "0xe0331c",
+        "0xe04c1c",
+            "0xe0631d",
+        "0xe08e27",
+            "0xe6b146",
+        "0xecd06b",
+            "0xf1ea8b"
         ],
         "mass": 20,
         "radius": 200
@@ -527,7 +527,7 @@
       "name": "player 1 goal",
       "position": {
         "x": 0,
-        "y": 505,
+        "y": 525,
         "z": -375
       },
       "quaternion": {
@@ -539,10 +539,10 @@
       "model": {
         "name": "box",
         "options": {
-          "height": 10,
+          "height": 50,
           "width": 750,
           "depth": 750,
-          "color": "0xfc2a2d"
+          "color": "0xc0c0c0"
         }
       },
       "size": {
@@ -564,7 +564,7 @@
       "name": "player 2 goal",
       "position": {
         "x": 0,
-        "y": -505,
+        "y": -525,
         "z": -375
       },
       "quaternion": {
@@ -576,10 +576,10 @@
       "model": {
         "name": "box",
         "options": {
-          "height": 10,
+          "height": 50,
           "width": 750,
           "depth": 750,
-          "color": "0x303cfc"
+          "color": "0xc0c0c0"
         }
       },
       "size": {
