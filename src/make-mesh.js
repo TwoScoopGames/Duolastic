@@ -31,7 +31,6 @@ function makeSprite(options) {
   });
   var sprite = new THREE.Sprite(spriteMaterial);
   sprite.scale.set(64, 64, 1.0); // imageWidth, imageHeight
-  console.log(sprite);
   return sprite;
 }
 
