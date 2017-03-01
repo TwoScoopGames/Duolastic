@@ -1,1 +1,12 @@
-{}
+{
+  "network": {
+    "name": "network",
+    "network": {
+      "lastPacketTime": 0,
+      "onConnected": "./scripts/network-connected",
+      "onConnecting": "./scripts/update-network-state-text",
+      "onDisconnected": "./scripts/update-network-state-text",
+      "time": 0
+    }
+  }
+}

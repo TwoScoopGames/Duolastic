@@ -9,6 +9,8 @@ module.exports = function(entity, game) {
     console.log("connect client");
     handleClient(game);
   }
+  game.sounds.play("fly.mp3", true);
+  //game.sounds.play("game-start.mp3");
 };
 
 function handleServer(game) {

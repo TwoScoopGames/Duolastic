@@ -149,17 +149,6 @@
       }
     },
     {
-      "id": 1,
-      "name": "network",
-      "network": {
-        "lastPacketTime": 0,
-        "onConnected": "./scripts/network-connected",
-        "onConnecting": "./scripts/update-network-state-text",
-        "onDisconnected": "./scripts/update-network-state-text",
-        "time": 0
-      }
-    },
-    {
       "id": 2,
       "name": "player 1",
 

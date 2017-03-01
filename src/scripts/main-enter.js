@@ -3,8 +3,6 @@ var constants = require("../constants");
 var random = require("splat-ecs/lib/random");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
-  game.sounds.play("fly.mp3", true);
-  //game.sounds.play("game-start.mp3");
   var model = game.entities.getComponent(constants.court, "model");
   model.options.width = constants.courtWidth;
   model.options.height = constants.courtHeight;
@@ -23,7 +21,6 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
   createStack(game, constants.player1);
   createStack(game, constants.player2);
 
-
   for (var i = 0; i < 1000; i++) {
     var cutOut = 250;
     var asize = 5000;
@@ -33,11 +30,7 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
     position.z = positionNotInRange(asize, cutOut);
     createStar(game, position);
   }
-
 };
-
-
-
 
 function positionNotInRange(size, cutOut) {
   var x = random.inRange(-size, size);
@@ -47,7 +40,6 @@ function positionNotInRange(size, cutOut) {
     positionNotInRange(size, cutOut);
   }
 }
-
 
 function setRadius(game, entity, radius) {
   var model = game.entities.getComponent(entity, "model");
@@ -69,7 +61,6 @@ function createStack(game, baseEntity) {
     entity = createCylinder(game, parent, entity, baseEntityPosition, baseEntityModel, segmentSize, circle.colorSet, i);
   }
 }
-
 
 function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEntityModel, segmentSize, colorSet, i) {
   var newEntity = game.entities.create();
@@ -110,7 +101,6 @@ function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEn
   follow.distance = segmentSize;
   return newEntity;
 }
-
 
 function createStar(game, position) {
   var newEntity = game.entities.create();
