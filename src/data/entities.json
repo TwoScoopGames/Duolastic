@@ -503,7 +503,7 @@
       "name": "menu",
       "position": {
         "x": 0,
-        "y": 0,
+        "y": 75,
         "z": 350
       },
       "quaternion": {
@@ -515,8 +515,8 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "press button to start",
-          "fillStyle": "white",
+          "text": "press a to start",
+          "fillStyle": "#7609A2",
           "textWidth": 1024,
           "textHeight": 64,
           "width": 1024,
@@ -524,8 +524,8 @@
           "font":{
             "fontStyle": "normal",
             "fontVariant": "small-caps",
-            "fontWeight": "100",
-            "fontSize": "80px",
+            "fontWeight": "300",
+            "fontSize": "60px",
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }
