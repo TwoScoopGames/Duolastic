@@ -7,7 +7,6 @@ module.exports = {
     playerController.right = "left";
     var playerControllerAnalog = game.entities.addComponent(constants.player1, "playerController2dAnalog");
     playerControllerAnalog.xScale = -1;
-    game.entities.addComponent(constants.player1, "hole");
   },
   player2: function(game) {
     var playerController = game.entities.addComponent(constants.player2, "playerController2d");
@@ -15,6 +14,5 @@ module.exports = {
     playerController.down = "up";
     var playerControllerAnalog = game.entities.addComponent(constants.player2, "playerController2dAnalog");
     playerControllerAnalog.yScale = -1;
-    game.entities.addComponent(constants.player2, "hole");
   }
 };
