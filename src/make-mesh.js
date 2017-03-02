@@ -24,13 +24,18 @@ module.exports = function makeMesh(name, options) { // eslint-disable-line no-un
 
 
 function makeSprite(options) {
-  var spriteMap = new THREE.TextureLoader().setPath("./").load(options.texture);
-  var spriteMaterial = new THREE.SpriteMaterial({
+  var texture = new THREE.TextureLoader().setPath("./").load(options.texture);
+  texture.generateMipmaps = true;
+  var material = new THREE.SpriteMaterial({
     useScreenCoordinates: false,
-    map: spriteMap
+    map: texture
   });
-  var sprite = new THREE.Sprite(spriteMaterial);
-  sprite.scale.set(64, 64, 1.0); // imageWidth, imageHeight
+
+  // material.blending = THREE.CustomBlending;
+  // material.blendSrc = THREE.OneFactor;
+  // material.blendDst = THREE.OneMinusSrcAlphaFactor;
+  var sprite = new THREE.Sprite(material);
+  sprite.scale.set(options.width, options.height, 1.0); // imageWidth, imageHeight
   return sprite;
 }
 

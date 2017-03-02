@@ -21,15 +21,7 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
   createStack(game, constants.player1);
   createStack(game, constants.player2);
 
-  for (var i = 0; i < 1000; i++) {
-    var cutOut = 250;
-    var asize = 5000;
-    var position = {};
-    position.x = positionNotInRange(asize, cutOut);
-    position.y = positionNotInRange(asize, cutOut);
-    position.z = positionNotInRange(asize, cutOut);
-    createStar(game, position);
-  }
+  createStarfield(game, 5600, 500, 10000, "images/star.png");
 };
 
 function positionNotInRange(size, cutOut) {
@@ -102,17 +94,30 @@ function createCylinder(game, parent, previousEntity, baseEntityPosition, baseEn
   return newEntity;
 }
 
-function createStar(game, position) {
+
+function createStarfield(game, quantity, innerCubeWidth, outerCubeWidth, image) {
+  for (var i = 0; i < 1000; i++) {
+    var cutOut = innerCubeWidth / 2;
+    var asize = outerCubeWidth / 2;
+    var position = {};
+    position.x = positionNotInRange(asize, cutOut);
+    position.y = positionNotInRange(asize, cutOut);
+    position.z = positionNotInRange(asize, cutOut);
+    createStar(game, position, image);
+  }
+}
+
+function createStar(game, position, image) {
   var newEntity = game.entities.create();
+
   var model = game.entities.addComponent(newEntity, "model");
   model.name = "sprite";
   model.options = {};
 
   model.options.color = "0xffffff";
-  // model.options.height = 50;
-  // model.options.width = 50;
-  // model.options.depth = 50;
-  model.options.texture = "images/star.png";
+  model.options.height = 64;
+  model.options.width = 64;
+  model.options.texture = image;
   var newPosition = game.entities.addComponent(newEntity, "position");
   newPosition.x = position.x;
   newPosition.y = position.y;
@@ -120,17 +125,4 @@ function createStar(game, position) {
   game.entities.addComponent(newEntity, "size");
   return newEntity;
 }
-// function createStar(game, position) {
-//   var newEntity = game.entities.create();
-//   var model = game.entities.addComponent(newEntity, "model");
-//   model.name = "sprite";
-//   model.options = {};
-//   //model.options.color = "0xffffff";
-//   model.options.texture = "images/star.png";
-//   var newPosition = game.entities.addComponent(newEntity, "position");
-//   newPosition.x = position.x;
-//   newPosition.y = position.y;
-//   newPosition.z = position.z;
-//   game.entities.addComponent(newEntity, "size");
-//   return newEntity;
-// }
+
