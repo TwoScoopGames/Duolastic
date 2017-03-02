@@ -23,30 +23,21 @@
           }
         }
       },
+
       {
-        "id": 1,
-        "name": "tsg text",
+        "id": 4,
+        "name": "logo",
         "position": {
           "x": 0,
-          "y": 250,
+          "y": 0,
           "z": 0
         },
         "model": {
-          "name": "spriteText",
+          "name": "sprite",
           "options": {
-            "text": "Two Scoop Games presents",
-            "fillStyle": "white",
-            "textWidth": 750,
-            "textHeight": 64,
-            "width": 750,
-            "height": 64,
-            "font":{
-              "fontStyle": "normal",
-              "fontVariant": "normal",
-              "fontWeight": "200",
-              "fontSize": "45px",
-              "fontFamily": "'Helvetica Neue', Helvetica"
-            }
+            "width": 768,
+            "height": 512,
+            "texture": "images/twoscoopgames-logo.png"
           }
         },
         "timers": {
@@ -55,70 +46,6 @@
             "running": true,
             "script": "./scripts/switch-scene-title",
             "time": 0
-          }
-        }
-      },
-
-      {
-        "id": 2,
-        "name": "scoop1",
-        "position": {
-          "x": 4,
-          "y": 0,
-          "z": 0
-        },
-        "model": {
-          "name": "sphere",
-          "options": {
-            "radius": 100,
-            "widthSegments": 64,
-            "heightSegments": 64,
-            "color": "0x85ff64"
-          }
-        }
-      },
-
-      {
-        "id": 3,
-        "name": "scoop2",
-        "position": {
-          "x": 4,
-          "y": -100,
-          "z": 0
-        },
-        "model": {
-          "name": "sphere",
-          "options": {
-            "radius": 100,
-            "widthSegments": 64,
-            "heightSegments": 64,
-            "color": "0xff013f"
-          }
-        }
-      },
-
-      {
-        "id": 4,
-        "name": "cone",
-        "position": {
-          "x": -40,
-          "y": -328,
-          "z": 0
-        },
-        "quaternion": {
-          "x": 0,
-          "y": 0,
-          "z": -0.3,
-          "w": 0.3
-        },
-        "model": {
-          "name": "cylinder",
-          "options": {
-            "radiusTop": 100,
-            "radiusBottom": 1,
-            "height": 380,
-            "radiusSegments": 64,
-            "color": "0xffd152"
           }
         }
       }
