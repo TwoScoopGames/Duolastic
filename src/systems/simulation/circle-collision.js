@@ -58,6 +58,17 @@ function collide(game, a, b) {
   var ball = game.entities.getComponent(a, "ball") || game.entities.getComponent(b, "ball");
   if (ball) { game.sounds.play(random.from(hits)); }
 
+  if (ball) {
+    var ballId = game.entities.getComponent(a, "ball") ? a : b;
+    var playerId = ballId === a ? b : a;
+    var playerHole = game.entities.getComponent(playerId, "hole");
+
+    playerHole.hasBall = playerHole.active;
+    if (playerHole.active) {
+      return;
+    }
+  }
+
   var toMove = collisionDistance - Math.sqrt(distSq);
   var angle = Math.atan2(positionA.y - positionB.y, positionA.x - positionB.x);
   positionA.x += (toMove * Math.cos(angle));

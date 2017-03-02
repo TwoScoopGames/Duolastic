@@ -99,8 +99,8 @@ function sendWorld(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, constants.player1, ["position", "velocity"]),
-      serialize(game, constants.player2, ["position", "velocity"]),
+      serialize(game, constants.player1, ["position", "velocity", "hole"]),
+      serialize(game, constants.player2, ["position", "velocity", "hole"]),
       serialize(game, constants.ball, ["position", "velocity"]),
       serialize(game, constants.score, ["score"])
     ]
@@ -112,7 +112,7 @@ function sendClient(game, time) {
   var message = {
     time: time,
     entities: [
-      serialize(game, constants.player2, ["movement2d", "movement2dAnalog"])
+      serialize(game, constants.player2, ["movement2d", "movement2dAnalog", "hole"])
     ]
   };
   peer.send(JSON.stringify(message));

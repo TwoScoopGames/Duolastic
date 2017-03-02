@@ -89,6 +89,10 @@
    ]
   },
   {
+    "name": "./systems/simulation/capture-ball",
+    "scenes": "all"
+  },
+  {
    "name": "splat-ecs/lib/systems/simulation/box-group-collider",
    "scenes": "all"
   },
