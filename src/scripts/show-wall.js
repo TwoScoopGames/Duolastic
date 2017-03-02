@@ -9,5 +9,4 @@ module.exports = function(entity, game) {
   if (entity === 4001) {
     position.x = 3750;
   }
-  console.log("boop", entity);
 };
