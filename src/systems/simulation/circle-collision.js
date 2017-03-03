@@ -271,8 +271,8 @@ function spawnGameOver(game, youArePlayer1, score) {
 
   // var ids = game.entities.find("network");
   // game.entities.destroy(ids[0]);
-  game.entities.removeComponent(constants.player1, "velocity");
-  game.entities.removeComponent(constants.player2, "velocity");
+  game.entities.addComponent(constants.player1, "velocity"); // zeroes velocity
+  game.entities.addComponent(constants.player2, "velocity"); // zeroes velocity
 
 
   game.entities.removeComponent(constants.player1, "playerController2d");
