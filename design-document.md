@@ -98,3 +98,16 @@ Funnel mode becomes more strategic because a player can hide behind a wall at an
 - players are given a randomly generated GUID which we can base a procedurally generated username off of
 - players are assigned random name
 - leaderboards for most matches won
+
+
+
+
+## sound credits
+
+http://www.freesound.org/people/kasa90/sounds/144027/
+
+end-lose
+http://freesound.org/people/pera/sounds/56580/
+
+end-win
+http://freesound.org/people/LittleRobotSoundFactory/sounds/274177/

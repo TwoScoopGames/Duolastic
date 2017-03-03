@@ -282,11 +282,24 @@ function spawnGameOver(game, youArePlayer1, score) {
   game.entities.removeComponent(constants.player1, "playerController2dAnalog");
   game.entities.removeComponent(constants.player2, "playerController2d");
   game.entities.removeComponent(constants.player2, "playerController2dAnalog");
-
+  game.sounds.stop("fly.mp3");
   if (score.player1 === constants.maxScore) {
-    game.prefabs.instantiate(game.entities, youArePlayer1 ? "win-menu" : "lose-menu");
+    if (youArePlayer1) {
+      game.prefabs.instantiate(game.entities, "win-menu");
+      game.sounds.play("end-win.mp3");
+    } else {
+      game.prefabs.instantiate(game.entities, "lose-menu");
+      game.sounds.play("end-lose.mp3");
+    }
   } else if (score.player2 === constants.maxScore) {
-    game.prefabs.instantiate(game.entities, youArePlayer1 ? "lose-menu" : "win-menu");
+    if (youArePlayer1) {
+      game.prefabs.instantiate(game.entities, "lose-menu");
+      game.sounds.play("end-lose.mp3");
+    } else {
+      game.prefabs.instantiate(game.entities, "win-menu");
+      game.sounds.play("end-win.mp3");
+    }
+
   }
 }
 

@@ -9,6 +9,7 @@ module.exports = function(entity, game) {
     console.log("connect client");
     addPlayerController.player2(game);
   }
+  game.sounds.stop("144027__kasa90__loopx.mp3");
   game.sounds.play("fly.mp3", true);
   //game.sounds.play("game-start.mp3");
 };

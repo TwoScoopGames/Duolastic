@@ -3,6 +3,9 @@ var constants = require("../constants");
 var random = require("splat-ecs/lib/random");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
+
+  game.sounds.stop("fly.mp3");
+  game.sounds.play("144027__kasa90__loopx.mp3", true);
   game.scaleCanvasToFitRectangle(constants.courtWidth, constants.courtHeight);
   var cube = {
     "width": 16000,
