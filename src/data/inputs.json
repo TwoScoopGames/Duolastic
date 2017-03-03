@@ -86,6 +86,22 @@
       {
         "device": "gamepad",
         "button": "y"
+      },
+      {
+        "device": "gamepad",
+        "button": "left trigger"
+      },
+      {
+        "device": "gamepad",
+        "button": "right trigger"
+      },
+      {
+        "device": "gamepad",
+        "button": "left shoulder"
+      },
+      {
+        "device": "gamepad",
+        "button": "right shoulder"
       }
     ],
     "hole": [
