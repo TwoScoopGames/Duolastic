@@ -3,12 +3,12 @@ module.exports = {
     return {
       active: false,
       hasBall: false,
-      input: "action",
+      input: "hole",
     };
   },
   reset: function(hole) {
     hole.active = false;
     hole.hasBall = false;
-    hole.input = "action";
+    hole.input = "hole";
   }
 };

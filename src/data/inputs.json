@@ -87,6 +87,8 @@
         "device": "gamepad",
         "button": "y"
       }
+    ],
+    "hole": [
     ]
   }
 }
