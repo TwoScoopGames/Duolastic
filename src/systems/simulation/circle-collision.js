@@ -234,8 +234,8 @@ function checkScore(game, entity) {
     if (constants.removeSegments) {
       removeLowestSegment(game, constants.player2, 1);
     }
-    playScoreSound(game, youArePlayer1);
     score.player1++;
+    playScoreSound(game, youArePlayer1, score.player1);
     if (youArePlayer1) {
       updateScoreText(game, constants.player1ScoreText, score.player1, "you ");
     } else {
@@ -249,8 +249,8 @@ function checkScore(game, entity) {
     if (constants.removeSegments) {
       removeLowestSegment(game, constants.player1, 2);
     }
-    playScoreSound(game, !youArePlayer1);
     score.player2++;
+    playScoreSound(game, !youArePlayer1, score.player2);
     if (youArePlayer1) {
       updateScoreText(game, constants.player2ScoreText, score.player2, "opponent ");
     } else {
@@ -271,12 +271,9 @@ function spawnGameOver(game, youArePlayer1, score) {
 
   // var ids = game.entities.find("network");
   // game.entities.destroy(ids[0]);
-  var velocityP1 = game.entities.getComponent(constants.player1, "velocity");
-  velocityP1.x = 0;
-  velocityP1.y = 0;
-  var velocityP2 = game.entities.getComponent(constants.player2, "velocity");
-  velocityP2.x = 0;
-  velocityP2.y = 0;
+  game.entities.removeComponent(constants.player1, "velocity");
+  game.entities.removeComponent(constants.player2, "velocity");
+
 
   game.entities.removeComponent(constants.player1, "playerController2d");
   game.entities.removeComponent(constants.player1, "playerController2dAnalog");
@@ -309,12 +306,16 @@ function updateScoreText(game, entity, score, text) {
   model.needsUpdate = true;
 }
 
-function playScoreSound(game, isGood) {
+function playScoreSound(game, isGood, score) {
+  console.log(score, constants.maxScore);
+  var finalPoint = score === constants.maxScore || score === constants.maxScore;
   game.sounds.play("goal.mp3");
-  if (isGood) {
-    game.sounds.play("score-player-1.mp3");
-  } else {
-    game.sounds.play("fail.mp3");
+  if (!finalPoint) {
+    if (isGood) {
+      game.sounds.play("score-player-1.mp3");
+    } else {
+      game.sounds.play("fail.mp3");
+    }
   }
 }
 
