@@ -89,6 +89,20 @@
       }
     ],
     "hole": [
+    ],
+    "restart": [
+      {
+        "device": "gamepad",
+        "button": "home"
+      },
+      {
+        "device": "gamepad",
+        "button": "start"
+      },
+      {
+        "device": "gamepad",
+        "button": "back"
+      }
     ]
   }
 }
