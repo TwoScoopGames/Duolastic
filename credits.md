@@ -1,4 +1,4 @@
-# credits
+# Credits
 
 #### Game Design, Visual Design, and Programming by:
 
