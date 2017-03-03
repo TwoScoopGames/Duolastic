@@ -105,7 +105,7 @@ function sendWorld(game, time) {
       serialize(game, constants.score, ["score"])
     ]
   };
-  peer.send(JSON.stringify(message));
+  trySend(JSON.stringify(message));
 }
 
 function sendClient(game, time) {
@@ -115,7 +115,19 @@ function sendClient(game, time) {
       serialize(game, constants.player2, ["movement2d", "movement2dAnalog", "hole"])
     ]
   };
-  peer.send(JSON.stringify(message));
+  trySend(JSON.stringify(message));
+}
+
+function trySend(message) {
+  if (peer !== undefined) {
+    try {
+      peer.send(message);
+    } catch (e) {
+      console.error("error sending message", e);
+    }
+  } else {
+    console.warn("peer is undefined, cannot send message");
+  }
 }
 
 function importComponents(game, network) {
