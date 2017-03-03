@@ -15,7 +15,7 @@ module.exports = function(ecs, game) {
   }, "resetIfOutsideCube");
 };
 
-
+/* right now this only works if stars exit the front of the cube */
 function insideCube(position, box) {
   // var half_of_box_width = box.width / 2;
   // var minX = box.x - half_of_box_width;
