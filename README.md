@@ -2,6 +2,7 @@
 
 Game originally created for #GGJ17 Global Game Jam 2017 theme: Waves
 
+## [Credits](credits.md)
 
 ## [Design Document](design-document.md)
 
