@@ -117,7 +117,37 @@
         "selected": true,
         "onActivate": "./scripts/switch-scene-main"
       }
+    },
+
+
+    {
+      "id": 5,
+      "name": "music credits",
+      "position": {
+        "x": 0,
+        "y": -380,
+        "z": 0
+      },
+      "model": {
+        "name": "spriteText",
+        "options": {
+          "text": "Music by kreuzbube, Seclorance, and Alexandr Zhelanov",
+          "fillStyle": "white",
+          "textWidth": 1024,
+          "textHeight": 64,
+          "width": 1024,
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "normal",
+            "fontWeight": "100",
+            "fontSize": "18px",
+            "fontFamily": "Helvetica"
+          }
+        }
+      }
     }
+
 
 
 
