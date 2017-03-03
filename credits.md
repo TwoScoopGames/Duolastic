@@ -16,13 +16,13 @@
 * [Alexandr Zhelanov](http://soundcloud.com/alexandr-zhelanov)
 
 #### Licenses:
-* Loopx by kreuzbube [src/sounds/title-screen.mp3](src/sounds/title-screen.mp3)
+* Loopx by kreuzbube [title-screen](src/sounds/title-screen.mp3)
    * Creative Commons
   * CC0 1.0 Universal (CC0 1.0)
   * Public Domain Dedication
   * [https://soundcloud.com/beverlyhillsboy](https://soundcloud.com/beverlyhillsboy)
 
-* Strangel by Seclorance **modified by alex** [lobby1](src/sounds/lobby1.mp3) [lobby2](src/sounds/lobby2.mp3)
+* Strangel by Seclorance **modified by alex** [lobby-1](src/sounds/lobby-1.mp3) [lobby-2](src/sounds/lobby-2.mp3)
   * Creative Commons
   * Attribution 4.0 International (CC BY 4.0)
   * [https://www.discogs.com/artist/874298-Seclorance](https://www.discogs.com/artist/874298-Seclorance)
