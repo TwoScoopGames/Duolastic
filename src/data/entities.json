@@ -98,7 +98,38 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "press a to start",
+          "text": "last day of arcade expo edition",
+          "fillStyle": "white",
+          "textWidth": 1024,
+          "textHeight": 64,
+          "width": 1024,
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "fontWeight": "100",
+            "fontSize": "64px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
+        }
+      },
+      "menuItem": {
+        "selected": true,
+        "onActivate": "./scripts/switch-scene-main"
+      }
+    },
+    {
+      "id": 840,
+      "name": "menu",
+      "position": {
+        "x": 0,
+        "y": -220,
+        "z": 0
+      },
+      "model": {
+        "name": "spriteText",
+        "options": {
+          "text": "press [A] for 1 on 1 game",
           "fillStyle": "white",
           "textWidth": 1024,
           "textHeight": 64,
@@ -472,7 +503,7 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "press a to start",
+          "text": "press a to join",
           "fillStyle": "#7609A2",
           "textWidth": 1024,
           "textHeight": 64,
@@ -482,7 +513,7 @@
             "fontStyle": "normal",
             "fontVariant": "small-caps",
             "fontWeight": "300",
-            "fontSize": "60px",
+            "fontSize": "45px",
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }

@@ -144,14 +144,15 @@ function keepOnCourt(game, entity, elasticity) {
   var circle = game.entities.getComponent(entity, "circle");
   var velocity = game.entities.getComponent(entity, "velocity");
 
-  if (position.y - circle.radius < courtTop) {
-    position.y = courtTop + circle.radius;
+  var halfCircleRadius = circle.radius / 2;
+  if (position.y - halfCircleRadius < courtTop) {
+    position.y = courtTop + halfCircleRadius;
     if (velocity.y < 0) {
       velocity.y *= -1 * elasticity;
     }
   }
-  if (position.y + circle.radius > courtBottom) {
-    position.y = courtBottom - circle.radius;
+  if (position.y + halfCircleRadius > courtBottom) {
+    position.y = courtBottom - halfCircleRadius;
     if (velocity.y > 0) {
       velocity.y *= -1 * elasticity;
     }

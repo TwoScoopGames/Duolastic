@@ -125,4 +125,3 @@ function createStar(game, position, image) {
   game.entities.addComponent(newEntity, "size");
   return newEntity;
 }
-
