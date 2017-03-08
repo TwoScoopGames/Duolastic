@@ -397,6 +397,10 @@
         "y": 0,
         "z": -320
       },
+      "angularVelocity": {
+        "y": 1,
+        "angle": 0.5
+      },
       "model": {
         "name": "box",
         "options": {
