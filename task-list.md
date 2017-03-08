@@ -1,12 +1,8 @@
 ## prioritized
-### Arcade Expo version
 
-1. Home / Rematch Screen MVP 
-	-The player who wins the most rounds wins the match, then rematch screen is displayed.
-	- option [rematch] is displayed.
-	- wait for players to both select rematch - new match starts
+1. Decide on next milestone
 
-3. `Funnel mode` MVP
+2. `Funnel mode` MVP
   - press button to toggle modes (cone/funnel)
   - directional controls do not allow player to move
   - player changes to single cylinder (the actual player entity remains?)
@@ -16,23 +12,22 @@
 
 ## non-prioritized
 
+
 - Home screen Final shows title of game and two options
 [Find a random match] and  [Play with someone you know]
 
 - players are given a randomly generated GUID which we can base a procedurally generated username off of
 
 - players are assigned random name
+
 - [Find a random match] - Players are matched at random where a player waits for the next 'random mode' player to arrive on the site, then they are paired and the game begins
 
 - [Play with someone you know] - User is provided a randomly generated 'game name' which will create a unique link to give to another player, they are matched until one player quits from the rematch screen
-
-
 
 - Rematch Screen Final options  [leave match] and [rematch] are displayed.
 	- Players both select rematch - new match starts
 	- one player chooses [leave match] -> this player is taken to home screen, other player gets "Player left" message then is given one option [return to home] when clicked the player is taken to home screen
 	- both players choose [leave match] -> both are taken to home screen
-
 
 - `Funnel mode` Final
   - Player becomes funnel into the ground
@@ -47,14 +42,14 @@
 - Shiny silver sphere
   - needs to be shinier
 
-- You are floating in space, stars and galaxies visible moving in background
-  - Skybox rotating on it's z axis forever ?
+
+- star field rotating on it's z axis during game play
   - quaternionSlerp ?
 
-- `round` - set of goals
+- `round` - set of goals (we have rounds now)
 - `match` - set of rounds
 
-- the side of the court cube closest to you flashes success color(ex. blue) when you score a goal, warning color(ex. red) when you have a goal scored on you
+- right now goals flash once, make goals strobe flash or possibly tween in and out?
   - player that lost jiggles in frustration (possibly particles)
   - player who scored "jumps" (each part of the players stack separates, moves up, then tweens back together)
 
@@ -66,9 +61,14 @@
   - side 4: small peg and small wall
 
 
-## not decided on
+## pastabilities
 
 - [17-02-23 : eric] instead of shooting the puck into the goal, maybe you have to shoot the puck into another "ghost" puck that you can't touch directly and use the bounce force to push the ghost puck into the goal
 - players pick which level(side of cube) to play on
 - players can pick number of points in a round, and or number of rounds in a match
 - leaderboards for most matches won
+- spectator mode where a user can deside to watch a match between two players (would be cool for showing off the game at bit bash or similar event)
+- 'tournament mode' where players are added to a list visible on the screen (top left maybe)
+	- 2 players play a normal match while others on list watch
+	- winner plays the next player in list, loser switches to spectator mode until they decide to leave
+	
