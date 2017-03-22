@@ -48,7 +48,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
 
     if (network.state === "connected") {
       network.time += elapsed;
-      importComponents(game, network);
+      processIncomingMessages(game, network);
       if (network.time - network.lastPacketTime > network.packetRate) {
         network.lastPacketTime = network.time;
         if (peer.initiator) {
@@ -98,6 +98,7 @@ function fireEvent(game, entity, script) {
 function sendWorld(game, time) {
   var message = {
     time: time,
+    type: "sync",
     entities: [
       serialize(game, constants.player1, ["position", "velocity", "hole"]),
       serialize(game, constants.player2, ["position", "velocity", "hole"]),
@@ -111,6 +112,7 @@ function sendWorld(game, time) {
 function sendClient(game, time) {
   var message = {
     time: time,
+    type: "sync",
     entities: [
       serialize(game, constants.player2, ["movement2d", "movement2dAnalog", "hole"])
     ]
@@ -130,19 +132,34 @@ function trySend(message) {
   }
 }
 
-function importComponents(game, network) {
+function processIncomingMessages(game, network) {
   for (var i = 0; i < incomingMessages.length; i++) {
     var msg = incomingMessages[i];
-    if (msg.time <= network.peerTime) {
-      console.log("skipping", msg.time, network.peerTime);
-      continue;
-    }
-    network.peerTime = msg.time;
-
-    var entities = msg.entities || [];
-    for (var j = 0; j < entities.length; j++) {
-      deserialize(game, entities[j]);
-    }
+    processIncomingMessage(game, network, msg);
   }
   incomingMessages.length = 0;
+}
+
+function processIncomingMessage(game, network, msg) {
+  if (msg.time <= network.peerTime) {
+    console.log("skipping", msg.time, network.peerTime);
+    return;
+  }
+  network.peerTime = msg.time;
+
+  var handler = messageHandlers[msg.type] || noop;
+  handler(game, msg);
+}
+
+function noop() {}
+
+var messageHandlers = {
+  "sync": handleSyncMessage
+};
+
+function handleSyncMessage(game, msg) {
+  var entities = msg.entities || [];
+  for (var j = 0; j < entities.length; j++) {
+    deserialize(game, entities[j]);
+  }
 }
