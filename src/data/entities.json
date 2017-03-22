@@ -98,7 +98,7 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "last day of arcade expo edition",
+          "text": "this somehow got leaked onto the internet version",
           "fillStyle": "white",
           "textWidth": 1024,
           "textHeight": 64,
@@ -108,7 +108,7 @@
             "fontStyle": "normal",
             "fontVariant": "small-caps",
             "fontWeight": "100",
-            "fontSize": "64px",
+            "fontSize": "45px",
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }
@@ -129,7 +129,7 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "press [A] for 1 on 1 game",
+          "text": "press space",
           "fillStyle": "white",
           "textWidth": 1024,
           "textHeight": 64,
@@ -139,7 +139,7 @@
             "fontStyle": "normal",
             "fontVariant": "small-caps",
             "fontWeight": "100",
-            "fontSize": "64px",
+            "fontSize": "60px",
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }
@@ -507,7 +507,7 @@
       "model": {
         "name": "spriteText",
         "options": {
-          "text": "press a to join",
+          "text": "press space",
           "fillStyle": "#7609A2",
           "textWidth": 1024,
           "textHeight": 64,

@@ -78,7 +78,7 @@
   },
   {
    "name": "./systems/simulation/apply-angular-velocity",
-   "scenes": "all"
+   "scenes": []
   },
   {
    "name": "splat-ecs/lib/systems/simulation/apply-friction",
