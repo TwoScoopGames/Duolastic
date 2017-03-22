@@ -3,6 +3,9 @@
     "name": "network",
     "network": {
       "lastPacketTime": 0,
+      "messageHandlers": {
+        "sync": "./scripts/handle-sync-message"
+      },
       "onConnected": "./scripts/network-connected",
       "onDisconnected": "./scripts/switch-scene-main",
       "time": 0

@@ -1,6 +1,5 @@
 var constants = require("../../constants");
 var createPeerConnection = require("../../peer");
-var deserialize = require("../../serialize").deserialize;
 var serialize = require("../../serialize").serialize;
 
 var peer;
@@ -133,33 +132,35 @@ function trySend(message) {
 }
 
 function processIncomingMessages(game, network) {
+  var messageHandlers = getHandlers(game, network);
   for (var i = 0; i < incomingMessages.length; i++) {
     var msg = incomingMessages[i];
-    processIncomingMessage(game, network, msg);
+    processIncomingMessage(game, network, msg, messageHandlers);
   }
   incomingMessages.length = 0;
 }
 
-function processIncomingMessage(game, network, msg) {
+function getHandlers(game, network) {
+  var keys = Object.keys(network.messageHandlers);
+  var handlers = {};
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    handlers[key] = game.require(network.messageHandlers[key]);
+  }
+  return handlers;
+}
+
+function processIncomingMessage(game, network, msg, messageHandlers) {
   if (msg.time <= network.peerTime) {
     console.log("skipping", msg.time, network.peerTime);
     return;
   }
   network.peerTime = msg.time;
 
-  var handler = messageHandlers[msg.type] || noop;
+  var handler = messageHandlers[msg.type] || unhandledMessageHandler;
   handler(game, msg);
 }
 
-function noop() {}
-
-var messageHandlers = {
-  "sync": handleSyncMessage
-};
-
-function handleSyncMessage(game, msg) {
-  var entities = msg.entities || [];
-  for (var j = 0; j < entities.length; j++) {
-    deserialize(game, entities[j]);
-  }
+function unhandledMessageHandler(game, msg) {
+  console.warn("unhandled message type:", msg.type);
 }
