@@ -46,7 +46,7 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     if (network.state === "connected") {
       network.time += elapsed;
       processIncomingMessages(game, network);
-      sendOutgoingMessages(network);
+      sendOutgoingMessages(network, elapsed);
     }
   }, "network");
 };
@@ -119,13 +119,33 @@ function unhandledMessageHandler(game, msg) {
   console.warn("unhandled message type:", msg.type);
 }
 
-function sendOutgoingMessages(network) {
+var nextId = 0;
+var maxAgeBeforeRetry = 100;
+
+function sendOutgoingMessages(network, elapsed) {
   for (var i = 0; i < network.outgoingMessages.length; i++) {
     var msg = network.outgoingMessages[i];
+
     msg.time = network.time;
-    trySend(msg);
-    network.outgoingMessages.splice(i, 1);
-    i--;
+
+    if (msg.age === undefined) {
+      msg.age = maxAgeBeforeRetry;
+    }
+    msg.age += elapsed;
+
+    if (msg.id === undefined) {
+      msg.id = nextId++;
+    }
+
+    if (msg.age >= maxAgeBeforeRetry) {
+      trySend(JSON.stringify(msg));
+      msg.age = 0;
+    }
+
+    if (msg.reliable === undefined) {
+      network.outgoingMessages.splice(i, 1);
+      i--;
+    }
   }
 }
 
