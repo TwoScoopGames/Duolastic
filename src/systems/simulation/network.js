@@ -51,14 +51,14 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
   }, "network");
 };
 
-function sendOutgoingMessages(network) {
-  for (var i = 0; i < network.outgoingMessages.length; i++) {
-    var msg = network.outgoingMessages[i];
-    msg.time = network.time;
-    trySend(msg);
-    network.outgoingMessages.splice(i, 1);
-    i--;
+function getNetworkState(network) {
+  if (peer) {
+    return "connected";
   }
+  if (network.state !== "connecting") {
+    return "disconnected";
+  }
+  return "connecting";
 }
 
 function getNetworkRole() {
@@ -76,16 +76,6 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function getNetworkState(network) {
-  if (peer) {
-    return "connected";
-  }
-  if (network.state !== "connecting") {
-    return "disconnected";
-  }
-  return "connecting";
-}
-
 function fireEvent(game, entity, script) {
   console.log("fire", script, entity);
   if (!script) {
@@ -93,18 +83,6 @@ function fireEvent(game, entity, script) {
   }
   var handler = game.require(script);
   handler(entity, game);
-}
-
-function trySend(message) {
-  if (peer !== undefined) {
-    try {
-      peer.send(message);
-    } catch (e) {
-      console.error("error sending message", e);
-    }
-  } else {
-    console.warn("peer is undefined, cannot send message");
-  }
 }
 
 function processIncomingMessages(game, network) {
@@ -139,4 +117,26 @@ function processIncomingMessage(game, network, msg, messageHandlers) {
 
 function unhandledMessageHandler(game, msg) {
   console.warn("unhandled message type:", msg.type);
+}
+
+function sendOutgoingMessages(network) {
+  for (var i = 0; i < network.outgoingMessages.length; i++) {
+    var msg = network.outgoingMessages[i];
+    msg.time = network.time;
+    trySend(msg);
+    network.outgoingMessages.splice(i, 1);
+    i--;
+  }
+}
+
+function trySend(message) {
+  if (peer !== undefined) {
+    try {
+      peer.send(message);
+    } catch (e) {
+      console.error("error sending message", e);
+    }
+  } else {
+    console.warn("peer is undefined, cannot send message");
+  }
 }
