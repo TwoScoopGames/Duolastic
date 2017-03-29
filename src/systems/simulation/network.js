@@ -96,7 +96,9 @@ function processIncomingMessages(game, network) {
 
 function getHandlers(game, network) {
   var keys = Object.keys(network.messageHandlers);
-  var handlers = {};
+  var handlers = {
+    ack: ackMessageHanndler
+  };
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i];
     handlers[key] = game.require(network.messageHandlers[key]);
@@ -112,10 +114,23 @@ function processIncomingMessage(game, network, msg, messageHandlers) {
   network.peerTime = msg.time;
 
   var handler = messageHandlers[msg.type] || unhandledMessageHandler;
-  handler(game, msg);
+  handler(game, network, msg);
+
+  if (msg.reliable) {
+    network.outgoingMessages.push({
+      id: msg.id,
+      type: "ack"
+    });
+  }
 }
 
-function unhandledMessageHandler(game, msg) {
+function ackMessageHanndler(game, network, msg) {
+  network.outgoingMessages = network.outgoingMessages.filter(function(m) {
+    return m.id !== msg.id;
+  });
+}
+
+function unhandledMessageHandler(game, network, msg) {
   console.warn("unhandled message type:", msg.type);
 }
 
