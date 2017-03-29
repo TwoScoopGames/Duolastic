@@ -3,6 +3,7 @@ module.exports = {
     return {
       lastPacketTime: 0,
       messageHandlers: {},
+      outgoingMessages: [],
       packetRate: 50,
       peerTime: 0,
       role: "server",
@@ -13,6 +14,7 @@ module.exports = {
   reset: function(network) {
     network.lastPacketTime = 0;
     network.messageHandlers = {};
+    network.outgoingMessages = [];
     network.packetRate = 50;
     network.peerTime = 0;
     network.role = "server";

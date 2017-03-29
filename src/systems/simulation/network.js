@@ -1,6 +1,4 @@
-var constants = require("../../constants");
 var createPeerConnection = require("../../peer");
-var serialize = require("../../serialize").serialize;
 
 var peer;
 var incomingMessages = [];
@@ -48,17 +46,20 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     if (network.state === "connected") {
       network.time += elapsed;
       processIncomingMessages(game, network);
-      if (network.time - network.lastPacketTime > network.packetRate) {
-        network.lastPacketTime = network.time;
-        if (peer.initiator) {
-          sendWorld(game, network.time);
-        } else {
-          sendClient(game, network.time);
-        }
-      }
+      sendOutgoingMessages(network);
     }
   }, "network");
 };
+
+function sendOutgoingMessages(network) {
+  for (var i = 0; i < network.outgoingMessages.length; i++) {
+    var msg = network.outgoingMessages[i];
+    msg.time = network.time;
+    trySend(msg);
+    network.outgoingMessages.splice(i, 1);
+    i--;
+  }
+}
 
 function getNetworkRole() {
   if (!peer) {
@@ -92,31 +93,6 @@ function fireEvent(game, entity, script) {
   }
   var handler = game.require(script);
   handler(entity, game);
-}
-
-function sendWorld(game, time) {
-  var message = {
-    time: time,
-    type: "sync",
-    entities: [
-      serialize(game, constants.player1, ["position", "velocity", "hole"]),
-      serialize(game, constants.player2, ["position", "velocity", "hole"]),
-      serialize(game, constants.ball, ["position", "velocity"]),
-      serialize(game, constants.score, ["score"])
-    ]
-  };
-  trySend(JSON.stringify(message));
-}
-
-function sendClient(game, time) {
-  var message = {
-    time: time,
-    type: "sync",
-    entities: [
-      serialize(game, constants.player2, ["movement2d", "movement2dAnalog", "hole"])
-    ]
-  };
-  trySend(JSON.stringify(message));
 }
 
 function trySend(message) {
