@@ -1,60 +1,55 @@
-var MersenneTwister = require('mersenne-twister');
-var generator = new MersenneTwister();
+var MarcelineTwister = require('mersenne-twister');
+var generator = new MarcelineTwister();
+var wordList = require("./data/word-lists");
 
-var seed = 912121;
-generator.init_seed(seed);
-generator.random();
+var testSeed = 912121;
 
-var random = {
-  "inRange": function(min, max) {
-    return min + generator.random() * (max - min);
+module.exports = {
+  username: function(seed) {
+    var parts = [
+      { list: wordList.prefixes, probability: 1 },
+      { list: wordList.adjectives, probability: 0.5 },
+      { list: wordList.firstnames, probability: 1 },
+      { list: wordList.lastnames, probability: 1 }
+    ];
+    return generateName(seed, parts);
   },
-  "from": function(array) {
-    return array[Math.floor(generator.random() * array.length)];
+  location: function(seed) {
+    var parts = [
+      { list: wordList.locationPrefixes, probability: 0.5 },
+      { list: wordList.adjectives, probability: 1 },
+      { list: wordList.locations, probability: 1 },
+      { list: wordList.locationSuffixes, probability: 0.2 }
+    ];
+    return generateName(seed, parts);
   }
 };
 
-module.exports = {
-  location: generateLocation,
-  username: generateUsername
+function generatorInRange(seed, min, max) {
+  generator.init_seed(seed);
+  return min + generator.random() * (max - min);
 }
 
-var wordList = require("./data/word-lists");
+function generatorFrom(seed, array) {
+  generator.init_seed(seed);
+  return array[Math.floor(generator.random() * array.length)];
+}
 
-function generateName(parts) {
+function generateName(seed, parts) {
   var names = [];
   for (var i = 0; i < parts.length; i++) {
     if (parts[i].probability) {
-      if (random.inRange(0, 1) < parts[i].probability) {
-        names.push(random.from(parts[i].list));
+      if (generatorInRange(seed, 0, 1) < parts[i].probability) {
+        names.push(generatorFrom(seed, parts[i].list));
       }
     } else {
-      names.push(random.from(parts[i].list));
+      names.push(generatorFrom(seed, parts[i].list));
     }
   }
   return names.join(" ");
 }
 
-function generateLocation() {
-    return generateName(
-    [
-      { list: wordList.locationPrefixes, probability: 0.5 },
-      { list: wordList.adjectives, probability: 1 },
-      { list: wordList.locations, probability: 1 },
-      { list: wordList.locationSuffixes, probability: 0.2 }
-    ]
-  )
-}
-
-function generateUsername() {
-    return generateName(
-      [
-        { list: wordList.prefixes, probability: 1 },
-        { list: wordList.adjectives, probability: 0.5 },
-        { list: wordList.firstnames, probability: 1 },
-        { list: wordList.lastnames, probability: 1 }
-      ]
-    );
-}
-
-console.log("Seed:", seed, "Username:", generateUsername() );
+console.log("Seed:", testSeed,
+"\nUser:", module.exports.username(testSeed),
+"\nLocation:", module.exports.location(testSeed)
+);
