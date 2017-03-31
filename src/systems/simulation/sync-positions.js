@@ -28,8 +28,8 @@ function sendWorld(game, network) {
     time: network.time,
     type: "sync",
     entities: [
-      serialize(game, constants.player1, ["position", "velocity", "hole"]),
-      serialize(game, constants.player2, ["position", "velocity", "hole"]),
+      serialize(game, constants.player1, ["position", "velocity", "hole", "uuid"]),
+      serialize(game, constants.player2, ["position", "velocity", "hole", "uuid"]),
       serialize(game, constants.ball, ["position", "velocity"]),
       serialize(game, constants.score, ["score"])
     ]
