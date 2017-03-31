@@ -34,18 +34,17 @@ function sendWorld(game, network) {
       serialize(game, constants.score, ["score"])
     ]
   };
-  queueMessage(network, JSON.stringify(message));
+  queueMessage(network, message);
 }
 
 function sendClient(game, network) {
   var message = {
-    time: network.time,
     type: "sync",
     entities: [
       serialize(game, constants.player2, ["movement2d", "movement2dAnalog", "hole"])
     ]
   };
-  queueMessage(network, JSON.stringify(message));
+  queueMessage(network, message);
 }
 
 function queueMessage(network, message) {
