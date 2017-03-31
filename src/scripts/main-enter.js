@@ -1,6 +1,10 @@
 var reset = require("../reset");
 var constants = require("../constants");
+var colorPalette = require("../color-palette");
 var random = require("splat-ecs/lib/random");
+
+//temp
+var uuidV4 = require("uuid/v4");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
   var model = game.entities.getComponent(constants.court, "model");
@@ -44,6 +48,14 @@ function setRadius(game, entity, radius) {
 
 function createStack(game, baseEntity) {
   var circle = game.entities.getComponent(baseEntity, "circle");
+  //replace with player seed
+  var newColors = colorPalette.palette(uuidV4());
+  var fixedNewColors = newColors.map(function(hexcode) {
+    return "0x" + hexcode;
+  });
+
+  circle.colorSet = fixedNewColors;
+
   var baseEntityModel = game.entities.getComponent(baseEntity, "model");
   var baseEntityPosition = game.entities.getComponent(baseEntity, "position");
   var segmentSize = baseEntityModel.options.radiusBottom / circle.colorSet.length;

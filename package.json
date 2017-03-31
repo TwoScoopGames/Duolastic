@@ -33,6 +33,7 @@
     "webpack-dev-server": "^1.15.1"
   },
   "dependencies": {
+    "color-scheme": "0.0.5",
     "mersenne-twister": "^1.1.0",
     "simple-peer": "^6.2.1",
     "splat-ecs": "^7.6.0",
