@@ -1,4 +1,3 @@
-//var reset = require("../reset");
 var constants = require("../constants");
 var starfield = require("../starfield");
 var uuidV4 = require("uuid/v4");

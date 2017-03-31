@@ -1,10 +1,9 @@
 var colorPalette = require("./color-palette");
-var uuidV4 = require("uuid/v4");
 
 module.exports = function createStack(game, baseEntity) {
   var circle = game.entities.getComponent(baseEntity, "circle");
-  //replace with player seed
-  var newColors = colorPalette.palette(uuidV4());
+  var uuid = game.entities.getComponent(baseEntity, "uuid");
+  var newColors = colorPalette.palette(uuid);
   var fixedNewColors = newColors.map(function(hexcode) {
     return "0x" + hexcode;
   });

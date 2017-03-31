@@ -1,5 +1,4 @@
 var constants = require("../constants");
-var createStack = require("../create-stack");
 var random = require("splat-ecs/lib/random");
 var reset = require("../reset");
 
@@ -18,9 +17,6 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 
   reset(game);
   game.scaleCanvasToFitRectangle(constants.courtWidth, constants.courtHeight);
-
-  createStack(game, constants.player1);
-  createStack(game, constants.player2);
 
   createStarfield(game, 5600, 500, 10000, "images/star.png");
 };

@@ -4,6 +4,7 @@
     "network": {
       "lastPacketTime": 0,
       "messageHandlers": {
+        "playerJoined": "./scripts/handle-player-joined-message",
         "sync": "./scripts/handle-sync-message"
       },
       "onConnected": "./scripts/network-connected",
