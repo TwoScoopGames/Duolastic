@@ -6,11 +6,14 @@ var namegen = require("../namegen");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
 
+  if (!window.localStorage.userId) {
+    window.localStorage.setItem("userId", uuidV4());
+  }
   var usernameTestModel = game.entities.getComponent(4321, "model");
-  usernameTestModel.options.text = "test name: " + namegen.username(uuidV4());
+  usernameTestModel.options.text = "Welcome back, " + namegen.username(window.localStorage.userId) + ".";
 
   var locationTestModel = game.entities.getComponent(4322, "model");
-  locationTestModel.options.text = "test location: " + namegen.location(uuidV4());
+  locationTestModel.options.text = "We will be arriving at " + namegen.location(uuidV4()) + " shortly.";
 
   game.sounds.stop("fly.mp3");
   game.sounds.play("title-screen.mp3", true);
