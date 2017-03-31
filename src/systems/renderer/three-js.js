@@ -2,11 +2,16 @@ var THREE = require("three");
 var makeMesh = require("../../make-mesh");
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
+
+
 renderer.setClearColor(0x7609A2, 1);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
+
+
+
+
 
 var oldCanvas = document.getElementById("canvas");
 oldCanvas.parentNode.removeChild(oldCanvas);
@@ -75,6 +80,10 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
       var camera = cameras[0];
       var model = game.entities.getComponent(camera, "model");
       renderer.render(scene, model.mesh);
+      resizeRenderer(camera);
+      window.addEventListener("optimizedResize", resizeRenderer(camera));
+
+
     }
   });
 
@@ -114,4 +123,29 @@ function addLighting(scene) {
   var ambientLight = new THREE.AmbientLight("white", 0.2);
   scene.add(ambientLight);
 
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/Events/resize
+function throttleEvent(type, name, obj) {
+  obj = obj || window;
+  var running = false;
+  var func = function() {
+    if (running) { return; }
+    running = true;
+    requestAnimationFrame(function() {
+      obj.dispatchEvent(new CustomEvent(name));
+      running = false;
+    });
+  };
+  obj.addEventListener(type, func);
+}
+
+throttleEvent("resize", "optimizedResize");
+
+
+function resizeRenderer(camera) {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  // update the camera
+  camera.aspect	= window.innerWidth / window.innerHeight;
+  //camera.updateProjectionMatrix(); // camera.updateProjectionMatrix is not a function ?
 }
