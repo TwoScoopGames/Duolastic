@@ -88,6 +88,62 @@
     },
 
     {
+      "id": 4321,
+      "name": "username test",
+      "position": {
+        "x": 0,
+        "y": 400,
+        "z": 0
+      },
+      "model": {
+        "name": "spriteText",
+        "options": {
+          "text": "error",
+          "fillStyle": "white",
+          "textWidth": 1024,
+          "textHeight": 64,
+          "width": 1024,
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "normal",
+            "fontWeight": "100",
+            "fontSize": "35px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
+        }
+      }
+    },
+    {
+      "id": 4322,
+      "name": "location test",
+      "position": {
+        "x": 0,
+        "y": 300,
+        "z": 0
+      },
+      "model": {
+        "name": "spriteText",
+        "options": {
+          "text": "error",
+          "fillStyle": "white",
+          "textWidth": 1024,
+          "textHeight": 64,
+          "width": 1024,
+          "height": 64,
+          "font":{
+            "fontStyle": "normal",
+            "fontVariant": "normal",
+            "fontWeight": "100",
+            "fontSize": "35px",
+            "fontFamily": "'Helvetica Neue', Helvetica"
+          }
+        }
+      }
+    },
+
+
+    {
       "id": 83,
       "name": "menu",
       "position": {
@@ -112,10 +168,6 @@
             "fontFamily": "'Helvetica Neue', Helvetica"
           }
         }
-      },
-      "menuItem": {
-        "selected": true,
-        "onActivate": "./scripts/switch-scene-main"
       }
     },
     {

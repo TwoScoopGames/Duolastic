@@ -1,8 +1,6 @@
-var MarcelineTwister = require('mersenne-twister');
+var MarcelineTwister = require("mersenne-twister");
 var generator = new MarcelineTwister();
 var wordList = require("./data/word-lists");
-
-var testSeed = 912121;
 
 module.exports = {
   username: function(seed) {
@@ -34,7 +32,7 @@ function randomFrom(generator, array) {
 }
 
 function generateName(seed, parts) {
-  generator.init_seed(seed);
+  generator.init_seed(hashCode(seed));
   var names = [];
   for (var i = 0; i < parts.length; i++) {
     if (parts[i].probability) {
@@ -48,7 +46,13 @@ function generateName(seed, parts) {
   return names.join(" ");
 }
 
-console.log("Seed:", testSeed,
-"\nUser:", module.exports.username(testSeed),
-"\nLocation:", module.exports.location(testSeed)
-);
+function hashCode(string) {
+  var hash = 0, i, chr;
+  if (string.length === 0) return hash;
+  for (i = 0; i < string.length; i++) {
+    chr   = string.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}

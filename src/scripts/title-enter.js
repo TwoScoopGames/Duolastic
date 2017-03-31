@@ -1,11 +1,22 @@
 //var reset = require("../reset");
 var constants = require("../constants");
 var starfield = require("../starfield");
+var uuidV4 = require("uuid/v4");
+var namegen = require("../namegen");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
 
+  var usernameTestModel = game.entities.getComponent(4321, "model");
+  usernameTestModel.options.text = "test name: " + namegen.username(uuidV4());
+
+  var locationTestModel = game.entities.getComponent(4322, "model");
+  locationTestModel.options.text = "test location: " + namegen.location(uuidV4());
+
   game.sounds.stop("fly.mp3");
   game.sounds.play("title-screen.mp3", true);
+
+
+
   game.scaleCanvasToFitRectangle(constants.courtWidth, constants.courtHeight);
   starfield.spawn(game, {
     stars: 200,
