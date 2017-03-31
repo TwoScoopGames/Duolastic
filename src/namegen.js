@@ -25,25 +25,24 @@ module.exports = {
   }
 };
 
-function generatorInRange(seed, min, max) {
-  generator.init_seed(seed);
+function randomInRange(generator, min, max) {
   return min + generator.random() * (max - min);
 }
 
-function generatorFrom(seed, array) {
-  generator.init_seed(seed);
+function randomFrom(generator, array) {
   return array[Math.floor(generator.random() * array.length)];
 }
 
 function generateName(seed, parts) {
+  generator.init_seed(seed);
   var names = [];
   for (var i = 0; i < parts.length; i++) {
     if (parts[i].probability) {
-      if (generatorInRange(seed, 0, 1) < parts[i].probability) {
-        names.push(generatorFrom(seed, parts[i].list));
+      if (randomInRange(generator, 0, 1) < parts[i].probability) {
+        names.push(randomFrom(generator, parts[i].list));
       }
     } else {
-      names.push(generatorFrom(seed, parts[i].list));
+      names.push(randomFrom(generator, parts[i].list));
     }
   }
   return names.join(" ");
