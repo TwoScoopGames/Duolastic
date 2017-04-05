@@ -1,15 +1,15 @@
 var constants = require("../constants");
 var starfield = require("../starfield");
 var uuidV4 = require("uuid/v4");
-var namegen = require("../namegen");
+var generatePlayerProfile = require("../generate-player-profile");
 var getUserId = require("../get-user-id");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
   var usernameTestModel = game.entities.getComponent(4321, "model");
-  usernameTestModel.options.text = "Welcome back, " + namegen.username(getUserId()) + ".";
+  usernameTestModel.options.text = "Welcome back, " + generatePlayerProfile(getUserId()).username + ".";
 
   var locationTestModel = game.entities.getComponent(4322, "model");
-  locationTestModel.options.text = "We will be arriving at " + namegen.location(uuidV4()) + " shortly.";
+  locationTestModel.options.text = "We will be arriving at " + generatePlayerProfile(uuidV4()).location + " shortly.";
 
   game.sounds.stop("fly.mp3");
   game.sounds.play("title-screen.mp3", true);

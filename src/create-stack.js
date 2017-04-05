@@ -1,14 +1,11 @@
-var colorPalette = require("./color-palette");
+var generatePlayerProfile = require("./generate-player-profile");
 
 module.exports = function createStack(game, baseEntity) {
   var circle = game.entities.getComponent(baseEntity, "circle");
+  console.log(baseEntity);
   var uuid = game.entities.getComponent(baseEntity, "uuid");
-  var newColors = colorPalette.palette(uuid);
-  var fixedNewColors = newColors.map(function(hexcode) {
-    return "0x" + hexcode;
-  });
 
-  circle.colorSet = fixedNewColors;
+  circle.colorSet = generatePlayerProfile(uuid).palette;
 
   var baseEntityModel = game.entities.getComponent(baseEntity, "model");
   var baseEntityPosition = game.entities.getComponent(baseEntity, "position");
