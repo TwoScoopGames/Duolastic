@@ -2,16 +2,10 @@ var THREE = require("three");
 var makeMesh = require("../../make-mesh");
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
-
-
 renderer.setClearColor(0x7609A2, 1);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
-
-
-
-
 
 var oldCanvas = document.getElementById("canvas");
 oldCanvas.parentNode.removeChild(oldCanvas);
@@ -48,8 +42,15 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     //console.log("model.mesh.castShadow", model.mesh.castShadow);
     model.mesh.receiveShadow = model.receiveShadow;
     //console.log("model.mesh.receiveShadow", model.mesh.receiveShadow);
-
-    scene.add(model.mesh);
+    var parent = scene;
+    var childOf = game.entities.getComponent(entity, "childOf");
+    if (childOf && game.entities.entities[childOf.parentId]) {
+      var parentModel = game.entities.getComponent(childOf.parentId, "model");
+      if (parentModel) {
+        parent = parentModel.mesh;
+      }
+    }
+    parent.add(model.mesh);
 
     // FIXME: this is kinda gross
     // if (model.mesh.target) {

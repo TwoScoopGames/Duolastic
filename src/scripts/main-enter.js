@@ -1,6 +1,6 @@
 var constants = require("../constants");
-var random = require("splat-ecs/lib/random");
 var reset = require("../reset");
+var starfield = require("../starfield");
 
 module.exports = function(game) { // eslint-disable-line no-unused-vars
   var model = game.entities.getComponent(constants.court, "model");
@@ -18,17 +18,32 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
   reset(game);
   game.scaleCanvasToFitRectangle(constants.courtWidth, constants.courtHeight);
 
-  createStarfield(game, 5600, 500, 10000, "images/star.png");
+
+  starfield.spawn(game, {
+    parentId: 1908,
+    stars: 2000,
+    direction: "z",
+    velocity: 0,
+    image: "images/star.png",
+    cube: {
+      "width": 10000,
+      "height": 10000,
+      "depth": 10000,
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    innerCube: {
+      "width": 1000,
+      "height": 1000,
+      "depth": 1000,
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  });
 };
 
-function positionNotInRange(size, cutOut) {
-  var x = random.inRange(-size, size);
-  if (x > cutOut || x < -cutOut) {
-    return x;
-  } else {
-    positionNotInRange(size, cutOut);
-  }
-}
 
 function setRadius(game, entity, radius) {
   var model = game.entities.getComponent(entity, "model");
@@ -37,35 +52,4 @@ function setRadius(game, entity, radius) {
   model.options.radiusTop =
     model.options.radiusBottom =
     circle.radius = radius;
-}
-
-function createStarfield(game, quantity, innerCubeWidth, outerCubeWidth, image) {
-  for (var i = 0; i < 1000; i++) {
-    var cutOut = innerCubeWidth / 2;
-    var asize = outerCubeWidth / 2;
-    var position = {};
-    position.x = positionNotInRange(asize, cutOut);
-    position.y = positionNotInRange(asize, cutOut);
-    position.z = positionNotInRange(asize, cutOut);
-    createStar(game, position, image);
-  }
-}
-
-function createStar(game, position, image) {
-  var newEntity = game.entities.create();
-
-  var model = game.entities.addComponent(newEntity, "model");
-  model.name = "sprite";
-  model.options = {};
-
-  model.options.color = "0xffffff";
-  model.options.height = 64;
-  model.options.width = 64;
-  model.options.texture = image;
-  var newPosition = game.entities.addComponent(newEntity, "position");
-  newPosition.x = position.x;
-  newPosition.y = position.y;
-  newPosition.z = position.z;
-  game.entities.addComponent(newEntity, "size");
-  return newEntity;
 }

@@ -53,6 +53,7 @@
 
   ],
   "title": [
+
     {
       "id": 0,
       "name": "camera",
@@ -237,6 +238,30 @@
 
   ],
   "main": [
+    {
+      "id": 1908,
+      "name": "starbox",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "angularVelocity":{
+        "z": 1,
+        "x": 1,
+        "angle": 0.00005
+      },
+      "model": {
+        "name": "box",
+        "options": {
+          "width": 0,
+          "height": 0,
+          "depth": 0,
+          "color": "0xbada55"
+        }
+      },
+      "quaternion": {}
+    },
     {
       "id": 0,
       "name": "camera",
@@ -449,10 +474,6 @@
         "y": 0,
         "z": -320
       },
-      "angularVelocity": {
-        "y": 1,
-        "angle": 0.5
-      },
       "model": {
         "name": "box",
         "options": {
@@ -467,12 +488,7 @@
         "x": 0,
         "y": 0
       },
-      "quaternion": {
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "w": 0
-      }
+      "quaternion": {}
     },
     {
       "id": 80,

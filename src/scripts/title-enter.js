@@ -16,14 +16,14 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 
   game.scaleCanvasToFitRectangle(constants.courtWidth, constants.courtHeight);
   starfield.spawn(game, {
-    stars: 200,
+    stars: 500,
     direction: "z",
     velocity: 5,
     image: "images/star.png",
     cube: {
-      "width": 16000,
-      "height": 10000,
-      "depth": 10000,
+      "width": 1000,
+      "height": 1000,
+      "depth": 1000,
       "x": 0,
       "y": 0,
       "z": -5000

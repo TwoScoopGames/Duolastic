@@ -5,9 +5,22 @@ module.exports = { // eslint-disable-line no-unused-vars
     for (var i = 0; i < options.stars; i++) {
       var position = {};
       var cubeSides = getCubeSides(options.cube);
-      position.x = random.inRange(cubeSides.left, cubeSides.right);
-      position.y = random.inRange(cubeSides.top, cubeSides.bottom);
-      position.z = random.inRange(cubeSides.front, cubeSides.back);
+      var defaultInnerCube = {
+        "width": 0,
+        "height": 0,
+        "depth": 0,
+        "x": 0,
+        "y": 0,
+        "z": 0
+      };
+      var innerCubeSides = getCubeSides(options.innerCube || defaultInnerCube);
+      do {
+        position.x = random.inRange(cubeSides.left, cubeSides.right);
+        position.y = random.inRange(cubeSides.top, cubeSides.bottom);
+        position.z = random.inRange(cubeSides.front, cubeSides.back);
+        console.log(position);
+      } while (insideCube(position, innerCubeSides));
+
       this.createStar(game, position, options);
     }
   },
@@ -29,14 +42,18 @@ module.exports = { // eslint-disable-line no-unused-vars
     newPosition.z = position.z;
 
     var velocity = game.entities.addComponent(newEntity, "velocity");
-    velocity[options.direction] = options.velocity;
+    velocity[options.direction] = -options.velocity;
 
     game.entities.addComponent(newEntity, "size");
 
-    var resetIfOutsideCube = game.entities.addComponent(newEntity, "resetIfOutsideCube");
-    resetIfOutsideCube.origin = position;
-    resetIfOutsideCube.cube = options.cube;
+    // var resetIfOutsideCube = game.entities.addComponent(newEntity, "resetIfOutsideCube");
+    // resetIfOutsideCube.origin = position;
+    // resetIfOutsideCube.cube = getCubeSides(options.cube);
 
+    if (options.parentId) {
+      var childOf = game.entities.addComponent(newEntity, "childOf");
+      childOf.parentId = options.parentId;
+    }
     return newEntity;
   }
 };
@@ -57,4 +74,13 @@ function getCubeSides(cube) {
   cubeSides.front = cube.z + half_of_box_depth;
 
   return cubeSides;
+}
+
+function insideCube(position, cube) {
+  return position.x > cube.left &&
+         position.x < cube.right &&
+         position.y > cube.top &&
+         position.y < cube.bottom &&
+         position.z > cube.back &&
+         position.z < cube.front;
 }

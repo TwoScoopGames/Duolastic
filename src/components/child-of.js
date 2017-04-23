@@ -1,12 +1,10 @@
 module.exports = {
   factory: function() {
     return {
-      parent: null,
-      nth: 0
+      parentId: null
     };
   },
   reset: function(childOf) {
-    childOf.parent = null;
-    childOf.nth = 0;
+    childOf.parentId = null;
   }
 };
