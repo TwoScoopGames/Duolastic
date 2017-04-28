@@ -2,7 +2,7 @@
  "loading": {
  },
  "tsg": {
-  "first": true,
+  "first": false,
   "onEnter": "./scripts/tsg-enter",
   "onExit": "./scripts/main-exit"
 },
@@ -12,7 +12,7 @@
   "onExit": "./scripts/main-exit"
  },
  "main": {
-  "first": false,
+  "first": true,
   "onEnter": "./scripts/main-enter",
   "onExit": "./scripts/main-exit"
  }

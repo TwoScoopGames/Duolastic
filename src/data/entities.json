@@ -263,20 +263,42 @@
       "quaternion": {}
     },
     {
-      "id": 0,
-      "name": "camera",
-      "camera": true,
+      "id": 1001,
+      "name": "cameraAxle",
       "position": {
         "x": 0,
         "y": 0,
-        "z": 800
+        "z": 0
       },
-      "quaternion": {
+      "angularVelocity":{
+        "z": 1,
+        "angle": 0.0005
+      },
+      "quaternion": {},
+      "model": {
+        "name": "box",
+        "options": {
+          "width": 100,
+          "height": 100,
+          "depth": 100,
+          "color": "0xbada55"
+        }
+      }
+    },
+    {
+      "id": 0,
+      "name": "camera",
+      "camera": true,
+      "parentThis": true,
+      "childOf": {
+        "parentId": 1001
+      },
+      "position": {
         "x": 0,
-        "y": 0,
-        "z": 0,
-        "w": 0
+        "y": -900,
+        "z": 400
       },
+      "quaternion": {},
       "model": {
         "name": "camera",
         "options": {
@@ -427,7 +449,7 @@
       "position": {
         "x": 250,
         "y": 200,
-        "z": 22
+        "z": 0
       },
       "quaternion": {
         "x": 0.7071067811865475,

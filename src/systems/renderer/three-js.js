@@ -79,10 +79,13 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     var cameras = game.entities.find("camera");
     if (cameras.length > 0) {
       var camera = cameras[0];
+
       var model = game.entities.getComponent(camera, "model");
+      model.mesh.lookAt(new THREE.Vector3(0, 0, 0));
       renderer.render(scene, model.mesh);
-      resizeRenderer(camera);
-      window.addEventListener("optimizedResize", resizeRenderer(camera));
+      resizeRenderer(model.mesh);
+
+      window.addEventListener("optimizedResize", resizeRenderer(model.mesh));
 
 
     }

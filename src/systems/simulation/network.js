@@ -1,4 +1,5 @@
 var createPeerConnection = require("../../peer");
+var constants = require("../../constants");
 
 var peer;
 var incomingMessages = [];
@@ -38,6 +39,24 @@ module.exports = function(ecs, game) { // eslint-disable-line no-unused-vars
     if (oldState !== network.state) {
       if (network.state === "connected") {
         network.role = getNetworkRole();
+        game.entities.removeComponent(constants.cameraAxel, "angularVelocity");
+        var cameraAxleQ = game.entities.getComponent(constants.cameraAxel, "quaternion");
+        /*
+        FIXME this where I was trying to restore the
+        correct rotaion after the players connect
+        */
+        // if (network.role === "server") {
+        cameraAxleQ.x = 0,
+        cameraAxleQ.y = 0;
+        cameraAxleQ.z = 0;
+        cameraAxleQ.w = 1;
+        // } else {
+        //   cameraAxleQ.x = 0.7071067811865475;
+        //   cameraAxleQ.y = 0;
+        //   cameraAxleQ.z = 0;
+        //   cameraAxleQ.w = 0.7071067811865476;
+        // }
+
       }
       var eventName = "on" + capitalizeFirstLetter(network.state);
       fireEvent(game, entity, network[eventName]);

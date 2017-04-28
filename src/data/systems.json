@@ -1,5 +1,6 @@
 {
  "simulation": [
+
    {
    "name": "splat-ecs/lib/systems/simulation/decay-life-span",
    "scenes": "all"
@@ -123,13 +124,17 @@
   },
   {
    "name": "./systems/simulation/look-at-player",
-   "scenes": "all"
-  }
+   "scenes": []
+ },
+ {
+  "name": "./systems/simulation/parenting",
+  "scenes": "all"
+ }
  ],
  "renderer": [
   {
    "name": "./systems/renderer/three-js",
    "scenes": "all"
-  }
+ }
  ]
 }

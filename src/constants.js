@@ -4,6 +4,7 @@ var puckDiameterRatio = 0.05;
 var paddleDiameterRatio = 0.17;
 
 module.exports = {
+  cameraAxel: 1001,
   camera: 0,
   player1: 2,
   player2: 3,
